@@ -1,0 +1,82 @@
+{
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Does exclusion E-17 apply to water damage from a burst supply line when the discharge was sudden and accidental?",
+      "expected_form": "HO-0304",
+      "expected_clause": "Clause 3, exclusions table row E-17",
+      "marker": "E-17",
+      "table_row": true,
+      "known_answer": "No. The E-17 exception says it does NOT apply where the discharge was sudden and accidental as defined in Clause 1(a), so the loss remains covered up to policy limits."
+    },
+    {
+      "id": "Q2",
+      "question": "What does 'sudden and accidental' mean, and what time period does it require?",
+      "expected_form": "HO-0304",
+      "expected_clause": "Clause 1(a) Definitions",
+      "marker": "14 days or fewer",
+      "table_row": false,
+      "known_answer": "An abrupt, unforeseen, unintended event occurring over 14 days or fewer from first discharge to discovery."
+    },
+    {
+      "id": "Q3",
+      "question": "Hail dented my metal roof but it still sheds water. Is that damage covered?",
+      "expected_form": "HO-0415",
+      "expected_clause": "Clause 3, exclusions table row E-22",
+      "marker": "E-22",
+      "table_row": true,
+      "known_answer": "No. E-22 excludes denting of metal roof surfacing without loss of water-shedding function, absolutely, with no exception."
+    },
+    {
+      "id": "Q4",
+      "question": "How much personal property cover is there for business property kept at the home?",
+      "expected_form": "HO-0509",
+      "expected_clause": "Clause 2 Limits of Liability",
+      "marker": "2,500 dollars",
+      "table_row": false,
+      "known_answer": "2,500 dollars for business property on the residence premises, and 500 dollars away from it. These are sublimits, not additional amounts of insurance."
+    },
+    {
+      "id": "Q5",
+      "question": "After this endorsement is attached, what percentage of the Coverage A limit applies to Ordinance or Law?",
+      "expected_form": "HO-0612",
+      "expected_clause": "Clause 2 Increased Limit",
+      "marker": "25 percent",
+      "table_row": false,
+      "known_answer": "25 percent of the Coverage A limit, increased from the 10 percent stated in the base wording."
+    },
+    {
+      "id": "Q6",
+      "question": "The sewer backed up into my basement. What is the most that will be paid for one event?",
+      "expected_form": "HO-0820",
+      "expected_clause": "Clause 2 Coverage Grant",
+      "marker": "10,000 dollars",
+      "table_row": false,
+      "known_answer": "Up to 10,000 dollars per loss event, with a separate 1,000 dollar deductible paid by the insured."
+    },
+    {
+      "id": "Q7",
+      "question": "A pipe burst in my rental house while it sat empty between tenants for 45 days. Is the damage covered?",
+      "expected_form": "DP-0703",
+      "expected_clause": "Clause 3, exclusions table row E-61",
+      "marker": "E-61",
+      "table_row": true,
+      "known_answer": "Excluded by E-61 because the dwelling was unoccupied more than 30 consecutive days, UNLESS the water supply was shut off at the main and the plumbing system drained during that period."
+    },
+    {
+      "id": "Q8",
+      "question": "My sump pump was not maintained and water backed up. Is there any situation where I am still paid?",
+      "expected_form": "HO-0820",
+      "expected_clause": "Clause 3, exclusions table row E-51",
+      "marker": "E-51",
+      "table_row": true,
+      "known_answer": "Yes. E-51 normally excludes backup caused by failure to keep the sump pump in working order, but the exception applies if the failure was caused by a power outage lasting more than 12 continuous hours."
+    }
+  ],
+  "out_of_corpus": [
+    { "id": "R1", "question": "What is the reserve-setting threshold for claim CLM-2024-88431?" },
+    { "id": "R2", "question": "What premium charge applies for attaching endorsement HO-0820 to a policy?" },
+    { "id": "R3", "question": "What is the all-perils deductible shown on the declarations page of policy HO-778812?" }
+  ],
+  "generation_questions": ["Q1", "Q5", "Q7"]
+}

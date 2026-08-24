@@ -1,0 +1,29 @@
+FORM NUMBER: HO-0509
+EDITION: 06-24
+POLICY LINE: homeowners
+EFFECTIVE DATE: 2024-06-01
+TITLE: Home Business Property and Liability Limitation Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Homeowners 3 - Special Form.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Home business" means a trade, profession, or occupation conducted on the residence premises that produced gross receipts exceeding 5,000 dollars in the 12 months before the loss.
+(b) "Business property" means property used primarily for a home business, including inventory, samples, and tools of the trade.
+
+CLAUSE 2. LIMITS OF LIABILITY
+Coverage C - Personal Property is limited to 2,500 dollars for business property on the residence premises, and 500 dollars for business property away from the residence premises. These are sublimits, not additional amounts of insurance.
+
+CLAUSE 3. EXCLUSIONS TABLE
+The following exclusions apply to Section II - Liability Coverages:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-31 | Bodily injury or property damage arising out of a home business | Coverage E and Coverage F | Does NOT apply to a home day care serving 3 or fewer children where no fee beyond expense reimbursement is charged. |
+| E-32 | Professional services rendered or which should have been rendered | Coverage E and Coverage F | None. Professional liability must be insured separately. |
+
+CLAUSE 4. NOTICE OBLIGATION
+The insured must notify the insurer within 30 days of commencing a home business that meets the definition in Clause 1(a). Failure to notify suspends the exception in exclusion E-31.
+
+CLAUSE 5. OTHER TERMS
+All other provisions of the policy remain unchanged.
