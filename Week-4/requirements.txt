@@ -1,5 +1,6 @@
 chromadb
 rank-bm25
+fastembed
 streamlit
 openai
 python-dotenv
