@@ -2,9 +2,14 @@ import json
 import streamlit as st
 from search import dense_search
 from hybrid import hybrid_search
+from rerank import rerank_search
 from answer import answer, REFUSAL
 
-RETRIEVERS = {"baseline (dense only)": dense_search, "hybrid (dense + BM25 + RRF)": hybrid_search}
+RETRIEVERS = {
+    "baseline (dense only)": dense_search,
+    "rerank (cross-encoder over top 25)": rerank_search,
+    "hybrid (BM25 + RRF, rejected)": hybrid_search,
+}
 
 
 @st.cache_data
