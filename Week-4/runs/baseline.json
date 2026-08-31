@@ -1,0 +1,166 @@
+{
+  "retriever": "baseline",
+  "k": 3,
+  "hit_rate_at_k": 0.75,
+  "hits": 9,
+  "total": 12,
+  "p50_latency_ms": 279.5,
+  "rows": [
+    {
+      "id": "Q01",
+      "question": "Pipe burst behind the shower wall on a HO-0304 ed. 03-24 policy. Insured was away three weeks and found it on return. Does E-17 exclude it?",
+      "gold_chunk_id": "HO-0304_03-24#02",
+      "retrieved": [
+        "HO-0304_03-24#05",
+        "HO-0304_03-24#06",
+        "DP-0703_02-24#05"
+      ],
+      "hit": false,
+      "rank": null,
+      "latency_ms": 252.1
+    },
+    {
+      "id": "Q02",
+      "question": "Leak ran for about three weeks before anyone noticed. Is that E-17 or E-18?",
+      "gold_chunk_id": "HO-0304_03-24#05",
+      "retrieved": [
+        "HO-0304_03-24#02",
+        "HO-0304_03-24#06",
+        "HO-0304_03-24#05"
+      ],
+      "hit": true,
+      "rank": 3,
+      "latency_ms": 419.5
+    },
+    {
+      "id": "Q03",
+      "question": "Sewer backed up and flooded the basement. What is the most we pay and what comes off for the deductible?",
+      "gold_chunk_id": "HO-0820_05-24#03",
+      "retrieved": [
+        "HO-0820_05-24#03",
+        "HO-0304_03-24#05",
+        "HO-0612_03-24#04"
+      ],
+      "hit": true,
+      "rank": 1,
+      "latency_ms": 237.4
+    },
+    {
+      "id": "Q04",
+      "question": "Tenant moved out in November, place stood empty with the heating off, pipes froze and split.",
+      "gold_chunk_id": "DP-0703_02-24#05",
+      "retrieved": [
+        "DP-0703_02-24#05",
+        "DP-0703_02-24#02",
+        "DP-0703_02-24#06"
+      ],
+      "hit": true,
+      "rank": 1,
+      "latency_ms": 257.2
+    },
+    {
+      "id": "Q05",
+      "question": "Landlord never looked at the place after the last tenant left. Does that hurt the burst pipe claim?",
+      "gold_chunk_id": "DP-0703_02-24#06",
+      "retrieved": [
+        "DP-0703_02-24#02",
+        "DP-0703_02-24#06",
+        "HO-0304_03-24#05"
+      ],
+      "hit": true,
+      "rank": 2,
+      "latency_ms": 338.8
+    },
+    {
+      "id": "Q06",
+      "question": "Sump pump battery was never changed, pump died in the storm, basement took water. Does E-51 apply?",
+      "gold_chunk_id": "HO-0820_05-24#05",
+      "retrieved": [
+        "HO-0820_05-24#06",
+        "HO-0820_05-24#05",
+        "HO-0304_03-24#06"
+      ],
+      "hit": true,
+      "rank": 2,
+      "latency_ms": 261.2
+    },
+    {
+      "id": "Q07",
+      "question": "Insured makes candles at home, cleared about 8,000 dollars last year. A customer tripped in the driveway. Are we on cover for the liability?",
+      "gold_chunk_id": "HO-0509_06-24#05",
+      "retrieved": [
+        "HO-0612_03-24#04",
+        "HO-0509_06-24#05",
+        "HO-0509_06-24#03"
+      ],
+      "hit": true,
+      "rank": 2,
+      "latency_ms": 349.6
+    },
+    {
+      "id": "Q08",
+      "question": "How much can we pay for work laptops that were taken to a client office and stolen there?",
+      "gold_chunk_id": "HO-0509_06-24#03",
+      "retrieved": [
+        "HO-0509_06-24#03",
+        "HO-0820_05-24#03",
+        "HO-0509_06-24#02"
+      ],
+      "hit": true,
+      "rank": 1,
+      "latency_ms": 287.2
+    },
+    {
+      "id": "Q09",
+      "question": "Hail dented the metal roof but it still sheds water and there are no leaks. Does E-22 apply?",
+      "gold_chunk_id": "HO-0415_01-24#05",
+      "retrieved": [
+        "HO-0415_01-24#05",
+        "HO-0415_01-24#06",
+        "HO-0415_01-24#03"
+      ],
+      "hit": true,
+      "rank": 1,
+      "latency_ms": 250.2
+    },
+    {
+      "id": "Q10",
+      "question": "Does E-41 stop us paying for the asbestos survey the council is insisting on?",
+      "gold_chunk_id": "HO-0612_03-24#06",
+      "retrieved": [
+        "HO-0612_03-24#06",
+        "DP-0703_02-24#03",
+        "HO-0415_01-24#03"
+      ],
+      "hit": true,
+      "rank": 1,
+      "latency_ms": 271.8
+    },
+    {
+      "id": "Q11",
+      "question": "Fire took half the house and the city now wants the undamaged wall rebuilt to current code. How much extra can we put up?",
+      "gold_chunk_id": "HO-0612_03-24#03",
+      "retrieved": [
+        "HO-0612_03-24#02",
+        "HO-0612_03-24#04",
+        "DP-0703_02-24#05"
+      ],
+      "hit": false,
+      "rank": null,
+      "latency_ms": 448.4
+    },
+    {
+      "id": "Q12",
+      "question": "What is the reserve-setting threshold for claim CLM-2024-88431?",
+      "gold_chunk_id": null,
+      "retrieved": [
+        "HO-0612_03-24#03",
+        "HO-0304_03-24#05",
+        "HO-0820_05-24#00"
+      ],
+      "hit": false,
+      "rank": null,
+      "latency_ms": 406.2
+    }
+  ]
+}

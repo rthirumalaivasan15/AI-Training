@@ -1,0 +1,29 @@
+FORM NUMBER: HO-0612
+EDITION: 03-24
+POLICY LINE: homeowners
+EFFECTIVE DATE: 2024-03-01
+TITLE: Ordinance or Law Increased Coverage Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Homeowners 3 - Special Form.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Ordinance or law" means any ordinance or law regulating the construction, demolition, remodeling, renovation, or repair of buildings, in force at the time of loss.
+(b) "Undamaged portion" means the part of a covered building structure that did not sustain direct physical loss but must be demolished or altered to comply with an ordinance or law.
+
+CLAUSE 2. INCREASED LIMIT
+The Ordinance or Law coverage percentage stated in the base wording is increased from 10 percent to 25 percent of the Coverage A limit of liability shown in the Declarations. This increase applies only to losses occurring on or after the effective date shown above.
+
+CLAUSE 3. COVERED COSTS
+The insurer will pay the increased costs the insured actually incurs to: (a) demolish and clear the site of the undamaged portion when required by ordinance or law; (b) rebuild or repair to the minimum standard the ordinance or law requires.
+
+CLAUSE 4. EXCLUSIONS TABLE
+The following exclusions apply to this endorsement:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-41 | Costs to comply with any ordinance or law requiring remediation of pollutants, including testing and monitoring | This endorsement | None. Pollutant remediation is excluded absolutely. |
+| E-42 | Loss in value of the building due to the requirements of any ordinance or law | This endorsement | None. Diminution in value is not a covered cost. |
+
+CLAUSE 5. OTHER TERMS
+All other provisions of the policy remain unchanged.
