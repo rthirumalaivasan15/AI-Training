@@ -196,19 +196,19 @@ before it.
 
 ## 6. Why a public benchmark would have missed the top three modes
 
-A public retrieval benchmark scores whether the right passage came back, and four
-of my five modes happen *after* the right passage came back or *instead of*
-reading it — mode 2 attaches a denial to a clause that states no consequence and
-mode 4 skips a definition, both while holding correct context, and neither is
-visible to a metric that stops at retrieval. The modes that do involve retrieval
-are invisible for a different reason: mode 5 never reaches the retriever's output
-at all because a hand-set 0.35 threshold short-circuits ahead of it, and no
-benchmark ships with my threshold in it. And the thing that makes mode 3 a
-failure — that E-15 through E-18 belong to the homeowners water form and E-61
-through E-62 belong to the rental dwelling-fire form, so answering one from the
-other is a wrong-form answer rather than a near-miss — is a fact about my six
-endorsements that no general corpus encodes, which is why a benchmark would have
-scored that answer as a clean hit on a relevant passage.
+Three of my five modes happen *after* the right passage came back — mode 2
+attaches a denial to a clause that states no consequence, mode 4 skips the
+definition an exception depends on, and mode 3 answers out of a passage any
+benchmark would score as relevant — so a metric that stops at whether the passage
+was retrieved is blind to all three by construction. Mode 5 is invisible for a
+different reason again: it never reaches the retriever's output at all, because a
+hand-set 0.35 threshold in my own code short-circuits ahead of it, and no public
+benchmark ships with my threshold in it. That leaves mode 1 as the only one a
+retrieval score could have caught, and even there the thing that makes mode 3 a
+*failure* rather than a near-miss — that E-15 through E-18 belong to the
+homeowners water form while E-61 and E-62 belong to the rental dwelling-fire form,
+so answering one from the other is the wrong form and not a close call — is a fact
+about these six endorsements that no general corpus encodes.
 
 ---
 
