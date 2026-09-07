@@ -1,0 +1,29 @@
+FORM NUMBER: DP-0703
+EDITION: 02-24
+POLICY LINE: dwelling-fire
+EFFECTIVE DATE: 2024-02-01
+TITLE: Rental Dwelling Water Damage Limitation Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Dwelling Property 3 - Special Form, issued for tenant-occupied rental dwellings.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Tenant-occupied period" means any period during which the dwelling is leased to one or more tenants under a written or oral rental agreement.
+(b) "Burst supply line" means the sudden rupture of any pipe, hose, or fitting carrying potable water under pressure within the described dwelling.
+
+CLAUSE 2. SCOPE OF THIS ENDORSEMENT
+This endorsement scopes exclusion codes E-61 and E-62 as applied to Coverage A - Dwelling for tenant-occupied rental dwellings on the dwelling-fire policy line.
+
+CLAUSE 3. EXCLUSIONS TABLE
+The following exclusions apply to Coverage A - Dwelling:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-61 | Water damage from a burst supply line occurring while the dwelling is unoccupied between tenancies for more than 30 consecutive days | Coverage A - Dwelling | Does NOT apply if the water supply was shut off at the main and the plumbing system drained during the unoccupied period. |
+| E-62 | Water damage of any kind where the landlord failed to maintain heat of at least 55 degrees Fahrenheit during the months of November through March | Coverage A - Dwelling | None. Freeze-related losses without maintained heat are excluded absolutely. |
+
+CLAUSE 4. LANDLORD DUTIES
+The named insured must inspect the dwelling within 7 days of a tenancy ending and document the condition of visible plumbing. Failure to inspect voids the exception in exclusion E-61.
+
+CLAUSE 5. OTHER TERMS
+All other provisions of the policy remain unchanged.
