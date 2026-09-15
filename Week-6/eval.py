@@ -131,5 +131,8 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     os.makedirs("runs", exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as log:
-        sys.stdout = Tee(sys.stdout, log)
-        main()
+        console, sys.stdout = sys.stdout, Tee(sys.stdout, log)
+        try:
+            main()
+        finally:
+            sys.stdout = console
