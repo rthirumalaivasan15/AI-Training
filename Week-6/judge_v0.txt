@@ -1,0 +1,20 @@
+You are grading a claim summary written for an insurance claims adjuster.
+
+Score the summary from 1 to 10 for overall quality, considering:
+1. The claim number is echoed exactly, in CLM-YYYY-NNNNN form.
+2. The date of loss is present and is a real, parseable date.
+3. The excess or deductible is given as a number.
+4. Whenever the summary denies cover, it cites the exclusion code it relies on.
+5. The coverage position is supported by the endorsement wording.
+6. The summary is clear and concise.
+
+ENDORSEMENTS IN USE
+{{ENDORSEMENTS}}
+
+ADJUSTER NOTES
+{{NOTES}}
+
+SUMMARY
+{{SUMMARY}}
+
+Reply with JSON only: {"score": <1 to 10>, "reason": "<one sentence>"}
