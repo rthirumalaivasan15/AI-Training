@@ -128,12 +128,12 @@ def parse(reply):
             reason.group(1) if reason else (reply or "")[:300])
 
 
-def run_path(version):
-    return os.path.join(RUNS, "judge_%s.jsonl" % version)
+def run_path(version, tag=""):
+    return os.path.join(RUNS, "judge_%s%s.jsonl" % (version, "_" + tag if tag else ""))
 
 
-def load_run(version):
-    path = run_path(version)
+def load_run(version, tag=""):
+    path = run_path(version, tag)
     if not os.path.exists(path):
         return None
     with open(path, encoding="utf-8") as f:
@@ -141,7 +141,9 @@ def load_run(version):
     return rows[0], {r["id"]: r for r in rows[1:]}
 
 
-def run(version):
+def run(version, tag=""):
+    """tag="repeat" runs the same prompt again into its own file, to measure how
+    many verdicts flip with nothing changed - the noise any v1 -> v2 move has to beat."""
     template = prompt_text(version)
     lock = labels_lock()
     if version != "v1":
@@ -150,7 +152,7 @@ def run(version):
         pcommit, pwhen = committed(PREDICTION)
         lock.update(prediction_commit=pcommit, prediction_committed_at=pwhen)
 
-    cached = load_run(version)
+    cached = load_run(version, tag)
     if cached:
         return cached
 
@@ -159,7 +161,8 @@ def run(version):
         raise Locked("the labels commit is not earlier than now - check the system clock")
 
     summaries = summarise.load_summaries()
-    header = {"type": "header", "version": version, "prompt_file": "judge_%s.txt" % version,
+    header = {"type": "header", "version": version, "tag": tag,
+              "prompt_file": "judge_%s.txt" % version,
               "prompt_sha": hashlib.sha256(template.encode("utf-8")).hexdigest()[:12],
               "model": JUDGE_MODEL, "params": JUDGE_PARAMS,
               "started_at": started.isoformat(timespec="seconds"),
@@ -180,19 +183,20 @@ def run(version):
 
     header["finished_at"] = utc_now().isoformat(timespec="seconds")
     os.makedirs(RUNS, exist_ok=True)
-    partial = run_path(version) + ".partial"
+    partial = run_path(version, tag) + ".partial"
     with open(partial, "w", encoding="utf-8") as f:
         for row in [header] + rows:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
-    os.replace(partial, run_path(version))
+    os.replace(partial, run_path(version, tag))
     return header, {r["id"]: r for r in rows}
 
 
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     version = sys.argv[1] if len(sys.argv) > 1 else "v1"
+    tag = sys.argv[2] if len(sys.argv) > 2 else ""
     try:
-        header, verdicts = run(version)
+        header, verdicts = run(version, tag)
     except Locked as exc:
         raise SystemExit("JUDGE LOCKED - %s" % exc)
     print("\njudge %s  model %s  started %s" % (version, header["model"], header["started_at"]))

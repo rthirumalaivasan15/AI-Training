@@ -79,6 +79,15 @@ def report(labels_doc, runs):
             print("            %s  human %s, judge %s - %s"
                   % (i, labels[i]["label"], verdicts[i]["verdict"], (verdicts[i]["reason"] or "")[:90]))
 
+    repeat = judge.load_run("v1", "repeat")
+    if repeat and "v1" in runs:
+        flips = [i for i in ids if repeat[1][i]["verdict"] != runs["v1"][1][i]["verdict"]]
+        out["v1_repeat"] = compare(labels, repeat[1], ids)
+        out["v1_run_to_run_flips"] = flips
+        print("  " + line("v1 again", out["v1_repeat"]))
+        print("            same prompt, same summaries, run twice: %d of %d verdicts flipped%s"
+              % (len(flips), len(ids), (" (%s)" % ", ".join(flips)) if flips else ""))
+
     if "v1" in runs and "v2" in runs:
         shots = few_shot_ids()
         held = [i for i in ids if i not in shots]
