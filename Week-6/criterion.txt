@@ -1,0 +1,11 @@
+COVERAGE POSITION SUPPORTED - PASS or FAIL
+
+PASS when the summary's coverage position, and the reasoning it gives for it, is what the endorsement wording actually gives when applied to the facts in the adjuster notes.
+
+FAIL when any one of these is true:
+- it invents coverage, an exclusion, an exception, a limit or a consequence that the wording does not state;
+- it applies an endorsement that is not on this policy, or is for a different policy line or edition;
+- it applies or rejects an exception without testing a definition the outcome depends on;
+- it says the wording is silent, UNDETERMINED or NOT_IN_DOCUMENTS when the endorsements do answer the question.
+
+A position of UNDETERMINED or NOT_IN_DOCUMENTS is a PASS when the endorsements genuinely do not settle the question and the summary says what is missing.

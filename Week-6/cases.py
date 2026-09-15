@@ -39,9 +39,10 @@ REGRESSIONS = [
 
 
 def corpus_sha(path=CORPUS):
-    # same fingerprint Week 5 wrote into every trace
+    # same fingerprint Week 5 wrote into every trace, over LF line endings so a
+    # CRLF checkout of the same 48 chunks is not mistaken for a moved corpus
     with open(path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()[:12]
+        return hashlib.sha256(f.read().replace(b"\r\n", b"\n")).hexdigest()[:12]
 
 
 def written(path=CASES):

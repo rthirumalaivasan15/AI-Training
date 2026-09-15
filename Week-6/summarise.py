@@ -126,8 +126,10 @@ def load_summaries(path=SUMMARIES):
 
 
 def file_sha(path=SUMMARIES):
+    # line endings normalised: git on Windows may rewrite LF as CRLF on checkout,
+    # and that must not read as "the summaries changed since labelling"
     with open(path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()[:12]
+        return hashlib.sha256(f.read().replace(b"\r\n", b"\n")).hexdigest()[:12]
 
 
 def generate_missing(path=SUMMARIES):
