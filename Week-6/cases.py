@@ -38,11 +38,14 @@ REGRESSIONS = [
 ]
 
 
-def corpus_sha(path=CORPUS):
-    # same fingerprint Week 5 wrote into every trace, over LF line endings so a
-    # CRLF checkout of the same 48 chunks is not mistaken for a moved corpus
+def corpus_shas(path=CORPUS):
+    """Every fingerprint the same 48 chunks can have. Week 5 hashed the file's raw
+    bytes; a git checkout on Windows can flip LF and CRLF, which changes those
+    bytes without changing one chunk. Any change to the text still misses all three."""
     with open(path, "rb") as f:
-        return hashlib.sha256(f.read().replace(b"\r\n", b"\n")).hexdigest()[:12]
+        raw = f.read()
+    lf = raw.replace(b"\r\n", b"\n")
+    return {hashlib.sha256(b).hexdigest()[:12] for b in (raw, lf, lf.replace(b"\n", b"\r\n"))}
 
 
 def written(path=CASES):
@@ -56,7 +59,7 @@ def regression(case_id, trace_id, mode, path=WEEK5_TRACES):
                        if ('"%s"' % trace_id) in line), None)
     if record is None:
         raise KeyError("trace %s not found in %s" % (trace_id, path))
-    if record["corpus_sha"] != corpus_sha():
+    if record["corpus_sha"] not in corpus_shas():
         raise RuntimeError("corpus moved since %s was written - replay would not be verbatim"
                            % trace_id)
     if record["refused_by"] == "score floor":

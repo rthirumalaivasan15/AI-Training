@@ -102,6 +102,8 @@ def endorsements():
 
 
 def prompt_text(version):
+    if not os.path.exists("judge_%s.txt" % version):
+        raise Locked("judge_%s.txt does not exist yet" % version)
     with open("judge_%s.txt" % version, encoding="utf-8") as f:
         template = f.read()
     with open(CRITERION, encoding="utf-8") as f:
