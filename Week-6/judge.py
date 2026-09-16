@@ -168,8 +168,31 @@ def run(version, tag=""):
               "started_at": started.isoformat(timespec="seconds"),
               "summaries_sha": summarise.file_sha(), **lock}
 
-    rows = []
+    # Each verdict is appended as it arrives. A run that dies part way through -
+    # a rate limit, a dropped connection - keeps what it had and resumes, instead
+    # of throwing away 22 paid-for verdicts the way the first v2 attempt did.
+    os.makedirs(RUNS, exist_ok=True)
+    partial = run_path(version, tag) + ".partial"
+    rows, done = [], set()
+    if os.path.exists(partial):
+        with open(partial, encoding="utf-8") as f:
+            saved = [json.loads(line) for line in f if line.strip()]
+        same = (saved and saved[0].get("prompt_sha") == header["prompt_sha"]
+                and saved[0].get("summaries_sha") == header["summaries_sha"]
+                and saved[0].get("labels_commit") == header["labels_commit"])
+        if same:
+            header, rows = saved[0], saved[1:]
+            done = {r["id"] for r in rows}
+            print("resuming %s: %d verdicts already recorded" % (version, len(rows)))
+        else:
+            os.remove(partial)
+    if not os.path.exists(partial):
+        with open(partial, "w", encoding="utf-8") as f:
+            f.write(json.dumps(header, ensure_ascii=False) + "\n")
+
     for case in case_store.load():
+        if case["id"] in done:
+            continue
         prompt = render(template, case, summaries[case["id"]]["summary"])
         reply = summarise.call_model(JUDGE_SYSTEM, prompt, model=JUDGE_MODEL, params=JUDGE_PARAMS)
         verdict, reason = parse(reply)
@@ -178,12 +201,13 @@ def run(version, tag=""):
             # and counts as a disagreement rather than being quietly dropped
             reply = summarise.call_model(JUDGE_SYSTEM, prompt, model=JUDGE_MODEL, params=JUDGE_PARAMS)
             verdict, reason = parse(reply)
-        rows.append({"id": case["id"], "verdict": verdict, "reason": reason, "raw": reply})
-        print("  judge %s  %s -> %s" % (version, case["id"], verdict))
+        row = {"id": case["id"], "verdict": verdict, "reason": reason, "raw": reply}
+        rows.append(row)
+        with open(partial, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        print("  judge %s  %s -> %s" % (version, case["id"], verdict), flush=True)
 
     header["finished_at"] = utc_now().isoformat(timespec="seconds")
-    os.makedirs(RUNS, exist_ok=True)
-    partial = run_path(version, tag) + ".partial"
     with open(partial, "w", encoding="utf-8") as f:
         for row in [header] + rows:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")

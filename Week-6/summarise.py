@@ -12,6 +12,7 @@ exact bytes (label.py records the file's sha), so this never regenerates a case
 it already has.
 """
 import os
+import re
 import sys
 import json
 import time
@@ -58,7 +59,22 @@ def client():
     return _client
 
 
-def call_model(system, user, model=MODEL, params=PARAMS, retries=8):
+def retry_after(exc, fallback):
+    """Seconds the provider asked us to wait. Groq puts it in a retry-after header
+    and in the message as e.g. "try again in 7m2.5s"; guessing something shorter
+    just spends the next window on a call that fails again."""
+    headers = getattr(getattr(exc, "response", None), "headers", None) or {}
+    value = headers.get("retry-after") or ""
+    if not value:
+        found = re.search(r"try again in ((?:\d+m)?[\d.]+s)", str(exc))
+        value = found.group(1) if found else ""
+    parsed = re.fullmatch(r"(?:(\d+)m)?([\d.]+)s?", value.strip()) if value else None
+    if parsed:
+        return min(900, int(parsed.group(1) or 0) * 60 + float(parsed.group(2)) + 2)
+    return fallback
+
+
+def call_model(system, user, model=MODEL, params=PARAMS, retries=12):
     """Shared with judge.py. Retries on rate limiting only - any other error stops
     the run, because a summary or a verdict silently missing is worse than a stop."""
     for attempt in range(retries):
@@ -70,8 +86,11 @@ def call_model(system, user, model=MODEL, params=PARAMS, retries=8):
                 **params
             ).choices[0].message
             return (msg.content or "").strip()
-        except RateLimitError:
-            time.sleep(min(60, 10 * (attempt + 1)))
+        except RateLimitError as exc:
+            wait = retry_after(exc, fallback=min(120, 10 * (attempt + 1)))
+            print("    rate limited, waiting %.0fs (attempt %d/%d)"
+                  % (wait, attempt + 1, retries), flush=True)
+            time.sleep(wait)
     raise RuntimeError("still rate limited after %d attempts" % retries)
 
 
