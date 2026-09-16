@@ -33,8 +33,12 @@ PREDICTION = "prediction.txt"
 CRITERION = "criterion.txt"
 RUNS = "runs"
 
-# a different model family from the summariser, so the judge is not marking its own homework
-JUDGE_MODEL = os.getenv("JUDGE_MODEL", "qwen/qwen3.8-27b")
+# A smaller model than the summariser's gpt-oss-120b. qwen/qwen3.8-27b was the
+# first choice - a different family, so the judge would not be marking its own
+# family's homework - and it judged v1 twice (runs/judge_v1_qwen*.jsonl) before its
+# free-tier token budget ran out part way through v2. Rather than compare v1 on one
+# model against v2 on another, both versions were re-run here on one model.
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", "openai/gpt-oss-20b")
 JUDGE_PARAMS = {"temperature": 0}
 JUDGE_SYSTEM = "You are a careful insurance claims reviewer. Reply with JSON only."
 
