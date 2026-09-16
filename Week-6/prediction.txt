@@ -1,0 +1,19 @@
+DISCLOSURE: this prediction was written by an AI model, not by a human. It was
+written and committed after reading judge v1's three disagreements and before
+judge_v2.txt existed.
+
+Prediction, one sentence:
+
+Putting C12 and C22 into the prompt as worked examples will fix the two mistakes
+they stand for - the judge accepting a summary that applied the wrong edition of
+a form, and the judge failing a summary whose UNDETERMINED position was correct -
+and will lift agreement from 88% to about 96% without breaking any of the 22
+cases v1 already got right.
+
+How it can be wrong: the two examples teach edition-checking and tolerance of
+UNDETERMINED, which pull in opposite directions, so the likeliest failure is that
+the judge becomes readier to fail summaries generally (C10, C13, C16 and C20 are
+the correct UNDETERMINED or clause-based positions most at risk) or that it
+starts passing anything that says UNDETERMINED. The other way it can be wrong is
+that nothing moves at all, because one example of each kind is too thin to change
+a verdict the model reaches from the wording.
