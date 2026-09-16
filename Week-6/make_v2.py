@@ -60,7 +60,8 @@ def main(ids):
     summaries = summarise.load_summaries()
     block = ("WORKED EXAMPLES\n"
              "These two summaries were checked against the same criterion before, and that "
-             "check got both of them wrong. The correct verdicts are a claims reviewer's.\n\n"
+             "check got both of them wrong. The correct verdicts below are the ones recorded "
+             "in the label file for these cases.\n\n"
              + "\n".join(example(n, cases[i], summaries[i]["summary"], verdicts[i], labels[i])
                          for n, i in enumerate(ids, 1))
              + "\n")

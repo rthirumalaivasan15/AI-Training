@@ -1,0 +1,70 @@
+You are checking one thing about a claim summary written for an insurance claims adjuster.
+
+CRITERION
+COVERAGE POSITION SUPPORTED - PASS or FAIL
+
+PASS when the summary's coverage position, and the reasoning it gives for it, is what the endorsement wording actually gives when applied to the facts in the adjuster notes.
+
+FAIL when any one of these is true:
+- it invents coverage, an exclusion, an exception, a limit or a consequence that the wording does not state;
+- it applies an endorsement that is not on this policy, or is for a different policy line or edition;
+- it applies or rejects an exception without testing a definition the outcome depends on;
+- it says the wording is silent, UNDETERMINED or NOT_IN_DOCUMENTS when the endorsements do answer the question.
+
+A position of UNDETERMINED or NOT_IN_DOCUMENTS is a PASS when the endorsements genuinely do not settle the question and the summary says what is missing.
+
+Do not grade anything else. The claim number, the date of loss, the excess figure and whether a denial cites a code are checked separately, and format and writing style do not matter here.
+
+WORKED EXAMPLES
+These two summaries were checked against the same criterion before, and that check got both of them wrong. The correct verdicts below are the ones recorded in the label file for these cases.
+
+Example 1
+
+ADJUSTER NOTES
+CLM-2024-20034. DOL 2024-09-03. Dec page shows HO-3 with HO-0415 ed. 05-23. Hail dented the metal roof panels on 3 September, no leaks, roof still sheds water. Please confirm our E-22 position. Excess 2,500.
+
+SUMMARY
+CLAIM NUMBER: CLM-2024-20034
+DATE OF LOSS: 2024-09-03
+POLICY FORMS: HO-0415 ed. 01-24
+LOSS: Hail dented the metal roof panels on 3 September, no leaks, roof still sheds water.
+COVERAGE POSITION: DENIED
+GROUNDS: E-22
+EXCESS: 2500
+REASONING: The hail event dented the metal roof panels but did not cause water intrusion, which falls under the definition of damage described in E-22. Because E-22 expressly excludes denting of metal roof surfacing without loss of water‑shedding function, the loss is not covered [HO-0415_01-24#05].
+NEXT STEP: Notify the insured of the denial and advise on any available options for appeal.
+
+The earlier check said: PASS - The summary correctly applies the E-22 exclusion from endorsement HO-0415 (ed. 01-24) to the facts, as the loss involves denting of metal roof surfacing without loss of water-shedding function, which is excluded absolutely. Although the adjuster notes reference an older edition (05-23), the provided endorsement wording (01-24) is effective as of 2024-01-15 and governs the loss date of 2024-09-03, supporting the denial position.
+The correct verdict is: FAIL - dec page shows HO-0415 ed. 05-23, which is not in the documents; summary denies under E-22 of ed. 01-24 as if it were the same edition
+
+Example 2
+
+ADJUSTER NOTES
+CLM-2024-20055. DOL 2024-10-02. HO-0304 ed. 03-24. Leak behind the shower wall ran about 10 days before it was found and mould has spread through the wall cavity. Insured wants mould remediation paid.
+
+SUMMARY
+CLAIM NUMBER: CLM-2024-20055
+DATE OF LOSS: 2024-10-02
+POLICY FORMS: HO-0304 ed. 03-24
+LOSS: A leak behind the shower wall went undetected for about 10 days, allowing mould to spread through the wall cavity.
+COVERAGE POSITION: UNDETERMINED
+GROUNDS: NONE
+EXCESS: NOT STATED
+REASONING: The loss involves a concealed water leak behind a shower wall that persisted for approximately ten days before discovery, resulting in mould growth within the wall cavity. [HO-0304_03-24#00] The endorsement text provided does not include the specific exclusion or coverage language needed to determine whether mould remediation is covered, leaving the position indeterminate. [HO-0304_03-24#00] Consequently, the coverage position is set to UNDETERMINED pending further review of the Water Damage Exclusions Endorsement. [HO-0304_03-24#00]
+NEXT STEP: Obtain and review the full Water Damage Exclusions Endorsement (HO-0304 ed. 03-24) to identify applicable exclusions or coverage for mould remediation.
+
+The earlier check said: FAIL - The summary fails because it claims the endorsement text does not contain the necessary language to determine coverage, but the provided endorsement HO-0304 explicitly defines 'continuous seepage' as leakage exceeding 14 days and excludes it absolutely (E-18), while defining 'sudden and accidental' as 14 days or fewer (E-17 exception). Although the 10-day duration suggests the loss might fall under the 'sudden and accidental' exception rather than the 'continuous seepage' exclusion, the endorsement clearly addresses the water damage mechanism and provides specific exclusions/exceptions that settle the question of whether the water damage itself is covered, making the position determinable rather than UNDETERMINED based on missing text.
+The correct verdict is: PASS - none of the six endorsements mentions mould, so UNDETERMINED is right and the summary says what is missing, though it wrongly implies more HO-0304 wording might exist
+
+ENDORSEMENTS IN USE
+The complete wording of every endorsement the claims desk uses. Anything not in this wording is not in the policy documents.
+
+{{ENDORSEMENTS}}
+
+ADJUSTER NOTES
+{{NOTES}}
+
+SUMMARY
+{{SUMMARY}}
+
+Reply with JSON only, reason first: {"reason": "<one or two sentences>", "verdict": "PASS" or "FAIL"}
