@@ -7,7 +7,26 @@ came from an LLM judge nobody had checked against a human. This week: move what 
 regex can check out of the judge, hand-label 25 summaries blind, measure how often
 the judge agrees, and move that number using the judge's own mistakes.
 
-Numbers, the two disagreements and the scored prediction: [results.md](results.md).
+**agreement_before = 72.0% (18/25) → agreement_after = 84.0% (21/25)**, and 87.0%
+(20/23) with the two few-shot cases held out. Kappa 0.44 → 0.68. The dangerous
+direction — judge PASS where the label said FAIL — went from 4 to 1.
+
+**4 deterministic assertions, 1 judged criterion** (the judge as first written had 6).
+
+Changing the judge model moved agreement further than iterating the prompt did:
+the same v1 prompt scored 88.0% on `qwen/qwen3.8-27b` and 72.0% on
+`openai/gpt-oss-20b`. Numbers, the disagreements with a verdict on each, and the
+prediction scored honestly: [results.md](results.md).
+
+> **Disclosure — the "hand" labels are not human.** The human labelling step was
+> not done. At my request an AI model wrote the 25 labels in `labels_25.json`, the
+> one-sentence `prediction.txt`, and the who-was-right verdicts in `results.md`.
+> Every agreement figure here is therefore **AI label vs AI judge**, not human vs
+> judge, and it does not validate the judge against a person. The ordering is still
+> real and provable: the labels were committed before any judge call (`1e14e43`),
+> and the labelling model had seen no judge output. It had, however, written the
+> 25 cases itself, so it knew which failure mode each case was built to exercise.
+> `label.py` is the tool a human labeller would use; it was not used for these labels.
 
 ## Setup
 

@@ -1,0 +1,71 @@
+WEEK 6 EVAL - 25 cases, 3 of them regression cases replayed from Week 5 traces
+checks: 4 deterministic assertions (claim_number, date_of_loss, excess_numeric, grounds_on_denial) | 1 judged criterion
+summaries.jsonl sha 0254f01250da
+
+PASS RATE BY MODE   (PASS = all assertions + judge v2)
+  mode                             n  assertions    judge v1      judge v2      human         PASS        
+  1 silent-but-not-fetched         5  4/5  80%      4/5  80%      3/5  60%      3/5  60%      3/5  60%    
+  2 invented-consequence           5  5/5 100%      3/5  60%      2/5  40%      2/5  40%      2/5  40%    
+  3 wrong-endorsement              5  5/5 100%      3/5  60%      2/5  40%      3/5  60%      2/5  40%    
+  4 exception-skips-definition     5  4/5  80%      2/5  40%      2/5  40%      2/5  40%      2/5  40%    
+  5 score-floor-refusal            5  3/5  60%      2/5  40%      2/5  40%      3/5  60%      2/5  40%    
+  ----------------------------------------------------------------------------------------------------------
+  ALL                             25  21/25  84%    14/25  56%    11/25  44%    13/25  52%    11/25  44%  
+
+ASSERTIONS BY MODE
+  mode                             n  claim_number       date_of_loss       excess_numeric     grounds_on_denial
+  1 silent-but-not-fetched         5  4/5  80%           4/5  80%           4/5  80%           5/5 100%         
+  2 invented-consequence           5  5/5 100%           5/5 100%           5/5 100%           5/5 100%         
+  3 wrong-endorsement              5  5/5 100%           5/5 100%           5/5 100%           5/5 100%         
+  4 exception-skips-definition     5  5/5 100%           4/5  80%           5/5 100%           5/5 100%         
+  5 score-floor-refusal            5  3/5  60%           3/5  60%           3/5  60%           5/5 100%         
+  ALL                             25  22/25  88%         21/25  84%         22/25  88%         25/25 100%       
+
+PER CASE
+  C01  m1  COVERED           PASS  v1 PASS  v2 PASS  human PASS  
+  C02  m1  DENIED            PASS  v1 PASS  v2 PASS  human PASS  
+  C03  m1  NOT_IN_DOCUMENTS  FAIL  v1 FAIL  v2 FAIL  human FAIL  claim_number: 'NOT STATED' is not in CLM-YYYY-NNNNN form; date_of_loss: 'NOT STATED' is not YYYY-MM-DD; excess_numeric: notes give 500, summary says NOT STATED
+  C04  m1  COVERED           PASS  v1 PASS  v2 PASS  human PASS  
+  C05  m2  DENIED            FAIL  v1 FAIL  v2 FAIL  human FAIL  
+  C06  m2  COVERED           PASS  v1 PASS  v2 PASS  human PASS  
+  C07  m2  COVERED           PASS  v1 PASS  v2 PASS  human PASS  
+  C08  m2  COVERED           FAIL  v1 PASS  v2 FAIL  human FAIL  
+  C09  m3  COVERED           FAIL  v1 PASS  v2 FAIL  human PASS  
+  C10  m3  UNDETERMINED      PASS  v1 FAIL  v2 PASS  human PASS  
+  C11  m3  UNDETERMINED      FAIL  v1 FAIL  v2 FAIL  human FAIL  
+  C12  m3  DENIED            FAIL  v1 PASS  v2 FAIL  human FAIL  
+  C13  m3  NOT_IN_DOCUMENTS  PASS  v1 PASS  v2 PASS  human PASS  
+  C14  m4  UNDETERMINED      FAIL  v1 FAIL  v2 FAIL  human FAIL  date_of_loss: 'NOT STATED' is not YYYY-MM-DD
+  C15  m4  DENIED            PASS  v1 PASS  v2 PASS  human FAIL  
+  C16  m4  UNDETERMINED      FAIL  v1 FAIL  v2 FAIL  human PASS  
+  C17  m4  COVERED           PASS  v1 PASS  v2 PASS  human PASS  
+  C18  m5  NOT_IN_DOCUMENTS  FAIL  v1 FAIL  v2 FAIL  human FAIL  claim_number: 'NOT STATED' is not in CLM-YYYY-NNNNN form; date_of_loss: 'NOT STATED' is not YYYY-MM-DD; excess_numeric: notes give 1000, summary says NOT STATED
+  C19  m5  NOT_IN_DOCUMENTS  FAIL  v1 FAIL  v2 FAIL  human FAIL  claim_number: 'NOT STATED' is not in CLM-YYYY-NNNNN form; date_of_loss: 'NOT STATED' is not YYYY-MM-DD; excess_numeric: notes give 250, summary says NOT STATED
+  C20  m5  DENIED            PASS  v1 PASS  v2 PASS  human PASS  
+  C21  m5  DENIED            PASS  v1 PASS  v2 PASS  human PASS  
+  C22  m5  UNDETERMINED      FAIL  v1 FAIL  v2 FAIL  human PASS  
+  R01  m1  NOT_IN_DOCUMENTS  FAIL  v1 PASS  v2 FAIL  human FAIL  
+  R02  m2  DENIED            FAIL  v1 FAIL  v2 FAIL  human FAIL  
+  R03  m4  COVERED           FAIL  v1 FAIL  v2 FAIL  human FAIL  
+
+AGREEMENT WITH THE HAND LABELS  (exact PASS/FAIL match over 25 labels)
+  judge v1  18/25 =  72.0%   kappa 0.44   judge-PASS/human-FAIL 4   judge-FAIL/human-PASS 3
+            labels committed 1e14e43 at 2026-09-15T23:51:08+05:30, judge started 2026-09-16T06:48:15+00:00
+            C08  human FAIL, judge PASS - The endorsement HO‑0509 provides coverage for business property used in a home business, w
+            C10  human PASS, judge FAIL - The summary incorrectly concludes the coverage position is undetermined; DP‑0703 does not 
+            C12  human FAIL, judge PASS - The loss is a denting of metal roof panels with no loss of water‑shedding function, which 
+            C15  human FAIL, judge PASS - The denial correctly applies Exclusion E‑31, which excludes bodily injury arising from a h
+            C16  human PASS, judge FAIL - The summary incorrectly declares the coverage position as UNDETERMINED, whereas the endors
+            C22  human PASS, judge FAIL - The endorsement HO‑0304 E‑17 excludes water damage from a burst or ruptured supply line un
+            R01  human FAIL, judge PASS - The endorsement HO‑0509 only limits personal‑property coverage for home business items and
+  judge v2  21/25 =  84.0%   kappa 0.68   judge-PASS/human-FAIL 1   judge-FAIL/human-PASS 3
+            labels committed 1e14e43 at 2026-09-15T23:51:08+05:30, judge started 2026-09-16T06:59:00+00:00
+            C09  human PASS, judge FAIL - The endorsement HO‑0304 ed. 03‑24 is not effective until 2024‑03‑01, but the loss occurred
+            C15  human FAIL, judge PASS - The loss is bodily injury arising from a home day care that charges a fee beyond expense r
+            C16  human PASS, judge FAIL - The endorsement HO‑0509 only applies to a home business with gross receipts >$5,000; the i
+            C22  human PASS, judge FAIL - The endorsement HO‑0304 explicitly defines a 10‑day leak as “sudden and accidental,” which
+  v2 held   20/23 =  87.0%   kappa 0.74   judge-PASS/human-FAIL 1   judge-FAIL/human-PASS 2   (without few-shot C12, C22)
+            fixed by v2: C08, C10, C12, R01
+            broken by v2: C09
+
+  agreement_before = 72.0   agreement_after = 84.0   (held out: 87.0)

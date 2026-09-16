@@ -1,0 +1,54 @@
+{
+  "agreement_before": 72.0,
+  "agreement_after": 84.0,
+  "agreement_after_held_out": 87.0,
+  "detail": {
+    "v1": {
+      "n": 25,
+      "agree": 18,
+      "pct": 72.0,
+      "kappa": 0.44,
+      "judge_pass_human_fail": 4,
+      "judge_fail_human_pass": 3,
+      "unparsed": 0,
+      "disagreements": [
+        "C08",
+        "C10",
+        "C12",
+        "C15",
+        "C16",
+        "C22",
+        "R01"
+      ]
+    },
+    "v2": {
+      "n": 25,
+      "agree": 21,
+      "pct": 84.0,
+      "kappa": 0.68,
+      "judge_pass_human_fail": 1,
+      "judge_fail_human_pass": 3,
+      "unparsed": 0,
+      "disagreements": [
+        "C09",
+        "C15",
+        "C16",
+        "C22"
+      ]
+    },
+    "v2_held_out": {
+      "n": 23,
+      "agree": 20,
+      "pct": 87.0,
+      "kappa": 0.74,
+      "judge_pass_human_fail": 1,
+      "judge_fail_human_pass": 2,
+      "unparsed": 0,
+      "disagreements": [
+        "C09",
+        "C15",
+        "C16"
+      ]
+    }
+  }
+}
