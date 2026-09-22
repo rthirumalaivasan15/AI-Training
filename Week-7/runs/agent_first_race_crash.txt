@@ -1,0 +1,23 @@
+First race run, agent, claim CLM-2024-10001, lap after get_claim + search_policy.
+The workflow had just finished all 10 claims (runs/race_workflow.jsonl, 8/10).
+
+openai.BadRequestError: Error code: 400 -
+  'Tool call validation failed: attempted to call tool 'json' which was not in request.tools'
+  code: tool_use_failed
+
+failed_generation (abridged):
+  {"name": "json", "arguments": {
+     "claim_id": "CLM-2024-10001", "coverage_position": "COVERED",
+     "grounds": ["E-17 (exception: discharge was sudden and accidental per Clause 1(a))",
+                 "HO-0304 Clause 4 duty satisfied (failed hose retained)"],
+     "payable_amount": 7400, ... }}
+
+The answer itself was right. gpt-oss-120b put it inside a call to a tool that was
+never declared, instead of returning it as text, and Groq refused the whole call.
+The loop had no path for a refused call, so the race died.
+
+Fix (next commit): llm.chat returns a refused tool call as a message with its
+generation attached and estimated usage (Groq reports none for it). agent.run
+accepts it as the final answer when its arguments pass contract.validate;
+otherwise it tells the model the tool does not exist and spends a lap.
+The workflow cannot hit this - it never sends tools to the model.
