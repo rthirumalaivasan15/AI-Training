@@ -1,0 +1,75 @@
+{
+  "_rule": "A run passes a claim only if coverage_position matches, payable_amount matches exactly (null for UNDETERMINED), and every must_cite token appears in the grounds list. Written from the endorsement wording before either system ran.",
+  "claims": {
+    "CLM-2024-10001": {
+      "class": "clean",
+      "coverage_position": "COVERED",
+      "payable_amount": 7400,
+      "must_cite": ["E-17"],
+      "why": "Supply hose burst, discovered within two hours, failed hose kept. E-17 exception for sudden and accidental (Clause 1(a), 14 days or fewer) applies. 8,400 - 1,000 excess."
+    },
+    "CLM-2024-10002": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "DENIED",
+      "payable_amount": 0,
+      "must_cite": ["E-18"],
+      "why": "First notice reads like a supply-line loss (E-17), but the plumber's note puts the leak at six to eight weeks. That is continuous seepage over 14 days, E-18, excluded absolutely."
+    },
+    "CLM-2024-10003": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "DENIED",
+      "payable_amount": 0,
+      "must_cite": ["E-15"],
+      "why": "Notes reveal the creek overtopped and water came through the window wells: surface water / flood, E-15, no exception. HO-0820 covers backup through drains or sump only, not surface water."
+    },
+    "CLM-2024-10004": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "COVERED",
+      "payable_amount": 9000,
+      "must_cite": ["HO-0820"],
+      "why": "Notes reveal sewer backup through the floor drain: E-16 would exclude, but HO-0820 Clause 2 overrides it up to 10,000 per event with a 1,000 deductible. min(14,200, 10,000) - 1,000."
+    },
+    "CLM-2024-10005": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "COVERED",
+      "payable_amount": 5300,
+      "must_cite": ["E-51"],
+      "why": "Sump failure could fall under E-51, but the utility report shows a 16.5 hour outage, over the 12 hour exception. Covered under HO-0820. min(6,300, 10,000) - 1,000."
+    },
+    "CLM-2024-10006": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "DENIED",
+      "payable_amount": 0,
+      "must_cite": ["E-61"],
+      "why": "Vacant 45 days (over 30), so E-61 applies. Water was shut off and drained, which would trigger the exception, but DP-0703 Clause 4: first inspection was 20 days after the tenancy ended, not within 7, which voids the exception."
+    },
+    "CLM-2024-10007": {
+      "class": "clean",
+      "coverage_position": "DENIED",
+      "payable_amount": 0,
+      "must_cite": ["E-22"],
+      "why": "Metal roof, denting only, still sheds water. E-22, excluded absolutely."
+    },
+    "CLM-2024-10008": {
+      "class": "missing-notes",
+      "coverage_position": "UNDETERMINED",
+      "payable_amount": null,
+      "must_cite": [],
+      "why": "No adjuster notes. Cause of the kitchen water and its duration are unknown, so neither E-17 nor E-18 can be decided."
+    },
+    "CLM-2024-10009": {
+      "class": "notes-trigger-exclusion",
+      "coverage_position": "COVERED",
+      "payable_amount": 2000,
+      "must_cite": ["HO-0509"],
+      "why": "Notes reveal a home business with 38,000 gross receipts (over 5,000), so the stolen items are business property. HO-0509 Clause 2 sublimit of 2,500 on premises. min(6,000, 2,500) - 500."
+    },
+    "CLM-2024-10010": {
+      "class": "missing-notes",
+      "coverage_position": "UNDETERMINED",
+      "payable_amount": null,
+      "must_cite": [],
+      "why": "Leak start is unknown, so sudden and accidental (E-17 exception) versus continuous seepage (E-18) cannot be decided, and the failed fitting was discarded (HO-0304 Clause 4 may void the exception)."
+    }
+  }
+}
