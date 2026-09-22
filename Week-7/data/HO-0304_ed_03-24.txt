@@ -1,0 +1,33 @@
+FORM NUMBER: HO-0304
+EDITION: 03-24
+POLICY LINE: homeowners
+EFFECTIVE DATE: 2024-03-01
+TITLE: Water Damage Exclusions Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Homeowners 3 - Special Form.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Sudden and accidental" means an abrupt event that is unforeseen, unintended, and occurs over a period of 14 days or fewer from first discharge to discovery.
+(b) "Supply line" means any pipe, hose, or fitting that carries potable water under pressure to a plumbing fixture or appliance within the residence premises.
+(c) "Surface water" means water on the surface of the ground, irrespective of its source, including flood, waves, and overflow of any body of water.
+(d) "Continuous seepage" means discharge or leakage of water that occurs over a period exceeding 14 days, whether or not detectable by the insured.
+
+CLAUSE 2. SCOPE OF THIS ENDORSEMENT
+This endorsement scopes exclusion codes E-15 through E-18 as applied to Section I - Property Coverages. Where a conflict exists between this endorsement and the base wording HO-3 ed. 10-22, this endorsement controls for losses occurring on or after the effective date shown above.
+
+CLAUSE 3. EXCLUSIONS TABLE
+The following exclusions apply to Section I - Property Coverages:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-15 | Flood, surface water, waves, tidal water, or overflow of any body of water | All Section I coverages | None. Flood must be insured separately. |
+| E-16 | Water which backs up through sewers or drains, or which overflows from a sump | Coverage A and Coverage C | Covered only if endorsement HO-0820 is attached to the policy. |
+| E-17 | Water damage from a burst or ruptured supply line | Coverage A - Dwelling | Does NOT apply where the discharge was sudden and accidental as defined in Clause 1(a); such losses remain covered up to policy limits. |
+| E-18 | Continuous seepage or leakage from plumbing over a period exceeding 14 days | All Section I coverages | None. Losses from continuous seepage are excluded absolutely. |
+
+CLAUSE 4. DUTIES AFTER A WATER LOSS
+The insured must take reasonable steps to stop the discharge, protect the property from further damage, and retain the failed pipe, fitting, or appliance component for inspection. Failure to retain the failed component may void coverage otherwise preserved by the E-17 exception.
+
+CLAUSE 5. OTHER TERMS
+All other provisions of the policy remain unchanged.

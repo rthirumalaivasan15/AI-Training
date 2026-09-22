@@ -1,0 +1,172 @@
+[
+  {
+    "claim_id": "CLM-2024-10001",
+    "status": "open",
+    "policy_number": "HP-448120",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24"],
+    "coverage_a_limit": 350000,
+    "excess": 1000,
+    "date_of_loss": "2024-07-14",
+    "first_notice": "Water damage to kitchen floor and lower cabinets.",
+    "claimed_amount": 8400,
+    "adjuster_notes": [
+      "2024-07-15 Spoke to insured. Braided supply hose to the dishwasher split while they were at dinner, water ran for about two hours before they got home.",
+      "2024-07-16 Site visit. Hose failure confirmed, insured shut off the valve under the sink on discovery. Insured has kept the failed hose in a bag for inspection.",
+      "2024-07-18 Contractor estimate for flooring and two base cabinets received: 8,400."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10002",
+    "status": "open",
+    "policy_number": "HP-448377",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24"],
+    "coverage_a_limit": 280000,
+    "excess": 1000,
+    "date_of_loss": "2024-08-02",
+    "first_notice": "Water damage in upstairs bathroom and ceiling below.",
+    "claimed_amount": 11750,
+    "adjuster_notes": [
+      "2024-08-03 Insured noticed a stain on the dining room ceiling and a soft spot in the bathroom floor above.",
+      "2024-08-06 Plumber opened the floor. Pinhole leak on the copper line to the toilet. Subfloor is rotted and there is mould growth on the joists.",
+      "2024-08-06 Plumber's written opinion: the staining pattern and rot show the line had been leaking for roughly six to eight weeks.",
+      "2024-08-09 Estimate for subfloor, joist treatment and dining room ceiling: 11,750."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10003",
+    "status": "open",
+    "policy_number": "HP-449002",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24", "HO-0820 ed. 05-24"],
+    "coverage_a_limit": 420000,
+    "excess": 1000,
+    "date_of_loss": "2024-09-19",
+    "first_notice": "Basement took on water during the storm.",
+    "claimed_amount": 23900,
+    "adjuster_notes": [
+      "2024-09-20 Insured reports two feet of water in the finished basement after the storm.",
+      "2024-09-21 Site visit. Floor drain and sump are both working. The creek behind the property overtopped its banks; water line on the exterior wall matches the interior, and water came in through the basement window wells.",
+      "2024-09-23 Estimate for drywall, flooring and furnace: 23,900."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10004",
+    "status": "open",
+    "policy_number": "HP-449215",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24", "HO-0820 ed. 05-24"],
+    "coverage_a_limit": 310000,
+    "excess": 1000,
+    "date_of_loss": "2024-06-11",
+    "first_notice": "Water in the basement.",
+    "claimed_amount": 14200,
+    "adjuster_notes": [
+      "2024-06-12 Heavy rain overnight. Insured found dark water around the basement floor drain in the morning.",
+      "2024-06-13 Site visit. Water came up through the floor drain. City confirms the municipal sewer main surcharged on the street that night. No surface water entry, window wells dry.",
+      "2024-06-14 Cleanup and restoration estimate: 14,200."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10005",
+    "status": "open",
+    "policy_number": "HP-450118",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24", "HO-0820 ed. 05-24"],
+    "coverage_a_limit": 295000,
+    "excess": 1000,
+    "date_of_loss": "2024-12-22",
+    "first_notice": "Sump pump failed and the basement flooded.",
+    "claimed_amount": 6300,
+    "adjuster_notes": [
+      "2024-12-23 Insured says the sump pump stopped and the pit overflowed into the basement.",
+      "2024-12-24 Utility outage report confirms power to the street was out from 02:00 on 12-22 to 18:30 the same day during the ice storm.",
+      "2024-12-24 Battery backup unit was replaced in April 2024, receipt provided. The battery ran down during the outage. Pump itself tested fine once power returned.",
+      "2024-12-27 Estimate: 6,300."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10006",
+    "status": "open",
+    "policy_number": "DF-221904",
+    "policy_line": "dwelling-fire",
+    "forms_attached": ["DP-0703 ed. 02-24"],
+    "coverage_a_limit": 240000,
+    "excess": 1500,
+    "date_of_loss": "2024-10-08",
+    "first_notice": "Burst pipe at rental property.",
+    "claimed_amount": 17600,
+    "adjuster_notes": [
+      "2024-10-09 Landlord reports a burst supply line under the kitchen sink at the rental. Found when showing the unit to a prospective tenant.",
+      "2024-10-10 Last tenant moved out on 2024-08-24, so the unit had been empty 45 days at the date of loss.",
+      "2024-10-10 Landlord states he shut off the water at the main and drained the lines the week the tenant left.",
+      "2024-10-11 Landlord's first visit to the unit after the tenancy ended was on 2024-09-13. He has no record of any earlier inspection of the plumbing.",
+      "2024-10-14 Estimate: 17,600."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10007",
+    "status": "open",
+    "policy_number": "HP-451330",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0415 ed. 01-24"],
+    "coverage_a_limit": 360000,
+    "excess": 2000,
+    "date_of_loss": "2024-05-03",
+    "first_notice": "Hail damage to roof.",
+    "claimed_amount": 19800,
+    "adjuster_notes": [
+      "2024-05-06 Roof is standing-seam metal. Numerous hail dents across the south and west panels.",
+      "2024-05-08 Inspection: no punctures, no leaks in the attic, panels still shed water normally. Damage is denting only.",
+      "2024-05-09 Roofer quote to replace the panels: 19,800."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10008",
+    "status": "open",
+    "policy_number": "HP-451902",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24"],
+    "coverage_a_limit": 300000,
+    "excess": 1000,
+    "date_of_loss": "2024-09-30",
+    "first_notice": "Water damage in the kitchen.",
+    "claimed_amount": 9100,
+    "adjuster_notes": []
+  },
+  {
+    "claim_id": "CLM-2024-10009",
+    "status": "open",
+    "policy_number": "HP-452611",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0509 ed. 06-24"],
+    "coverage_a_limit": 330000,
+    "excess": 500,
+    "date_of_loss": "2024-08-27",
+    "first_notice": "Burglary, laptops and camera equipment stolen from the house.",
+    "claimed_amount": 6000,
+    "adjuster_notes": [
+      "2024-08-28 Police report filed. Two laptops and a camera kit taken from the home office.",
+      "2024-08-29 Insured runs a wedding photography business from the house. Tax return shows gross receipts of 38,000 for the last 12 months.",
+      "2024-08-29 All stolen items are used for the photography business. Replacement cost 6,000, receipts provided. Items were at the house when stolen."
+    ]
+  },
+  {
+    "claim_id": "CLM-2024-10010",
+    "status": "open",
+    "policy_number": "HP-453047",
+    "policy_line": "homeowners",
+    "forms_attached": ["HO-0304 ed. 03-24"],
+    "coverage_a_limit": 310000,
+    "excess": 1000,
+    "date_of_loss": "2024-11-05",
+    "first_notice": "Leak under the bathroom sink.",
+    "claimed_amount": 4800,
+    "adjuster_notes": [
+      "2024-11-06 Insured found water under the vanity and a warped cabinet base. Not sure when the leak started, they rarely use that bathroom.",
+      "2024-11-07 Plumber replaced a failed compression fitting on the supply line. The old fitting was thrown away by the plumber.",
+      "2024-11-08 Estimate: 4,800."
+    ]
+  }
+]
