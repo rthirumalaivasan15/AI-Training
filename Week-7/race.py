@@ -7,7 +7,8 @@ per-claim grid to race_claims.csv, and the 8 headline numbers to race.csv.
 Every claim is graded by contract.grade against expected.json, which was
 committed before this script first ran.
 
-Refuses to overwrite a finished race: delete the runs/race_*.jsonl files to re-run.
+Never overwrites a finished run: a complete runs/race_<system>.jsonl is loaded,
+not re-rolled. Delete it to re-run that system.
 """
 import os
 import csv
@@ -32,7 +33,12 @@ CLAIM_IDS = sorted(EXPECTED)
 def race(system, run):
     path = "runs/race_%s.jsonl" % system
     if os.path.exists(path):
-        sys.exit("%s exists - delete it to re-run the race" % path)
+        with open(path, encoding="utf-8") as f:
+            done = [json.loads(line) for line in f if line.strip()]
+        if [r["claim_id"] for r in done] == CLAIM_IDS:
+            print("  %-8s loaded the finished run from %s" % (system, path))
+            return done
+        sys.exit("%s is incomplete - delete it to re-run %s" % (path, system))
     rows = []
     for claim_id in CLAIM_IDS:
         lines = []

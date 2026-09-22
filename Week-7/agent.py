@@ -48,6 +48,7 @@ class Budget:
         self.laps = 0
         self.tokens = 0
         self.cost = 0.0
+        self.estimated_laps = 0
 
     def elapsed(self):
         return self.clock() - self.started - self.waited
@@ -80,6 +81,7 @@ class Budget:
         self.tokens += usage["total_tokens"]
         self.cost += usage["cost_usd"]
         self.waited += usage["wait_s"]
+        self.estimated_laps += 1 if usage.get("estimated") else 0
 
 
 def assistant_turn(msg):
@@ -90,6 +92,18 @@ def assistant_turn(msg):
                                "function": {"name": c.function.name, "arguments": c.function.arguments}}
                               for c in msg.tool_calls]
     return turn
+
+
+def rejected_answer(generation):
+    """The contract answer inside a refused tool call, if that is what it carried."""
+    try:
+        call = json.loads(generation)
+        args = call.get("arguments", call)
+        args = json.loads(args) if isinstance(args, str) else args
+    except (json.JSONDecodeError, AttributeError):
+        return None
+    output, _ = contract.validate(args) if isinstance(args, dict) else (None, None)
+    return output
 
 
 def stopped_output(claim_id, fired):
@@ -122,6 +136,19 @@ def run(claim_id, budget=None, log=print, chat=llm.chat):
                usage["completion_tokens"], budget.tokens, budget.cost,
                budget.elapsed(), usage["finish_reason"]))
 
+        if usage["finish_reason"] == "tool_use_failed":
+            output = rejected_answer(msg.rejected)
+            if output:
+                log("      provider refused a call to an undeclared tool; its arguments are a valid "
+                    "answer, accepted (usage estimated)")
+                log("DONE  final answer")
+                return finish(claim_id, output, None, None, budget, calls)
+            log("      provider refused an invalid tool call (usage estimated): %s" % msg.rejected[:200])
+            messages.append({"role": "user", "content":
+                             "Your last reply called a tool that does not exist. Call one of the "
+                             "declared tools, or reply with the JSON object as plain text."})
+            continue
+
         if not msg.tool_calls:
             if usage["finish_reason"] == "length":
                 # cut off by the completion cap - not an answer, spend nothing more on it
@@ -148,7 +175,8 @@ def finish(claim_id, output, error, stop_reason, budget, calls):
     return {"claim_id": claim_id, "output": output, "error": error,
             "stop_reason": stop_reason, "laps": budget.laps, "tokens": budget.tokens,
             "cost_usd": budget.cost, "latency_s": budget.elapsed(),
-            "rate_limit_wait_s": budget.waited, "tool_calls": calls}
+            "rate_limit_wait_s": budget.waited, "estimated_laps": budget.estimated_laps,
+            "tool_calls": calls}
 
 
 if __name__ == "__main__":

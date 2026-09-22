@@ -9,7 +9,9 @@ import os
 import re
 import time
 from dotenv import load_dotenv
-from openai import OpenAI, RateLimitError, APIConnectionError
+import json
+from types import SimpleNamespace
+from openai import OpenAI, RateLimitError, APIConnectionError, BadRequestError
 
 load_dotenv()
 
@@ -73,6 +75,29 @@ def chat(messages, tools=None, max_completion_tokens=4096, timeout=60, retries=1
             time.sleep(wait)
             waited += wait
             continue
+        except BadRequestError as exc:
+            body = getattr(exc, "body", None) or {}
+            err = body.get("error", body) if isinstance(body, dict) else {}
+            if err.get("code") != "tool_use_failed":
+                raise
+            # The model produced a tool call Groq refused to pass back (seen: a call to
+            # an undeclared tool named "json" carrying the final answer). Groq reports
+            # no usage for a refused call, so it is estimated at 4 characters a token
+            # and flagged, rather than counted as free.
+            generation = err.get("failed_generation") or ""
+            prompt_est = len(json.dumps(messages)) // 4 + (len(json.dumps(tools)) // 4 if tools else 0)
+            completion_est = len(generation) // 4
+            usage = {
+                "prompt_tokens": prompt_est,
+                "completion_tokens": completion_est,
+                "total_tokens": prompt_est + completion_est,
+                "cost_usd": cost(prompt_est, completion_est),
+                "call_s": time.perf_counter() - started,
+                "wait_s": waited,
+                "finish_reason": "tool_use_failed",
+                "estimated": True,
+            }
+            return SimpleNamespace(content=None, tool_calls=None, rejected=generation), usage
         except APIConnectionError as exc:
             # a dropped TLS handshake, seen once on this machine; retried, not hidden
             print("    connection error (%s), retrying" % exc.__cause__, flush=True)
