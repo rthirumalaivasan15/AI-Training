@@ -31,6 +31,20 @@ def search_policy(query, form_numbers=None, k=4):
              "text": h["text"]} for h in hits]
 
 
+CLAIM_STATUSES = ("covered", "denied", "undetermined")
+
+
+def compute_payout(claim_status, loss_amount, excess, limit=None):
+    if claim_status not in CLAIM_STATUSES:
+        return {"error": "claim_status must be one of %s" % ", ".join(CLAIM_STATUSES)}
+    if claim_status == "denied":
+        return {"payable_amount": 0}
+    if claim_status == "undetermined":
+        return {"payable_amount": None}
+    capped = min(loss_amount, limit) if limit is not None else loss_amount
+    return {"payable_amount": max(0, round(capped - excess))}
+
+
 TOOLS = [
     {
         "type": "function",
@@ -76,9 +90,36 @@ TOOLS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "compute_payout",
+            "description": (
+                "Compute the payable amount for a coverage decision already made: "
+                "min(loss_amount, limit) minus the excess, never below zero; 0 when denied, "
+                "null when undetermined. Arithmetic only - it never reads the claim or the "
+                "wording, so pass in the figures you have already found."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "claim_status": {"type": "string", "enum": list(CLAIM_STATUSES),
+                                     "description": "The coverage decision already reached."},
+                    "loss_amount": {"type": "integer", "minimum": 0,
+                                    "description": "Dollars of loss the decision applies to."},
+                    "excess": {"type": "integer", "minimum": 0,
+                               "description": "Excess or deductible in dollars that applies to this loss."},
+                    "limit": {"type": "integer", "minimum": 0,
+                              "description": "Per-event limit or sublimit in dollars that caps this loss. Omit if none applies."},
+                },
+                "required": ["claim_status", "loss_amount", "excess"],
+                "additionalProperties": False,
+            },
+        },
+    },
 ]
 
-IMPLS = {"get_claim": get_claim, "search_policy": search_policy}
+IMPLS = {"get_claim": get_claim, "search_policy": search_policy, "compute_payout": compute_payout}
 
 
 def run_tool(name, args):

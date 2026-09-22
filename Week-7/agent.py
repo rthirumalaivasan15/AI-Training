@@ -21,6 +21,7 @@ Rules:
 - Rely only on what the tools return. You have no other knowledge of the policy wording.
 - The notes decide which wording matters. If a note reveals a new fact (a cause, a duration, a vacancy, a business use), search the wording for it before deciding.
 - If the notes do not establish the facts an exclusion or exception turns on, the position is UNDETERMINED. Never guess.
+- Take payable_amount from compute_payout. Do not do the arithmetic yourself.
 
 """ + contract.CONTRACT_TEXT
 
