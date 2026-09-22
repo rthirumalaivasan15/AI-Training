@@ -1,0 +1,10 @@
+2026-09-22 09:46:48  START CLM-2024-10006  limits {"max_iters": 8, "max_tokens": 3000, "max_cost": 0.02, "max_wall": 90}
+2026-09-22 09:46:49  lap 1  +853 tok (810 in / 43 out)  total 853 tok  $0.00015  0.7s  finish=tool_calls
+2026-09-22 09:46:49        -> get_claim({"claim_id": "CLM-2024-10006"})
+2026-09-22 09:46:49  lap 2  +1198 tok (1104 in / 94 out)  total 2051 tok  $0.00037  1.3s  finish=tool_calls
+2026-09-22 09:46:50        -> search_policy({"form_numbers": ["DP-0703"], "query": "burst pipe"})
+2026-09-22 09:46:51  lap 3  +2087 tok (1561 in / 526 out)  total 4138 tok  $0.00092  3.1s  finish=tool_calls
+2026-09-22 09:46:51        -> compute_payout({"claim_status": "denied", "excess": 1500, "loss_amount": 17600})
+2026-09-22 09:46:51  STOP  budget=max_tokens fired  used=4138  limit=3000
+2026-09-22 09:46:51        used {"max_iters": 3, "max_tokens": 4138, "max_cost": 0.000919, "max_wall": 3.12}
+2026-09-22 09:46:51  OUTPUT {"claim_id": "CLM-2024-10006", "coverage_position": "UNDETERMINED", "grounds": [], "payable_amount": null, "reasoning": "Triage stopped before a decision: the max_tokens budget was reached.", "next_step": "Refer the claim to an adjuster for manual triage."}
