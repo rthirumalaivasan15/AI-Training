@@ -1,0 +1,3 @@
+system,claims,pass_rate,p50_latency_s,total_tokens,cost_per_claim_usd,model
+workflow,10,8/10,3.09,23319,0.000753,openai/gpt-oss-120b
+agent,10,8/10,4.74,54785,0.001209,openai/gpt-oss-120b

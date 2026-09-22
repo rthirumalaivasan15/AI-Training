@@ -1,0 +1,11 @@
+claim_id,class,expected_position,expected_payable,workflow_pass,workflow_position,workflow_payable,workflow_laps,workflow_tokens,workflow_latency_s,workflow_stop_reason,agent_pass,agent_position,agent_payable,agent_laps,agent_tokens,agent_latency_s,agent_stop_reason
+CLM-2024-10001,clean,COVERED,7400,True,COVERED,7400,2,2296,3.14,,True,COVERED,7400,4,6372,5.37,
+CLM-2024-10002,notes-trigger-exclusion,DENIED,0,True,DENIED,0,2,2277,2.75,,True,DENIED,0,4,6003,3.81,
+CLM-2024-10003,notes-trigger-exclusion,DENIED,0,True,DENIED,0,2,2231,2.6,,True,DENIED,0,3,3965,2.53,
+CLM-2024-10004,notes-trigger-exclusion,COVERED,9000,True,COVERED,9000,2,2310,3.04,,False,COVERED,13200,4,6098,4.43,
+CLM-2024-10005,notes-trigger-exclusion,COVERED,5300,False,UNDETERMINED,,2,2652,3.63,,True,COVERED,5300,4,6043,4.53,
+CLM-2024-10006,notes-trigger-exclusion,DENIED,0,True,DENIED,0,2,2628,3.76,,True,DENIED,0,4,6238,5.36,
+CLM-2024-10007,clean,DENIED,0,True,DENIED,0,2,2155,3.51,,True,DENIED,0,4,5579,4.95,
+CLM-2024-10008,missing-notes,UNDETERMINED,,True,UNDETERMINED,,2,1985,2.64,,True,UNDETERMINED,,2,2232,1.91,
+CLM-2024-10009,notes-trigger-exclusion,COVERED,2000,True,COVERED,2000,2,2196,2.92,,True,COVERED,2000,4,5715,4.95,
+CLM-2024-10010,missing-notes,UNDETERMINED,,False,DENIED,0,2,2589,3.67,,False,DENIED,0,4,6540,6.05,
