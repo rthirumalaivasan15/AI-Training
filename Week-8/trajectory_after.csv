@@ -1,0 +1,11 @@
+claim_id,class,outcome,trajectory,path_taken,sequence_accepted,decisive_opened,decisive_missed,arg_failures,steps_taken,steps_needed,step_efficiency,modes,tokens,cost_usd,latency_s
+CLM-2024-10001,clean,PASS,PASS,get_claim > search_policy > compute_payout > search_policy > compute_payout,True,True,,,5,3,1.67,,11433,0.002214,9.97
+CLM-2024-10002,notes-trigger-exclusion,PASS,FAIL,get_claim > search_policy > compute_payout,True,True,,compute_payout: limit 280000 is stated in no passage opened,3,2,1.5,M3_ungrounded_limit,6109,0.001194,4.76
+CLM-2024-10003,notes-trigger-exclusion,PASS,PASS,get_claim > search_policy > compute_payout,True,True,,,3,2,1.5,,6882,0.001527,6.73
+CLM-2024-10004,notes-trigger-exclusion,FAIL,FAIL,get_claim > search_policy > compute_payout > search_policy > compute_payout,True,False,HO-0820_05-24#03,,5,3,1.67,M2_decisive_clause_missed,11310,0.002113,11.99
+CLM-2024-10005,notes-trigger-exclusion,PASS,FAIL,get_claim > search_policy > compute_payout > search_policy,True,False,HO-0820_05-24#03,,4,3,1.33,M2_decisive_clause_missed; M5_payout_skipped,7996,0.001639,6.59
+CLM-2024-10006,notes-trigger-exclusion,PASS,FAIL,get_claim > search_policy > compute_payout,True,True,,compute_payout: limit 240000 is stated in no passage opened,3,2,1.5,M3_ungrounded_limit,6324,0.001504,6.21
+CLM-2024-10007,clean,PASS,PASS,get_claim > search_policy > compute_payout,True,True,,,3,2,1.5,,5484,0.001142,5.17
+CLM-2024-10008,missing-notes,PASS,FAIL,get_claim,False,False,HO-0304_03-24#05,,1,2,0.5,M1_exclusions_never_opened,2104,0.000469,2.89
+CLM-2024-10009,notes-trigger-exclusion,PASS,PASS,get_claim > search_policy > compute_payout,True,True,,,3,3,1.0,,5693,0.001236,4.19
+CLM-2024-10010,missing-notes,FAIL,PASS,get_claim > search_policy > compute_payout,True,True,,,3,2,1.5,,6682,0.001692,9.46
