@@ -1,0 +1,2 @@
+tag,cases,outcome_pass_rate,trajectory_pass_rate,gap,tool_choice_accuracy,argument_validity_rate,step_efficiency_p50,cost_p50_usd,cost_max_usd,tokens_total,latency_p50_s
+before,10,0.8,0.4,0.4,0.9,0.927536,1.0,0.0013,0.001705,55332,5.347175
