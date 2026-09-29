@@ -20,10 +20,18 @@ more than one order is genuinely right:
     zero, and OPTIONAL when the answer is DENIED (zero) or UNDETERMINED (null) -
     there is no arithmetic to do, and calling the tool to be told "0" is not a
     better path than not calling it.
+  - a second compute_payout is accepted when an earlier one was refused: going
+    back to the wording and retrying is the correction the refusal asks for, and
+    scoring that as a wrong path would punish the agent for recovering.
 
-So the accepted set for a case is every sequence matching
-get_claim, search_policy{1,3}, compute_payout{0 or 1}, with the payout call
-mandatory only where a positive amount is claimed.
+accepted_sequences() enumerates that set in code; report() prints it.
+
+ATTEMPTED vs LANDED
+A tool call the tool itself refused did not happen to the claim. Mode counts are
+of calls that landed, so a mitigation that blocks bad arguments shows up as the
+mode falling. The count of attempts is reported alongside it, unblocked, because
+a blocked attempt still means the model tried - the behaviour did not change,
+only its consequence.
 """
 import os
 import re
@@ -75,12 +83,27 @@ MODES = {
 }
 
 
-def accepted_sequences(payout_required):
-    """Every tool sequence this case accepts, as a set of tuples."""
+def accepted_sequences(payout_required, retry_allowed):
+    """Every tool sequence this case accepts, as a set of tuples. Enumerated from
+    the rules in the module docstring rather than written out one by one."""
     seqs = set()
-    payout_options = [1] if payout_required else [0, 1]
-    for searches, payouts in product(range(1, MAX_SEARCHES + 1), payout_options):
-        seqs.add(tuple(["get_claim"] + ["search_policy"] * searches + ["compute_payout"] * payouts))
+    max_payouts = 2 if retry_allowed else 1
+    alphabet = ("search_policy", "compute_payout")
+    for length in range(1, MAX_SEARCHES + max_payouts + 1):
+        for tail in product(alphabet, repeat=length):
+            searches = tail.count("search_policy")
+            payouts = tail.count("compute_payout")
+            if not 1 <= searches <= MAX_SEARCHES or payouts > max_payouts:
+                continue
+            if payout_required and payouts == 0:
+                continue
+            if tail[0] != "search_policy":
+                continue                      # nothing can be computed before the wording is open
+            if payouts == 2:
+                first, second = [i for i, t in enumerate(tail) if t == "compute_payout"]
+                if "search_policy" not in tail[first:second]:
+                    continue                  # a retry has to go back to the wording first
+            seqs.add(("get_claim",) + tail)
     return seqs
 
 
@@ -89,13 +112,22 @@ def numbers_in(text):
     return {int(n.replace(",", "")) for n in re.findall(r"\d[\d,]*", text)}
 
 
+def refused(call):
+    return "error" in (call.get("returned") or {})
+
+
 def check_args(row, opened_text):
-    """Referential validity of every argument the run passed. Returns
-    (checks, failures) where a check is one argument that could be wrong."""
+    """Referential validity of every argument that LANDED. Returns
+    (checks, failures, attempts) - attempts counts ungrounded limits the tool
+    refused, which are not failures of the claim but are still model behaviour."""
     claim = CLAIMS[row["claim_id"]]
-    checks, bad = 0, []
+    checks, bad, blocked = 0, [], 0
     for call in row["tool_calls"]:
         a = call["args"]
+        if call["tool"] == "compute_payout" and refused(call):
+            if a.get("limit") is not None and a["limit"] not in numbers_in(opened_text):
+                blocked += 1
+            continue    # refused: it never reached the claim, so it is not scored as a landed argument
         if call["tool"] == "get_claim":
             checks += 1
             if a.get("claim_id") not in CLAIMS:
@@ -132,7 +164,7 @@ def check_args(row, opened_text):
         checks += 1
         if code not in CODES:
             bad.append("answer cites exclusion %s, which does not exist" % code)
-    return checks, bad
+    return checks, bad, blocked
 
 
 def score(row):
@@ -140,8 +172,9 @@ def score(row):
     out = row["output"] or {}
     payable = out.get("payable_amount")
     payout_required = isinstance(payable, (int, float)) and payable > 0
-    accepted = accepted_sequences(payout_required)
     taken = tuple(c["tool"] for c in row["tool_calls"])
+    retried = any(refused(c) for c in row["tool_calls"])
+    accepted = accepted_sequences(payout_required, retry_allowed=retried)
 
     searched = [c for c in row["tool_calls"] if c["tool"] == "search_policy"]
     opened = [cid for c in searched for cid in (c.get("returned") or {}).get("chunk_ids", [])]
@@ -149,8 +182,8 @@ def score(row):
     decisive = DECISIVE[claim_id]["chunks"]
     missed = [cid for cid in decisive if cid not in opened]
 
-    checks, arg_failures = check_args(row, opened_text)
-    steps_needed = min(len(s) for s in accepted)
+    checks, arg_failures, blocked = check_args(row, opened_text)
+    steps_needed = min(len(s) for s in accepted_sequences(payout_required, retry_allowed=False))
     steps_max = max(len(s) for s in accepted)
 
     modes = []
@@ -162,7 +195,10 @@ def score(row):
         modes.append("M3_ungrounded_limit")
     if any(f.startswith("answer cites") or "does not exist" in f for f in arg_failures):
         modes.append("M4_fabricated_reference")
-    if payout_required and "compute_payout" not in taken:
+    accepted_payouts = [c for c in row["tool_calls"]
+                        if c["tool"] == "compute_payout" and not refused(c)]
+    if payout_required and not accepted_payouts:
+        # a refused call is not a payout: the figure in the answer was the model's own arithmetic
         modes.append("M5_payout_skipped")
     if len(taken) > steps_max:
         modes.append("M6_step_inefficiency")
@@ -178,6 +214,7 @@ def score(row):
         "decisive_missed": missed,
         "arg_checks": checks,
         "arg_failures": arg_failures,
+        "blocked_attempts": blocked,
         "steps_taken": len(taken),
         "steps_needed": steps_needed,
         "step_efficiency": round(len(taken) / steps_needed, 2),
@@ -206,6 +243,9 @@ def summarise(tag, scored):
         "cost_max_usd": max(costs),
         "tokens_total": sum(s["tokens"] for s in scored),
         "latency_p50_s": statistics.median(s["latency_s"] for s in scored),
+        "ungrounded_limit_landed": sum("M3_ungrounded_limit" in s["modes"] for s in scored),
+        "ungrounded_limit_attempts": sum("M3_ungrounded_limit" in s["modes"] for s in scored)
+                                     + sum(s["blocked_attempts"] for s in scored),
     }
 
 
@@ -244,6 +284,8 @@ def report(tag, scored):
     print("  step efficiency (p50)  %.2f  (taken / needed)" % s["step_efficiency_p50"])
     print("  cost per claim         p50 $%.5f   max $%.5f" % (s["cost_p50_usd"], s["cost_max_usd"]))
     print("  tokens total %d   latency p50 %.2fs" % (s["tokens_total"], s["latency_p50_s"]))
+    print("  ungrounded limits: %d landed, %d attempted (the rest refused by the tool)"
+          % (s["ungrounded_limit_landed"], s["ungrounded_limit_attempts"]))
     print("  modes:")
     for mode, count in mode_counts(scored).items():
         print("    %-28s %d   %s" % (mode, count, MODES[mode]))
@@ -283,6 +325,8 @@ if __name__ == "__main__":
                 arrow = "better"
             print("    %-28s %d -> %d   %s" % (mode, before[mode], after[mode], arrow))
         sa, sb = summaries
+        print("    %-28s %d -> %d   (behaviour unchanged where equal: the tool refuses, the model still tries)"
+              % ("ungrounded limit ATTEMPTS", sa["ungrounded_limit_attempts"], sb["ungrounded_limit_attempts"]))
         print("  price paid per claim:  tokens %+d   cost %+.6f   latency p50 %+.2fs"
               % ((sb["tokens_total"] - sa["tokens_total"]) / 10,
                  (sb["cost_p50_usd"] - sa["cost_p50_usd"]),
