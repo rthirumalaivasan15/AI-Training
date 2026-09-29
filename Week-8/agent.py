@@ -9,14 +9,19 @@ into the call itself (completion tokens and request timeout), so a single lap
 cannot overshoot by much. When one fires the run stops, logs which budget fired,
 and returns a well-formed UNDETERMINED answer referring the claim to a person.
 """
+import os
 import sys
 import json
 import time
 import argparse
 
 import llm
+import tools
 import contract
 from tools import TOOLS, run_tool
+
+# Week 8: argument validation on compute_payout. WEEK8_VALIDATE_ARGS=0 turns it off.
+VALIDATE_ARGS = os.getenv("WEEK8_VALIDATE_ARGS", "1") != "0"
 
 MAX_ITERS = 8          # laps (model calls)
 MAX_TOKENS = 60_000    # prompt + completion, summed over every lap
@@ -126,8 +131,11 @@ def stopped_output(claim_id, fired):
             "next_step": "Refer the claim to an adjuster for manual triage."}
 
 
-def run(claim_id, budget=None, log=print, chat=llm.chat):
+def run(claim_id, budget=None, log=print, chat=llm.chat, validate_args=VALIDATE_ARGS):
     budget = budget or Budget()
+    # Week 8 mitigation, one change only: compute_payout refuses a limit that no
+    # passage this run opened states. Off reproduces the pre-mitigation agent.
+    tools.begin_run() if validate_args else tools.end_run()
     messages = [{"role": "system", "content": SYSTEM},
                 {"role": "user", "content": "Triage claim %s." % claim_id}]
     calls = []

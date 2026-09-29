@@ -5,6 +5,7 @@ Each description names one job and says what the tool does not return, so the
 model has no reason to call get_claim for policy wording or search_policy for
 claim facts.
 """
+import re
 import json
 from search import dense_search
 
@@ -21,12 +22,40 @@ def get_claim(claim_id):
     return claim
 
 
+# --- Week 8 mitigation: argument validation -------------------------------
+# Top trajectory failure mode in runs/traj_before.jsonl was M3_ungrounded_limit,
+# 5 of 10 claims: a limit passed to compute_payout that no passage the run opened
+# ever states, usually the Coverage A limit off the claim record standing in for a
+# per-event cap. On CLM-2024-10004 that paid 13,200 instead of 9,000.
+# The tool now refuses a limit it cannot find in the wording this run retrieved.
+# Validation is off unless begin_run() turns it on, so the workflow is untouched.
+_evidence = None
+
+
+def begin_run():
+    """Start tracking the wording this run has actually opened."""
+    global _evidence
+    _evidence = []
+
+
+def end_run():
+    global _evidence
+    _evidence = None
+
+
+def _numbers_seen():
+    return {int(n.replace(",", "")) for text in (_evidence or [])
+            for n in re.findall(r"\d[\d,]*", text)}
+
+
 def search_policy(query, form_numbers=None, k=4):
     where = None
     if form_numbers:
         forms = [f.split()[0] for f in form_numbers]   # "HO-0304 ed. 03-24" -> "HO-0304"
         where = {"form_number": forms[0]} if len(forms) == 1 else {"form_number": {"$in": forms}}
     hits = dense_search(query, k=k, where=where)
+    if _evidence is not None:
+        _evidence.extend(h["text"] for h in hits)
     return [{"chunk_id": h["chunk_id"], "form_number": h["meta"]["form_number"],
              "text": h["text"]} for h in hits]
 
@@ -41,6 +70,12 @@ def compute_payout(claim_status, loss_amount, excess, limit=None):
         return {"payable_amount": 0}
     if claim_status == "undetermined":
         return {"payable_amount": None}
+    if limit is not None and _evidence is not None and limit not in _numbers_seen():
+        return {"error": "limit %s is not stated in any passage you have retrieved. Search the "
+                         "wording for the clause that states the per-event limit or sublimit and "
+                         "call again with that figure, or omit limit if the wording states none. "
+                         "A Coverage A limit from the claim record is not a per-event limit."
+                         % limit}
     capped = min(loss_amount, limit) if limit is not None else loss_amount
     return {"payable_amount": max(0, round(capped - excess))}
 
