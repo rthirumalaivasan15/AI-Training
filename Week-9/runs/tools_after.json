@@ -1,0 +1,171 @@
+{
+  "config": "mcp_config.json",
+  "tool_count": 4,
+  "tools": [
+    {
+      "name": "search_policy",
+      "server": "policy-docs"
+    },
+    {
+      "name": "compute_payout",
+      "server": "policy-docs"
+    },
+    {
+      "name": "get_claim_status",
+      "server": "claims-system"
+    },
+    {
+      "name": "get_adjuster_notes",
+      "server": "claims-system"
+    }
+  ],
+  "servers": {
+    "policy-docs": {
+      "serverInfo": {
+        "name": "policy-docs",
+        "version": ""
+      },
+      "protocolVersion": "2025-11-25",
+      "tools/list": {
+        "ttlMs": 0,
+        "cacheScope": "private",
+        "tools": [
+          {
+            "name": "search_policy",
+            "description": "Search the endorsement wording - definitions, exclusions table rows, exceptions, limits and duty clauses - with a free-text query, optionally restricted to specific form numbers. Returns wording passages with chunk ids only - it never returns claim facts.",
+            "inputSchema": {
+              "properties": {
+                "query": {
+                  "description": "What to look for in the wording, e.g. 'sewer backup deductible'.",
+                  "title": "Query",
+                  "type": "string"
+                },
+                "form_numbers": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "description": "Form numbers to restrict to, e.g. ['HO-0820']. Omit to search all forms.",
+                  "title": "Form Numbers"
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "type": "object",
+              "title": "search_policyArguments"
+            }
+          },
+          {
+            "name": "compute_payout",
+            "description": "Compute the payable amount for a coverage decision already made: min(loss_amount, limit) minus the excess, never below zero; 0 when denied, null when undetermined. Arithmetic only - it never reads the claim or the wording, so pass in the figures you have already found.",
+            "inputSchema": {
+              "properties": {
+                "claim_status": {
+                  "description": "The coverage decision already reached.",
+                  "enum": [
+                    "covered",
+                    "denied",
+                    "undetermined"
+                  ],
+                  "title": "Claim Status",
+                  "type": "string"
+                },
+                "loss_amount": {
+                  "description": "Dollars of loss the decision applies to.",
+                  "minimum": 0,
+                  "title": "Loss Amount",
+                  "type": "integer"
+                },
+                "excess": {
+                  "description": "Excess or deductible in dollars that applies to this loss.",
+                  "minimum": 0,
+                  "title": "Excess",
+                  "type": "integer"
+                },
+                "limit": {
+                  "anyOf": [
+                    {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "description": "Per-event limit or sublimit in dollars that caps this loss. Omit if none applies.",
+                  "title": "Limit"
+                }
+              },
+              "required": [
+                "claim_status",
+                "loss_amount",
+                "excess"
+              ],
+              "type": "object",
+              "title": "compute_payoutArguments"
+            }
+          }
+        ],
+        "resultType": "complete"
+      }
+    },
+    "claims-system": {
+      "serverInfo": {
+        "name": "claims-system",
+        "version": ""
+      },
+      "protocolVersion": "2025-11-25",
+      "tools/list": {
+        "ttlMs": 0,
+        "cacheScope": "private",
+        "tools": [
+          {
+            "name": "get_claim_status",
+            "description": "Current status and policy facts for one claim, by claim number (CLM-YYYY-nnnnn): status, policy number, policy line, endorsement forms attached, Coverage A limit, excess, date of loss, first notice of loss and claimed amount. Does not return the adjuster's notes - use get_adjuster_notes for those.",
+            "inputSchema": {
+              "properties": {
+                "claim_number": {
+                  "title": "Claim Number",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "claim_number"
+              ],
+              "type": "object",
+              "title": "get_claim_statusArguments"
+            }
+          },
+          {
+            "name": "get_adjuster_notes",
+            "description": "The adjuster's dated file notes for one claim, by claim number (CLM-YYYY-nnnnn), oldest first. An empty list means no notes have been written yet.",
+            "inputSchema": {
+              "properties": {
+                "claim_number": {
+                  "title": "Claim Number",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "claim_number"
+              ],
+              "type": "object",
+              "title": "get_adjuster_notesArguments"
+            }
+          }
+        ],
+        "resultType": "complete"
+      }
+    }
+  }
+}

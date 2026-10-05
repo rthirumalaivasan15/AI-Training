@@ -1,0 +1,199 @@
+{
+  "_about": "Raw JSON-RPC between the host (agent.py via mcp_host.py) and the claims-system server, captured by wiretap.py on the run in runs/trace_wire.log (CLM-2024-10004). 'message' is each line exactly as it crossed stdio, parsed; the byte-exact lines are runs/wire_raw.jsonl lines 1-7. Lines 8-9 (tools/call get_adjuster_notes, id 4) have the same shape and are not repeated here. 't_s' is seconds since the wiretap started.",
+  "where_the_model_call_happens": "The model is called only in the host - agent.py run() -> llm.chat -> Groq - in the 0.786 s gap between the tools/list reply (t=0.807) and tools/call id 3 (t=1.593) when nothing crosses this wire; it never happens on the wire or inside either server, where tools/call is plain Python reading claims.json.",
+  "exchange": [
+    {
+      "step": "1. initialize - request",
+      "direction": "host->server",
+      "t_s": 0.0005,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2025-11-25",
+          "capabilities": {},
+          "clientInfo": {
+            "name": "mcp",
+            "version": "0.1.0"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Protocol tag, always \"2.0\". Present on every message in both directions.",
+        "id": "1 - request id picked by the host. The reply must carry the same id; that is the only thing pairing a reply with its request.",
+        "method": "\"initialize\" - must be the first message of the session. The server answers nothing else before it.",
+        "params": "What the host offers:",
+        "params.protocolVersion": "\"2025-11-25\" - the MCP revision the host speaks. The server replies with the one it will use.",
+        "params.capabilities": "{} - the host offers the server nothing back: no sampling (the server cannot ask our model for a completion), no roots, no elicitation. A server that wanted to run our model would need sampling here, and it is not granted.",
+        "params.clientInfo": "\"mcp\" 0.1.0 - the SDK default; the host never named itself. Informational only - it is not authentication."
+      }
+    },
+    {
+      "step": "1. initialize - result",
+      "direction": "server->host",
+      "t_s": 0.804,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "listChanged": false,
+              "subscribe": false
+            },
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "claims-system",
+            "version": ""
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "1 - answers request 1.",
+        "result": "Present means success. A failed request would carry \"error\" instead, never both.",
+        "result.capabilities": "tools.listChanged=false: the tool list is fixed for the session, so the single tools/list the host makes at start-up is complete. prompts and resources are declared too, but the server lists none - declared is not offered.",
+        "result.protocolVersion": "\"2025-11-25\" - agreed; both sides now speak this revision.",
+        "result.serverInfo": "name \"claims-system\", version \"\" - the server reports no version, so we cannot tell which build we are running. Carried into risk_note.md."
+      }
+    },
+    {
+      "step": "2. notifications/initialized",
+      "direction": "host->server",
+      "t_s": 0.8046,
+      "message": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "method": "\"notifications/initialized\" - the host says the handshake is done. No id, so it is a notification: no reply is sent or expected."
+      }
+    },
+    {
+      "step": "3. tools/list - request",
+      "direction": "host->server",
+      "t_s": 0.8055,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list"
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "2 - next request id.",
+        "method": "\"tools/list\" - discovery. No params, so no pagination cursor: first page. This reply is the only source of the tool list the model sees - mcp_host.py turns it into the Groq tools parameter unchanged."
+      }
+    },
+    {
+      "step": "3. tools/list - result",
+      "direction": "server->host",
+      "t_s": 0.8066,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "description": "Current status and policy facts for one claim, by claim number (CLM-YYYY-nnnnn): status, policy number, policy line, endorsement forms attached, Coverage A limit, excess, date of loss, first notice of loss and claimed amount. Does not return the adjuster's notes - use get_adjuster_notes for those.",
+              "inputSchema": {
+                "properties": {
+                  "claim_number": {
+                    "title": "Claim Number",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "claim_number"
+                ],
+                "type": "object",
+                "title": "get_claim_statusArguments"
+              },
+              "name": "get_claim_status"
+            },
+            {
+              "description": "The adjuster's dated file notes for one claim, by claim number (CLM-YYYY-nnnnn), oldest first. An empty list means no notes have been written yet.",
+              "inputSchema": {
+                "properties": {
+                  "claim_number": {
+                    "title": "Claim Number",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "claim_number"
+                ],
+                "type": "object",
+                "title": "get_adjuster_notesArguments"
+              },
+              "name": "get_adjuster_notes"
+            }
+          ]
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "2 - answers tools/list.",
+        "result": "One page; no nextCursor, so the list is complete.",
+        "result.tools": "2 tools: get_claim_status, get_adjuster_notes. For each: name (what the model will call), description (the server author's docstring - goes verbatim into our model's prompt, so a third party writes part of our prompt), inputSchema (JSON Schema, passed to the model as the tool's parameters). claim_number has no pattern in the schema; the CLM-YYYY-nnnnn format is only stated in prose."
+      }
+    },
+    {
+      "step": "4. tools/call - request",
+      "direction": "host->server",
+      "t_s": 1.5928,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "get_claim_status",
+          "arguments": {
+            "claim_number": "CLM-2024-10004"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "3 - next request id.",
+        "method": "\"tools/call\" - run one tool.",
+        "params": "Written by the model, not the host:",
+        "params.name": "\"get_claim_status\" - chosen by the model on lap 1. The host only looked up which server listed this name and forwarded the call.",
+        "params.arguments": "{\"claim_number\": \"CLM-2024-10004\"} - written by the model; the server validates it against inputSchema before running."
+      }
+    },
+    {
+      "step": "4. tools/call - result",
+      "direction": "server->host",
+      "t_s": 1.5946,
+      "message": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "text": "{\n  \"claim_id\": \"CLM-2024-10004\",\n  \"status\": \"open\",\n  \"policy_number\": \"HP-449215\",\n  \"policy_line\": \"homeowners\",\n  \"forms_attached\": [\n    \"HO-0304 ed. 03-24\",\n    \"HO-0820 ed. 05-24\"\n  ],\n  \"coverage_a_limit\": 310000,\n  \"excess\": 1000,\n  \"date_of_loss\": \"2024-06-11\",\n  \"first_notice\": \"Water in the basement.\",\n  \"claimed_amount\": 14200\n}",
+              "type": "text"
+            }
+          ],
+          "isError": false
+        }
+      },
+      "annotations": {
+        "jsonrpc": "\"2.0\".",
+        "id": "3 - answers the call.",
+        "result": "A tool result - a JSON-RPC success even when the tool fails:",
+        "result.content": "One text block holding the claim record as JSON text. This string is what the host hands the model as the tool message. Adjuster notes are not in it - a separate tool.",
+        "result.isError": "false - tool-level success. A tool failure (e.g. claim not found) comes back as isError=true inside a normal result, not as a JSON-RPC error, so the model gets to read the message and recover."
+      }
+    }
+  ]
+}

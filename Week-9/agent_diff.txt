@@ -1,0 +1,24 @@
+# agent_diff.txt - agent module, server one only -> server one plus two
+# agent module = agent.py (the loop and the model call) + mcp_host.py (discovery and routing)
+#                + llm.py (model client) + contract.py (output contract)
+# 1a9bff0 = server one only     2026-10-05 22:39:13 +0530  Week 9: server one only - CLM-2024-10004 comes back U
+# 3d7186a = server one plus two  2026-10-05 22:39:13 +0530  Week 9: add server two (claims-system) - config entry
+
+$ git diff 1a9bff0 3d7186a -- Week-9/agent.py Week-9/mcp_host.py Week-9/llm.py Week-9/contract.py
+(no output: no line differs)
+
+$ git diff --numstat 1a9bff0 3d7186a -- Week-9/agent.py Week-9/mcp_host.py Week-9/llm.py Week-9/contract.py | wc -l
+0
+
+$ git diff --stat 1a9bff0 3d7186a -- Week-9    # everything that did change
+ Week-9/.env.example              |   1 +
+ Week-9/claims_system/claims.json | 172 +++++++++++++++++++++++++++++++++++++++
+ Week-9/claims_system/server.py   |  70 ++++++++++++++++
+ Week-9/mcp_config.json           |   5 ++
+ 4 files changed, 248 insertions(+)
+
+# blob hashes of the agent module at both commits - identical
+Week-9/agent.py        19236eea76a1  19236eea76a1
+Week-9/mcp_host.py     4b289cb0f309  4b289cb0f309
+Week-9/llm.py          91dfea0f725e  91dfea0f725e
+Week-9/contract.py     1381b28fb8bc  1381b28fb8bc
