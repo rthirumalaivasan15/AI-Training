@@ -1,0 +1,324 @@
+{
+  "tag": "after",
+  "claim_id": "CLM-2024-10004",
+  "pinned_call": {
+    "query": "sewer or drain backup: exclusion, coverage grant and per-event limit",
+    "form_numbers": [
+      "HO-0304",
+      "HO 08 20"
+    ]
+  },
+  "model_search_swapped_out": [
+    {
+      "form_numbers": [
+        "HO-0820 ed. 05-24"
+      ],
+      "query": "sewer backup"
+    }
+  ],
+  "search_policy_as_listed": {
+    "name": "search_policy",
+    "description": "Search the endorsement wording and return the passages a coverage decision rests on.\n\n    Call this whenever the decision depends on wording: a definition, an exclusions table row (codes like E-16), the exception in that row, a limit or sublimit, a deductible, or a duty such as maintenance or notice. One call per fact; a second, narrower query is normal when the first does not show the clause you need.\n\n    query: plain words for the fact, e.g. 'sewer backup per-event limit' or 'vacant more than 60 days'.\n    form_numbers: the endorsements attached to the claim, written HO-0820 - two letters, a hyphen, four digits. Copy them from the claim's forms_attached; 'HO-0820 ed. 05-24' is accepted. Omit to search every form.\n\n    Returns {\"passages\": [{chunk_id, form_number, text}]}, up to 4, best match first. Cite the chunk_id of every passage you rely on. Never returns claim facts - those come from the claims system.\n\n    If a form number is not in the library, nothing is searched and the error names the bad form, the closest form held and the full list: correct form_numbers and call again. Do not read that error as the wording being silent.",
+    "parameters": {
+      "properties": {
+        "query": {
+          "description": "Plain words for the one fact you need, e.g. 'sewer backup per-event limit'.",
+          "title": "Query",
+          "type": "string"
+        },
+        "form_numbers": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The claim's endorsements as HO-0820 (two letters, hyphen, four digits), copied from forms_attached. Omit to search every form.",
+          "title": "Form Numbers"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "title": "search_policyArguments"
+    }
+  },
+  "outcome_passed": false,
+  "outcome_fail_reasons": [
+    "payable 13200, expected 9000"
+  ],
+  "model": "openai/gpt-oss-120b",
+  "ts": "2026-10-05T17:13:53+00:00",
+  "log": [
+    "tools/list policy-docs -> 2: search_policy, compute_payout",
+    "tools/list claims-system -> 2: get_claim_status, get_adjuster_notes",
+    "discovered 4 tools from 2 servers",
+    "START CLM-2024-10004  limits {\"max_iters\": 8, \"max_tokens\": 60000, \"max_cost\": 0.02, \"max_wall\": 90}",
+    "      offered 4 tools: search_policy@policy-docs, compute_payout@policy-docs, get_claim_status@claims-system, get_adjuster_notes@claims-system",
+    "lap 1  +1162 tok (1082 in / 80 out)  total 1162 tok  $0.00021  1.2s  finish=tool_calls",
+    "      -> get_claim_status({\"claim_number\": \"CLM-2024-10004\"})  [server: claims-system]",
+    "lap 2  +1273 tok (1231 in / 42 out)  total 2435 tok  $0.00042  2.2s  finish=tool_calls",
+    "      -> get_adjuster_notes({\"claim_number\": \"CLM-2024-10004\"})  [server: claims-system]",
+    "lap 3  +1544 tok (1371 in / 173 out)  total 3979 tok  $0.00073  3.2s  finish=tool_calls",
+    "      -> search_policy({\"query\": \"sewer or drain backup: exclusion, coverage grant and per-event limit\", \"form_numbers\": [\"HO-0304\", \"HO 08 20\"]})  [server: policy-docs]  ERROR: Error executing tool search_policy: form 'HO 08 20' is not in the endorsement library, so nothing was searched. Form numbers look like HO-0820: two letters, a hyphen, four digits (an edition suffix such as ' ed. 05-24' is accepted). Did you mean HO-0820? Forms held: DP-0703, HO-0304, HO-0415, HO-0509, HO-0612, HO-0820. Call search_policy again with corrected form_numbers, or omit form_numbers to search every form.",
+    "lap 4  +1626 tok (1553 in / 73 out)  total 5605 tok  $0.00101  3.9s  finish=tool_calls",
+    "      -> search_policy({\"form_numbers\": [\"HO-0304\", \"HO-0820\"], \"query\": \"sewer backup\"})  [server: policy-docs]",
+    "lap 5  +2558 tok (2150 in / 408 out)  total 8163 tok  $0.00157  6.2s  finish=tool_calls",
+    "      -> compute_payout({\"claim_status\": \"covered\", \"excess\": 1000, \"limit\": 310000, \"loss_amount\": 14200})  [server: policy-docs]  ERROR: limit 310000 is not stated in any passage you have retrieved. Search the wording for the clause that states the per-event limit or sublimit and call again with that figure, or omit limit if the wording states none. A Coverage A limit from the claim record is not a per-event limit.",
+    "lap 6  +2450 tok (2260 in / 190 out)  total 10613 tok  $0.00203  7.2s  finish=tool_calls",
+    "      -> search_policy({\"form_numbers\": [\"HO-0820\"], \"query\": \"limit\"})  [server: policy-docs]",
+    "lap 7  +2897 tok (2602 in / 295 out)  total 13510 tok  $0.00259  10.0s  finish=tool_calls",
+    "      -> compute_payout({\"claim_status\": \"covered\", \"excess\": 1000, \"limit\": null, \"loss_amount\": 14200})  [server: policy-docs]",
+    "lap 8  +3368 tok (2655 in / 713 out)  total 16878 tok  $0.00342  12.9s  finish=stop",
+    "DONE  final answer"
+  ],
+  "output": {
+    "claim_id": "CLM-2024-10004",
+    "coverage_position": "COVERED",
+    "grounds": [
+      "E-16 (coverage for water backup through sewers or drains requires HO-0820 endorsement)",
+      "HO-0820 Clause 1 (definition of water backup)",
+      "HO-0304 Clause 4 (duties after a water loss – no breach identified)"
+    ],
+    "payable_amount": 13200,
+    "reasoning": "The adjuster notes describe water entering the basement via the floor drain after a municipal sewer surcharge, which matches the definition of \"water backup\" in HO-0820 Clause 1 [HO-0820_05-24#02]. Exclusion E-16 permits coverage for such backup only when the HO-0820 endorsement is attached, and it is attached to this policy [HO-0304_03-24#05]. No other exclusions (e.g., E-51 pump failure or E-52 vacancy) apply, and the insured has not breached the post‑loss duties in HO-0304 Clause 4, so coverage is affirmed.",
+    "next_step": "Proceed with payment of the approved amount and issue the claim settlement to the insured."
+  },
+  "error": null,
+  "stop_reason": null,
+  "laps": 8,
+  "tokens": 16878,
+  "cost_usd": 0.0034200000000000003,
+  "latency_s": 12.862925300025381,
+  "rate_limit_wait_s": 50.0,
+  "estimated_laps": 0,
+  "tool_calls": [
+    {
+      "tool": "get_claim_status",
+      "server": "claims-system",
+      "args": {
+        "claim_number": "CLM-2024-10004"
+      },
+      "error": null
+    },
+    {
+      "tool": "get_adjuster_notes",
+      "server": "claims-system",
+      "args": {
+        "claim_number": "CLM-2024-10004"
+      },
+      "error": null
+    },
+    {
+      "tool": "search_policy",
+      "server": "policy-docs",
+      "args": {
+        "query": "sewer or drain backup: exclusion, coverage grant and per-event limit",
+        "form_numbers": [
+          "HO-0304",
+          "HO 08 20"
+        ]
+      },
+      "error": "Error executing tool search_policy: form 'HO 08 20' is not in the endorsement library, so nothing was searched. Form numbers look like HO-0820: two letters, a hyphen, four digits (an edition suffix such as ' ed. 05-24' is accepted). Did you mean HO-0820? Forms held: DP-0703, HO-0304, HO-0415, HO-0509, HO-0612, HO-0820. Call search_policy again with corrected form_numbers, or omit form_numbers to search every form."
+    },
+    {
+      "tool": "search_policy",
+      "server": "policy-docs",
+      "args": {
+        "form_numbers": [
+          "HO-0304",
+          "HO-0820"
+        ],
+        "query": "sewer backup"
+      },
+      "error": null
+    },
+    {
+      "tool": "compute_payout",
+      "server": "policy-docs",
+      "args": {
+        "claim_status": "covered",
+        "excess": 1000,
+        "limit": 310000,
+        "loss_amount": 14200
+      },
+      "error": "limit 310000 is not stated in any passage you have retrieved. Search the wording for the clause that states the per-event limit or sublimit and call again with that figure, or omit limit if the wording states none. A Coverage A limit from the claim record is not a per-event limit."
+    },
+    {
+      "tool": "search_policy",
+      "server": "policy-docs",
+      "args": {
+        "form_numbers": [
+          "HO-0820"
+        ],
+        "query": "limit"
+      },
+      "error": null
+    },
+    {
+      "tool": "compute_payout",
+      "server": "policy-docs",
+      "args": {
+        "claim_status": "covered",
+        "excess": 1000,
+        "limit": null,
+        "loss_amount": 14200
+      },
+      "error": null
+    }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "content": "You triage insurance claims for a claims adjuster.\n\nFor the claim number you are given: pull the claim, read the adjuster notes, check the endorsement wording for every exclusion, exception, limit or duty the facts in the notes bring into play, and work out the payable amount after the excess.\n\nRules:\n- Rely only on what the tools return. You have no other knowledge of the claim or the policy wording.\n- The notes decide which wording matters. If a note reveals a new fact (a cause, a duration, a vacancy, a business use), search the wording for it before deciding.\n- If the notes do not establish the facts an exclusion or exception turns on, the position is UNDETERMINED. Never guess.\n- If no tool can give you the claim itself, the position is UNDETERMINED.\n- Take payable_amount from the payout tool. Do not do the arithmetic yourself.\n\nReturn one JSON object and nothing else, with exactly these keys:\n{\n  \"claim_id\": \"<the claim number>\",\n  \"coverage_position\": \"COVERED\" | \"DENIED\" | \"UNDETERMINED\",\n  \"grounds\": [\"<exclusion codes such as E-17 and form clauses such as HO-0820 Clause 2 the position rests on>\"],\n  \"payable_amount\": <integer dollars after the excess, 0 if DENIED, null if UNDETERMINED>,\n  \"reasoning\": \"<two to four sentences, each citing the chunk id it relies on in square brackets>\",\n  \"next_step\": \"<one sentence for the adjuster>\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "Triage claim CLM-2024-10004."
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_010b1481-d0f3-4fbf-bb2c-15f24d96626b",
+          "type": "function",
+          "function": {
+            "name": "get_claim_status",
+            "arguments": "{\"claim_number\":\"CLM-2024-10004\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_010b1481-d0f3-4fbf-bb2c-15f24d96626b",
+      "content": "{\"claim_id\": \"CLM-2024-10004\", \"status\": \"open\", \"policy_number\": \"HP-449215\", \"policy_line\": \"homeowners\", \"forms_attached\": [\"HO-0304 ed. 03-24\", \"HO-0820 ed. 05-24\"], \"coverage_a_limit\": 310000, \"excess\": 1000, \"date_of_loss\": \"2024-06-11\", \"first_notice\": \"Water in the basement.\", \"claimed_amount\": 14200}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_0e2d1b43-bd43-46fb-a1d4-ffdf063ef32c",
+          "type": "function",
+          "function": {
+            "name": "get_adjuster_notes",
+            "arguments": "{\"claim_number\":\"CLM-2024-10004\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_0e2d1b43-bd43-46fb-a1d4-ffdf063ef32c",
+      "content": "{\"claim_id\": \"CLM-2024-10004\", \"adjuster_notes\": [\"2024-06-12 Heavy rain overnight. Insured found dark water around the basement floor drain in the morning.\", \"2024-06-13 Site visit. Water came up through the floor drain. City confirms the municipal sewer main surcharged on the street that night. No surface water entry, window wells dry.\", \"2024-06-14 Cleanup and restoration estimate: 14,200.\"]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_4476139b-a8f4-487b-9957-d3ba3320d236",
+          "type": "function",
+          "function": {
+            "name": "search_policy",
+            "arguments": "{\"query\": \"sewer or drain backup: exclusion, coverage grant and per-event limit\", \"form_numbers\": [\"HO-0304\", \"HO 08 20\"]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_4476139b-a8f4-487b-9957-d3ba3320d236",
+      "content": "{\"error\": \"Error executing tool search_policy: form 'HO 08 20' is not in the endorsement library, so nothing was searched. Form numbers look like HO-0820: two letters, a hyphen, four digits (an edition suffix such as ' ed. 05-24' is accepted). Did you mean HO-0820? Forms held: DP-0703, HO-0304, HO-0415, HO-0509, HO-0612, HO-0820. Call search_policy again with corrected form_numbers, or omit form_numbers to search every form.\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_91eb8b1e-3149-4fde-af1d-c8eac1213edf",
+          "type": "function",
+          "function": {
+            "name": "search_policy",
+            "arguments": "{\"form_numbers\":[\"HO-0304\",\"HO-0820\"],\"query\":\"sewer backup\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_91eb8b1e-3149-4fde-af1d-c8eac1213edf",
+      "content": "{\"passages\": [{\"chunk_id\": \"HO-0820_05-24#02\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 1. DEFINITIONS\\nFor the purposes of this endorsement:\\n(a) \\\"Water backup\\\" means water or waterborne material which backs up through sewers or drains, or which overflows or is discharged from a sump, sump pump, or related equipment.\\n(b) \\\"Related equipment\\\" means the sump pit, discharge piping, check valves, and battery backup unit serving the sump pump.\"}, {\"chunk_id\": \"HO-0304_03-24#06\", \"form_number\": \"HO-0304\", \"text\": \"CLAUSE 4. DUTIES AFTER A WATER LOSS\\nThe insured must take reasonable steps to stop the discharge, protect the property from further damage, and retain the failed pipe, fitting, or appliance component for inspection. Failure to retain the failed component may void coverage otherwise preserved by the E-17 exception.\"}, {\"chunk_id\": \"HO-0820_05-24#05\", \"form_number\": \"HO-0820\", \"text\": \"| Code | Exclusion Description | Applies To | Exception |\\n| E-51 | Water backup caused by the insured's failure to keep the sump pump in working order | This endorsement | Does NOT apply if the failure was caused by a power outage lasting more than 12 continuous hours. |\\n| E-52 | Water backup occurring while the residence premises is vacant for more than 60 consecutive days | This endorsement | None. Vacancy beyond 60 days suspends this coverage. |\"}, {\"chunk_id\": \"HO-0304_03-24#05\", \"form_number\": \"HO-0304\", \"text\": \"| Code | Exclusion Description | Applies To | Exception |\\n| E-15 | Flood, surface water, waves, tidal water, or overflow of any body of water | All Section I coverages | None. Flood must be insured separately. |\\n| E-16 | Water which backs up through sewers or drains, or which overflows from a sump | Coverage A and Coverage C | Covered only if endorsement HO-0820 is attached to the policy. |\\n| E-17 | Water damage from a burst or ruptured supply line | Coverage A - Dwelling | Does NOT apply where the discharge was sudden and accidental as defined in Clause 1(a); such losses remain covered up to policy limits. |\\n| E-18 | Continuous seepage or leakage from plumbing over a period exceeding 14 days | All Section I coverages | None. Losses from continuous seepage are excluded absolutely. |\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_411ec053-125c-4958-b21f-4062aaf94013",
+          "type": "function",
+          "function": {
+            "name": "compute_payout",
+            "arguments": "{\"claim_status\":\"covered\",\"excess\":1000,\"limit\":310000,\"loss_amount\":14200}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_411ec053-125c-4958-b21f-4062aaf94013",
+      "content": "{\"error\": \"limit 310000 is not stated in any passage you have retrieved. Search the wording for the clause that states the per-event limit or sublimit and call again with that figure, or omit limit if the wording states none. A Coverage A limit from the claim record is not a per-event limit.\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_1cd2f0b4-fcaa-4b8a-a01a-fef77d0c08f4",
+          "type": "function",
+          "function": {
+            "name": "search_policy",
+            "arguments": "{\"form_numbers\":[\"HO-0820\"],\"query\":\"limit\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_1cd2f0b4-fcaa-4b8a-a01a-fef77d0c08f4",
+      "content": "{\"passages\": [{\"chunk_id\": \"HO-0820_05-24#04\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 3. EXCLUSIONS TABLE\\nThe following exclusions apply to this endorsement:\"}, {\"chunk_id\": \"HO-0820_05-24#05\", \"form_number\": \"HO-0820\", \"text\": \"| Code | Exclusion Description | Applies To | Exception |\\n| E-51 | Water backup caused by the insured's failure to keep the sump pump in working order | This endorsement | Does NOT apply if the failure was caused by a power outage lasting more than 12 continuous hours. |\\n| E-52 | Water backup occurring while the residence premises is vacant for more than 60 consecutive days | This endorsement | None. Vacancy beyond 60 days suspends this coverage. |\"}, {\"chunk_id\": \"HO-0820_05-24#07\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 5. OTHER TERMS\\nAll other provisions of the policy remain unchanged.\"}, {\"chunk_id\": \"HO-0820_05-24#06\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 4. MAINTENANCE DUTY\\nThe insured must test the sump pump and related equipment at least once every 90 days and retain proof of battery backup replacement performed within the 24 months preceding a claimed loss.\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_f98ff24c-fa9a-442f-8a89-cfbacd35e491",
+          "type": "function",
+          "function": {
+            "name": "compute_payout",
+            "arguments": "{\"claim_status\":\"covered\",\"excess\":1000,\"limit\":null,\"loss_amount\":14200}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_f98ff24c-fa9a-442f-8a89-cfbacd35e491",
+      "content": "{\"payable_amount\": 13200}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"claim_id\": \"CLM-2024-10004\",\n  \"coverage_position\": \"COVERED\",\n  \"grounds\": [\n    \"E-16 (coverage for water backup through sewers or drains requires HO-0820 endorsement)\",\n    \"HO-0820 Clause 1 (definition of water backup)\",\n    \"HO-0304 Clause 4 (duties after a water loss – no breach identified)\"\n  ],\n  \"payable_amount\": 13200,\n  \"reasoning\": \"The adjuster notes describe water entering the basement via the floor drain after a municipal sewer surcharge, which matches the definition of \\\"water backup\\\" in HO-0820 Clause 1 [HO-0820_05-24#02]. Exclusion E-16 permits coverage for such backup only when the HO-0820 endorsement is attached, and it is attached to this policy [HO-0304_03-24#05]. No other exclusions (e.g., E-51 pump failure or E-52 vacancy) apply, and the insured has not breached the post‑loss duties in HO-0304 Clause 4, so coverage is affirmed.\",\n  \"next_step\": \"Proceed with payment of the approved amount and issue the claim settlement to the insured.\"\n}"
+    }
+  ]
+}

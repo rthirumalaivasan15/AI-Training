@@ -67,6 +67,45 @@ async def main(tag):
     print("wrote", path)
 
 
+def render(tag):
+    """The run as a markdown transcript: every turn, with passages cut to their
+    chunk id and first line, and every error in full."""
+    with open("runs/error_%s.json" % tag, encoding="utf-8") as f:
+        d = json.load(f)
+    out = ["**Model's own first search, swapped for the pinned call:** `%s`"
+           % json.dumps(d["model_search_swapped_out"]), ""]
+    lap = 0
+    for m in d["messages"][2:]:
+        if m["role"] == "assistant":
+            lap += 1
+            for c in m.get("tool_calls", []):
+                args = json.loads(c["function"]["arguments"])
+                pinned = "  **<- the pinned failing call**" if c["function"]["name"] == "search_policy" \
+                    and args == PINNED else ""
+                out.append("- lap %d model -> `%s(%s)`%s" % (lap, c["function"]["name"],
+                                                          json.dumps(args), pinned))
+            if not m.get("tool_calls"):
+                out += ["- lap %d model -> final answer:" % lap, "", "```json",
+                        json.dumps(d["output"], indent=2, ensure_ascii=False), "```"]
+        elif m["role"] == "tool":
+            body = json.loads(m["content"])
+            if isinstance(body, dict) and "error" in body:
+                out.append("  - tool returned **error**: `%s`" % body["error"])
+            elif isinstance(body, dict) and "passages" in body:
+                out.append("  - tool returned %d passages: %s" % (len(body["passages"]), ", ".join(
+                    "`%s` (%s)" % (p["chunk_id"], p["text"].split("\n")[0][:48]) for p in body["passages"])))
+            else:
+                out.append("  - tool returned `%s`" % json.dumps(body, ensure_ascii=False)[:160])
+    out += ["", "Outcome **%s**%s - %d laps, %d tokens, $%.5f, %.1f s active."
+            % ("PASS" if d["outcome_passed"] else "FAIL",
+               " (%s)" % "; ".join(d["outcome_fail_reasons"]) if d["outcome_fail_reasons"] else "",
+               d["laps"], d["tokens"], d["cost_usd"], d["latency_s"])]
+    return "\n".join(out)
+
+
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
-    asyncio.run(main(sys.argv[1]))
+    if sys.argv[1] == "render":
+        print(render(sys.argv[2]))
+    else:
+        asyncio.run(main(sys.argv[1]))
