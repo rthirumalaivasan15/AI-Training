@@ -1,0 +1,256 @@
+{
+  "tag": "before",
+  "claim_id": "CLM-2024-10004",
+  "pinned_call": {
+    "query": "sewer or drain backup: exclusion, coverage grant and per-event limit",
+    "form_numbers": [
+      "HO-0304",
+      "HO 08 20"
+    ]
+  },
+  "model_search_swapped_out": [
+    {
+      "form_numbers": [
+        "HO-0820"
+      ],
+      "query": "sewer backup"
+    }
+  ],
+  "search_policy_as_listed": {
+    "name": "search_policy",
+    "description": "Search the endorsement wording - definitions, exclusions table rows, exceptions, limits and duty clauses - with a free-text query, optionally restricted to specific form numbers. Returns wording passages with chunk ids only - it never returns claim facts.",
+    "parameters": {
+      "properties": {
+        "query": {
+          "description": "What to look for in the wording, e.g. 'sewer backup deductible'.",
+          "title": "Query",
+          "type": "string"
+        },
+        "form_numbers": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Form numbers to restrict to, e.g. ['HO-0820']. Omit to search all forms.",
+          "title": "Form Numbers"
+        }
+      },
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "title": "search_policyArguments"
+    }
+  },
+  "outcome_passed": true,
+  "outcome_fail_reasons": [],
+  "model": "openai/gpt-oss-120b",
+  "ts": "2026-10-05T17:11:43+00:00",
+  "log": [
+    "tools/list policy-docs -> 2: search_policy, compute_payout",
+    "tools/list claims-system -> 2: get_claim_status, get_adjuster_notes",
+    "discovered 4 tools from 2 servers",
+    "START CLM-2024-10004  limits {\"max_iters\": 8, \"max_tokens\": 60000, \"max_cost\": 0.02, \"max_wall\": 90}",
+    "      offered 4 tools: search_policy@policy-docs, compute_payout@policy-docs, get_claim_status@claims-system, get_adjuster_notes@claims-system",
+    "lap 1  +937 tok (844 in / 93 out)  total 937 tok  $0.00018  0.8s  finish=tool_calls",
+    "      -> get_claim_status({\"claim_number\": \"CLM-2024-10004\"})  [server: claims-system]",
+    "lap 2  +1032 tok (993 in / 39 out)  total 1969 tok  $0.00035  1.3s  finish=tool_calls",
+    "      -> get_adjuster_notes({\"claim_number\": \"CLM-2024-10004\"})  [server: claims-system]",
+    "lap 3  +1316 tok (1133 in / 183 out)  total 3285 tok  $0.00063  2.2s  finish=tool_calls",
+    "      -> search_policy({\"query\": \"sewer or drain backup: exclusion, coverage grant and per-event limit\", \"form_numbers\": [\"HO-0304\", \"HO 08 20\"]})  [server: policy-docs]",
+    "lap 4  +1761 tok (1633 in / 128 out)  total 5046 tok  $0.00096  3.8s  finish=tool_calls",
+    "      -> search_policy({\"form_numbers\": [\"HO-0820\"], \"query\": \"sewer backup coverage HO-0820\"})  [server: policy-docs]",
+    "lap 5  +2731 tok (2105 in / 626 out)  total 7777 tok  $0.00165  5.7s  finish=tool_calls",
+    "      -> compute_payout({\"claim_status\": \"covered\", \"excess\": 1000, \"limit\": 10000, \"loss_amount\": 14200})  [server: policy-docs]",
+    "lap 6  +2794 tok (2159 in / 635 out)  total 10571 tok  $0.00235  7.9s  finish=stop",
+    "DONE  final answer"
+  ],
+  "output": {
+    "claim_id": "CLM-2024-10004",
+    "coverage_position": "COVERED",
+    "grounds": [
+      "E-16",
+      "HO-0820 Clause 2"
+    ],
+    "payable_amount": 9000,
+    "reasoning": "The adjuster notes describe water backing up through the basement floor drain due to a municipal sewer surcharge, which triggers exclusion E-16 (water backs up through sewers or drains) [HO-0304_03-24#05]. The policy includes endorsement HO-0820, and its Clause 2 provides coverage for water backup up to $10,000 per loss, overriding E-16 [HO-0820_05-24#03]. The loss amount of $14,200 exceeds the endorsement limit, so the payable amount is limited to $10,000 minus the $1,000 deductible, resulting in $9,000 [computed payout].",
+    "next_step": "Confirm the loss documentation and issue a payment of $9,000 to the insured."
+  },
+  "error": null,
+  "stop_reason": null,
+  "laps": 6,
+  "tokens": 10571,
+  "cost_usd": 0.00235245,
+  "latency_s": 7.948675999999978,
+  "rate_limit_wait_s": 7.0,
+  "estimated_laps": 0,
+  "tool_calls": [
+    {
+      "tool": "get_claim_status",
+      "server": "claims-system",
+      "args": {
+        "claim_number": "CLM-2024-10004"
+      },
+      "error": null
+    },
+    {
+      "tool": "get_adjuster_notes",
+      "server": "claims-system",
+      "args": {
+        "claim_number": "CLM-2024-10004"
+      },
+      "error": null
+    },
+    {
+      "tool": "search_policy",
+      "server": "policy-docs",
+      "args": {
+        "query": "sewer or drain backup: exclusion, coverage grant and per-event limit",
+        "form_numbers": [
+          "HO-0304",
+          "HO 08 20"
+        ]
+      },
+      "error": null
+    },
+    {
+      "tool": "search_policy",
+      "server": "policy-docs",
+      "args": {
+        "form_numbers": [
+          "HO-0820"
+        ],
+        "query": "sewer backup coverage HO-0820"
+      },
+      "error": null
+    },
+    {
+      "tool": "compute_payout",
+      "server": "policy-docs",
+      "args": {
+        "claim_status": "covered",
+        "excess": 1000,
+        "limit": 10000,
+        "loss_amount": 14200
+      },
+      "error": null
+    }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "content": "You triage insurance claims for a claims adjuster.\n\nFor the claim number you are given: pull the claim, read the adjuster notes, check the endorsement wording for every exclusion, exception, limit or duty the facts in the notes bring into play, and work out the payable amount after the excess.\n\nRules:\n- Rely only on what the tools return. You have no other knowledge of the claim or the policy wording.\n- The notes decide which wording matters. If a note reveals a new fact (a cause, a duration, a vacancy, a business use), search the wording for it before deciding.\n- If the notes do not establish the facts an exclusion or exception turns on, the position is UNDETERMINED. Never guess.\n- If no tool can give you the claim itself, the position is UNDETERMINED.\n- Take payable_amount from the payout tool. Do not do the arithmetic yourself.\n\nReturn one JSON object and nothing else, with exactly these keys:\n{\n  \"claim_id\": \"<the claim number>\",\n  \"coverage_position\": \"COVERED\" | \"DENIED\" | \"UNDETERMINED\",\n  \"grounds\": [\"<exclusion codes such as E-17 and form clauses such as HO-0820 Clause 2 the position rests on>\"],\n  \"payable_amount\": <integer dollars after the excess, 0 if DENIED, null if UNDETERMINED>,\n  \"reasoning\": \"<two to four sentences, each citing the chunk id it relies on in square brackets>\",\n  \"next_step\": \"<one sentence for the adjuster>\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "Triage claim CLM-2024-10004."
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_5b09979a-ad56-4a2a-be46-9a60f2e3970c",
+          "type": "function",
+          "function": {
+            "name": "get_claim_status",
+            "arguments": "{\"claim_number\":\"CLM-2024-10004\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_5b09979a-ad56-4a2a-be46-9a60f2e3970c",
+      "content": "{\"claim_id\": \"CLM-2024-10004\", \"status\": \"open\", \"policy_number\": \"HP-449215\", \"policy_line\": \"homeowners\", \"forms_attached\": [\"HO-0304 ed. 03-24\", \"HO-0820 ed. 05-24\"], \"coverage_a_limit\": 310000, \"excess\": 1000, \"date_of_loss\": \"2024-06-11\", \"first_notice\": \"Water in the basement.\", \"claimed_amount\": 14200}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_47fa2565-68f2-4cc5-b6d6-69a0e40762e7",
+          "type": "function",
+          "function": {
+            "name": "get_adjuster_notes",
+            "arguments": "{\"claim_number\":\"CLM-2024-10004\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_47fa2565-68f2-4cc5-b6d6-69a0e40762e7",
+      "content": "{\"claim_id\": \"CLM-2024-10004\", \"adjuster_notes\": [\"2024-06-12 Heavy rain overnight. Insured found dark water around the basement floor drain in the morning.\", \"2024-06-13 Site visit. Water came up through the floor drain. City confirms the municipal sewer main surcharged on the street that night. No surface water entry, window wells dry.\", \"2024-06-14 Cleanup and restoration estimate: 14,200.\"]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_cd4fe55d-e04d-46eb-be01-0101ca7d1cf6",
+          "type": "function",
+          "function": {
+            "name": "search_policy",
+            "arguments": "{\"query\": \"sewer or drain backup: exclusion, coverage grant and per-event limit\", \"form_numbers\": [\"HO-0304\", \"HO 08 20\"]}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_cd4fe55d-e04d-46eb-be01-0101ca7d1cf6",
+      "content": "{\"passages\": [{\"chunk_id\": \"HO-0304_03-24#05\", \"form_number\": \"HO-0304\", \"text\": \"| Code | Exclusion Description | Applies To | Exception |\\n| E-15 | Flood, surface water, waves, tidal water, or overflow of any body of water | All Section I coverages | None. Flood must be insured separately. |\\n| E-16 | Water which backs up through sewers or drains, or which overflows from a sump | Coverage A and Coverage C | Covered only if endorsement HO-0820 is attached to the policy. |\\n| E-17 | Water damage from a burst or ruptured supply line | Coverage A - Dwelling | Does NOT apply where the discharge was sudden and accidental as defined in Clause 1(a); such losses remain covered up to policy limits. |\\n| E-18 | Continuous seepage or leakage from plumbing over a period exceeding 14 days | All Section I coverages | None. Losses from continuous seepage are excluded absolutely. |\"}, {\"chunk_id\": \"HO-0304_03-24#06\", \"form_number\": \"HO-0304\", \"text\": \"CLAUSE 4. DUTIES AFTER A WATER LOSS\\nThe insured must take reasonable steps to stop the discharge, protect the property from further damage, and retain the failed pipe, fitting, or appliance component for inspection. Failure to retain the failed component may void coverage otherwise preserved by the E-17 exception.\"}, {\"chunk_id\": \"HO-0304_03-24#04\", \"form_number\": \"HO-0304\", \"text\": \"CLAUSE 3. EXCLUSIONS TABLE\\nThe following exclusions apply to Section I - Property Coverages:\"}, {\"chunk_id\": \"HO-0304_03-24#00\", \"form_number\": \"HO-0304\", \"text\": \"FORM NUMBER: HO-0304\\nEDITION: 03-24\\nPOLICY LINE: homeowners\\nEFFECTIVE DATE: 2024-03-01\\nTITLE: Water Damage Exclusions Endorsement\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_7a49a6e5-5b7f-4507-9b81-70f41aa08e25",
+          "type": "function",
+          "function": {
+            "name": "search_policy",
+            "arguments": "{\"form_numbers\":[\"HO-0820\"],\"query\":\"sewer backup coverage HO-0820\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_7a49a6e5-5b7f-4507-9b81-70f41aa08e25",
+      "content": "{\"passages\": [{\"chunk_id\": \"HO-0820_05-24#00\", \"form_number\": \"HO-0820\", \"text\": \"FORM NUMBER: HO-0820\\nEDITION: 05-24\\nPOLICY LINE: homeowners\\nEFFECTIVE DATE: 2024-05-01\\nTITLE: Water Backup and Sump Discharge Coverage Endorsement\"}, {\"chunk_id\": \"HO-0820_05-24#03\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 2. COVERAGE GRANT\\nThe insurer will pay up to 10,000 dollars per loss event for direct physical loss to property covered under Section I caused by water backup. This coverage overrides exclusion E-16 of endorsement HO-0304 while this endorsement remains attached to the policy. A deductible of 1,000 dollars applies separately to this coverage.\"}, {\"chunk_id\": \"HO-0820_05-24#02\", \"form_number\": \"HO-0820\", \"text\": \"CLAUSE 1. DEFINITIONS\\nFor the purposes of this endorsement:\\n(a) \\\"Water backup\\\" means water or waterborne material which backs up through sewers or drains, or which overflows or is discharged from a sump, sump pump, or related equipment.\\n(b) \\\"Related equipment\\\" means the sump pit, discharge piping, check valves, and battery backup unit serving the sump pump.\"}, {\"chunk_id\": \"HO-0820_05-24#05\", \"form_number\": \"HO-0820\", \"text\": \"| Code | Exclusion Description | Applies To | Exception |\\n| E-51 | Water backup caused by the insured's failure to keep the sump pump in working order | This endorsement | Does NOT apply if the failure was caused by a power outage lasting more than 12 continuous hours. |\\n| E-52 | Water backup occurring while the residence premises is vacant for more than 60 consecutive days | This endorsement | None. Vacancy beyond 60 days suspends this coverage. |\"}]}"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "fc_a468a6b0-b348-4347-a1c6-c3bdad2c0b86",
+          "type": "function",
+          "function": {
+            "name": "compute_payout",
+            "arguments": "{\"claim_status\":\"covered\",\"excess\":1000,\"limit\":10000,\"loss_amount\":14200}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "fc_a468a6b0-b348-4347-a1c6-c3bdad2c0b86",
+      "content": "{\"payable_amount\": 9000}"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"claim_id\": \"CLM-2024-10004\",\n  \"coverage_position\": \"COVERED\",\n  \"grounds\": [\"E-16\", \"HO-0820 Clause 2\"],\n  \"payable_amount\": 9000,\n  \"reasoning\": \"The adjuster notes describe water backing up through the basement floor drain due to a municipal sewer surcharge, which triggers exclusion E-16 (water backs up through sewers or drains) [HO-0304_03-24#05]. The policy includes endorsement HO-0820, and its Clause 2 provides coverage for water backup up to $10,000 per loss, overriding E-16 [HO-0820_05-24#03]. The loss amount of $14,200 exceeds the endorsement limit, so the payable amount is limited to $10,000 minus the $1,000 deductible, resulting in $9,000 [computed payout].\",\n  \"next_step\": \"Confirm the loss documentation and issue a payment of $9,000 to the insured.\"\n}"
+    }
+  ]
+}
