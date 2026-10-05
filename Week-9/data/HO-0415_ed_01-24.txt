@@ -1,0 +1,29 @@
+FORM NUMBER: HO-0415
+EDITION: 01-24
+POLICY LINE: homeowners
+EFFECTIVE DATE: 2024-01-15
+TITLE: Roof Surfacing Cosmetic Damage Exclusion Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Homeowners 3 - Special Form.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Cosmetic damage" means marring, pitting, denting, or other superficial alteration of the roof surfacing that does not prevent the roof from continuing to function as a barrier to entrance of the elements.
+(b) "Roof surfacing" means the shingles, tiles, membrane, or metal panels exposed to the weather, including underlayment and flashing.
+
+CLAUSE 2. SCOPE OF THIS ENDORSEMENT
+This endorsement scopes exclusion codes E-21 and E-22 as applied to Coverage A - Dwelling. It applies only to loss caused by wind or hail occurring on or after the effective date shown above.
+
+CLAUSE 3. EXCLUSIONS TABLE
+The following exclusions apply to Coverage A - Dwelling:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-21 | Cosmetic damage to roof surfacing caused by hail | Coverage A - Dwelling | Does NOT apply if the hail impact penetrates the underlayment or causes water intrusion within 30 days of the storm event. |
+| E-22 | Damage to metal roof surfacing consisting solely of denting, without loss of water-shedding function | Coverage A - Dwelling | None. Denting of metal roofs is excluded absolutely. |
+
+CLAUSE 4. ROOF INSPECTION RIGHT
+The insurer may inspect the roof surfacing within 60 days of a reported wind or hail claim. The insured shall not authorize permanent repairs before inspection except emergency measures to prevent further damage.
+
+CLAUSE 5. OTHER TERMS
+All other provisions of the policy remain unchanged.
