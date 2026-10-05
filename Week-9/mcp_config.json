@@ -3,6 +3,11 @@
     "policy-docs": {
       "command": "python",
       "args": ["policy_server.py"]
+    },
+    "claims-system": {
+      "command": "python",
+      "args": ["claims_system/server.py"],
+      "env": {"CLAIMS_API_TOKEN": "${CLAIMS_API_TOKEN}"}
     }
   }
 }
