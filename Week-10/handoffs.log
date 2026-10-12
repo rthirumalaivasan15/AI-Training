@@ -1,0 +1,98 @@
+# handoffs.log - every hand-off in the claims squad, per case, with the tokens it billed
+# tokens = prompt + completion of every model call made to serve that hand-off (Groq usage, not estimated
+#          unless marked est.); payload = characters handed over; laps = the coverage worker's search loop
+
+C01  mode 1  total 11311 tok  6 calls
+  case -> orchestrator (plan)            status 200  payload   368 ch  1 call    1632 tok (374 in / 1258 out)
+  orchestrator -> notes worker           status 200  payload   368 ch  1 call     531 tok (312 in / 219 out)
+  orchestrator -> coverage worker        status 200  payload  2306 ch  3 calls    6982 tok (5604 in / 1378 out)
+      lap 1: {"form_numbers":["HO-0304 ed. 03-24"],"query":"water    1473 tok (1298 in / 175 out)
+      lap 2: {"form_numbers":["HO-0820 ed. 05-24"],"query":"water    2078 tok (1916 in / 162 out)
+      lap 3: answer                                                  3431 tok (2390 in / 1041 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1758 ch  1 call    2166 tok (1062 in / 1104 out)
+
+C02  mode 1  total 10660 tok  7 calls
+  case -> orchestrator (plan)            status 200  payload   285 ch  1 call     987 tok (342 in / 645 out)
+  orchestrator -> notes worker           status 200  payload   285 ch  1 call     481 tok (280 in / 201 out)
+  orchestrator -> coverage worker        status 200  payload   950 ch  4 calls    7672 tok (6678 in / 994 out)
+      lap 1: {"form_numbers":["HO-0304 ed. 03-24"],"query":"water    1303 tok (1013 in / 290 out)
+      lap 2: {"form_numbers":["E-17"],"query":"E-17 water damage b   1727 tok (1628 in / 99 out)
+      lap 3: {"form_numbers":["HO-0820"],"query":"E-17 water damag   1850 tok (1783 in / 67 out)
+      lap 4: answer                                                  2792 tok (2254 in / 538 out)
+  workers -> orchestrator (synthesis)    status 200  payload   874 ch  1 call    1520 tok (815 in / 705 out)
+
+C05  mode 2  total 6072 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   388 ch  1 call     860 tok (367 in / 493 out)
+  orchestrator -> notes worker           status 200  payload   388 ch  1 call     512 tok (305 in / 207 out)
+  orchestrator -> coverage worker        status 200  payload   830 ch  2 calls    3122 tok (2453 in / 669 out)
+      lap 1: {"form_numbers":["HO-0820 ed. 05-24"],"query":"water    1187 tok (1000 in / 187 out)
+      lap 2: answer                                                  1935 tok (1453 in / 482 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1162 ch  1 call    1578 tok (874 in / 704 out)
+
+C06  mode 2  total 6649 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   303 ch  1 call     868 tok (349 in / 519 out)
+  orchestrator -> notes worker           status 200  payload   303 ch  1 call     475 tok (287 in / 188 out)
+  orchestrator -> coverage worker        status 200  payload   885 ch  2 calls    3360 tok (2460 in / 900 out)
+      lap 1: {"form_numbers":["HO-0415 ed. 01-24"],"query":"windst   1202 tok (996 in / 206 out)
+      lap 2: answer                                                  2158 tok (1464 in / 694 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1491 ch  1 call    1946 tok (937 in / 1009 out)
+
+C09  mode 3  total 6787 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   336 ch  1 call    1048 tok (352 in / 696 out)
+  orchestrator -> notes worker           status 200  payload   336 ch  1 call     490 tok (290 in / 200 out)
+  orchestrator -> coverage worker        status 200  payload  1231 ch  2 calls    3438 tok (2666 in / 772 out)
+      lap 1: {"form_numbers":["HO-0304 ed. 03-24"],"query":"vacanc   1218 tok (1075 in / 143 out)
+      lap 2: answer                                                  2220 tok (1591 in / 629 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1595 ch  1 call    1811 tok (968 in / 843 out)
+
+C10  mode 3  total 8834 tok  6 calls
+  case -> orchestrator (plan)            status 200  payload   312 ch  1 call    1159 tok (347 in / 812 out)
+  orchestrator -> notes worker           status 200  payload   312 ch  1 call     529 tok (285 in / 244 out)
+  orchestrator -> coverage worker        status 200  payload  1329 ch  3 calls    5373 tok (4600 in / 773 out)
+      lap 1: {"form_numbers":["DP-0703 ed. 02-24"],"query":"munici   1216 tok (1083 in / 133 out)
+      lap 2: {"form_numbers":["DP-0703 ed. 02-24"],"query":"sewer    1680 tok (1525 in / 155 out)
+      lap 3: answer                                                  2477 tok (1992 in / 485 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1088 ch  1 call    1773 tok (852 in / 921 out)
+
+C14  mode 4  total 8694 tok  6 calls
+  case -> orchestrator (plan)            status 200  payload   281 ch  1 call     979 tok (341 in / 638 out)
+  orchestrator -> notes worker           status 200  payload   281 ch  1 call     601 tok (279 in / 322 out)
+  orchestrator -> coverage worker        status 200  payload   705 ch  3 calls    5473 tok (4479 in / 994 out)
+      lap 1: {"form_numbers":["HO-0304 ed. 03-24"],"query":"vacant   1155 tok (959 in / 196 out)
+      lap 2: {"form_numbers":["HO-0304 ed. 03-24"],"query":"sudden   1606 tok (1453 in / 153 out)
+      lap 3: answer                                                  2712 tok (2067 in / 645 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1054 ch  1 call    1641 tok (856 in / 785 out)
+
+C15  mode 4  total 6177 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   255 ch  1 call     932 tok (334 in / 598 out)
+  orchestrator -> notes worker           status 200  payload   255 ch  1 call     465 tok (272 in / 193 out)
+  orchestrator -> coverage worker        status 200  payload  1071 ch  2 calls    3068 tok (2454 in / 614 out)
+      lap 1: {"form_numbers":["HO-0509 ed. 06-24"],"query":"covera   1163 tok (1026 in / 137 out)
+      lap 2: answer                                                  1905 tok (1428 in / 477 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1102 ch  1 call    1712 tok (841 in / 871 out)
+
+C18  mode 5  total 6513 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   156 ch  1 call    1004 tok (310 in / 694 out)
+  orchestrator -> notes worker           status 200  payload   156 ch  1 call     430 tok (248 in / 182 out)
+  orchestrator -> coverage worker        status 200  payload   823 ch  2 calls    3275 tok (2549 in / 726 out)
+      lap 1: {"form_numbers":["HO-0304 ed. 03-24"],"query":"water    1132 tok (967 in / 165 out)
+      lap 2: answer                                                  2143 tok (1582 in / 561 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1155 ch  1 call    1804 tok (878 in / 926 out)
+
+C19  mode 5  total 6685 tok  5 calls
+  case -> orchestrator (plan)            status 200  payload   158 ch  1 call     993 tok (311 in / 682 out)
+  orchestrator -> notes worker           status 200  payload   158 ch  1 call     428 tok (249 in / 179 out)
+  orchestrator -> coverage worker        status 200  payload   670 ch  2 calls    3301 tok (2340 in / 961 out)
+      lap 1: {"form_numbers":["HO-0509 ed. 06-24"],"query":"theft    1103 tok (956 in / 147 out)
+      lap 2: answer                                                  2198 tok (1384 in / 814 out)
+  workers -> orchestrator (synthesis)    status 200  payload  1416 ch  1 call    1963 tok (933 in / 1030 out)
+
+TOTALS OVER THE 10 CASES (multi arm 78382 tokens, single arm 47339 tokens)
+  orchestrator -> coverage worker         45064 tok   57.5% of all multi tokens  (25 calls, 36283 in / 8781 out)
+  workers -> orchestrator (synthesis)     17914 tok   22.9% of all multi tokens  (10 calls, 9016 in / 8898 out)
+  case -> orchestrator (plan)             10462 tok   13.3% of all multi tokens  (10 calls, 3427 in / 7035 out)
+  orchestrator -> notes worker             4942 tok    6.3% of all multi tokens  (10 calls, 2807 in / 2135 out)
+
+re-sent inside the coverage worker loop (prompt tokens on laps 2+): 25910 tok, 33% of all multi tokens
+
+context re-send multiplier = 78382 / 47339 = 1.7x; largest share: orchestrator -> coverage worker, 57% of all multi tokens
