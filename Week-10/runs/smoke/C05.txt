@@ -1,0 +1,36 @@
+START single C05  tools: search_policy, compute_payout
+lap 1  +1315 tok (1132 in / 183 out)  1.9s  finish=tool_calls
+      -> search_policy({"form_numbers": ["HO-0820 ed. 05-24"], "query": "testing every 90 days sump pump maintenance"})
+lap 2  +2452 tok (1582 in / 870 out)  2.2s  finish=stop
+DONE  position DENIED
+CLAIM NUMBER: CLM-2024-20021
+DATE OF LOSS: 2024-08-03
+POLICY FORMS: HO-0820 ed. 05-24
+LOSS: Water backed up into the finished basement after the sump pump motor seized during a storm, resulting in approximately 10 cm of water.
+COVERAGE POSITION: DENIED
+GROUNDS: E-51
+EXCESS: 1000
+REASONING: The loss is water backup caused by the failure of the sump pump, which is covered only if the insured complies with the maintenance duty to test the pump at least every 90 days; the insured has no record of such testing, violating the duty (HO-0820_05-24#06). Because the failure was not due to a power outage exceeding 12 hours, the exclusion E-51 applies, barring coverage for water backup caused by the insured’s failure to keep the pump in working order (HO-0820_05-24#05). Consequently, the claim must be denied. 
+NEXT STEP: Prepare and send a denial notice citing the maintenance duty breach and exclusion E-51.
+======
+START multi C05
+      orchestrator -> notes worker -> status 200 (attempt 1)
+      brief: {"coverage_question": "Does the HO-3 policy with HO-0820 endorsement cover the damage caused by the sump pump motor failure and resulting basement water intrusion that occurred during the storm on August 3, 2024?", "forms": ["HO-3", "HO-0820 ed. 05-24"], "policy": "HO-3 homeowner policy, primary res
+      coverage worker -> search_policy({"form_numbers":["HO-0820 ed. 05-24"],"query":"sump pump"})
+      orchestrator -> coverage worker -> status 200 (attempt 1)
+    rate limited, waiting 6s
+    rate limited, waiting 3s
+DONE  position DENIED
+CLAIM NUMBER: CLM-2024-20021  
+DATE OF LOSS: 2024-08-03  
+POLICY FORMS: HO-0820 ed. 05-24  
+LOSS: A storm caused the sump pump motor to burn out, resulting in about 10 cm of water entering the finished basement.  
+COVERAGE POSITION: DENIED  
+GROUNDS: E-51  
+EXCESS: 1000  
+REASONING: The endorsement defines “water backup” to include discharge from a sump pump [HO-0820_05-24#02]. It also imposes a maintenance duty requiring testing every 90 days, which the insured failed to document, breaching that duty [HO-0820_05-24#06]. Exclusion E-51 bars coverage for water backup caused by the insured’s failure to keep the sump pump in working order, and no exception applies, so the loss is excluded and denied [HO-0820_05-24#05].  
+NEXT STEP: Notify the insured of the denial and provide the relevant policy language and exclusion details.
+case -> orchestrator (plan)            1 calls   1137 tok
+orchestrator -> notes worker           1 calls    512 tok
+orchestrator -> coverage worker        2 calls   3294 tok
+workers -> orchestrator (synthesis)    1 calls   1901 tok
