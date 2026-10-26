@@ -1,0 +1,4 @@
+{"ts": "2026-10-26T18:03:13+0530", "model": "openai/gpt-oss-120b",
+ "probe": "one ~3,000-token request, after the day's traffic, trap pre-tests and suite runs",
+ "result": "429", "unit": "TPD", "limit": 200000, "used": 198945, "requested": 3080, "retry_after_s": 876,
+ "note": "the tokens-per-day cap is not in Groq's x-ratelimit headers (they carry RPD and TPM); it shows only in the 429 itself, parsed by llm.rate_limit_hit"}

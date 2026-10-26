@@ -1,0 +1,15 @@
+SUITE GREEN - prompt claims-agent-v3 (sha 38e4336a5604) - Week-6 cases sha 400bb0047d97 - 2026-10-26T21:31:52+05:30
+
+  C01                        PARTIAL          E-16, HO-0820 Clause 2   PASS
+  C02                        DENIED           E-15                     PASS
+  C05                        DENIED           E-51                     PASS
+  C06                        COVERED          NONE                     PASS
+  C09                        COVERED          E-17, HO-0304 Clause 1(a PASS
+  C10                        DENIED           NONE                     FAIL  grounds_on_denial
+  C14                        DENIED           E-17                     FAIL  date_of_loss
+  C15                        DENIED           E-31                     PASS
+  C18                        UNDETERMINED     E-17, HO-0304_03-24#06   PASS
+  C19                        PARTIAL          HO-0509 Clause 2 (sublim PASS
+  P-trc_a4a9f492d77c         NOT_IN_DOCUMENTS NONE                     PASS
+
+SUITE GREEN: 9/11 pass

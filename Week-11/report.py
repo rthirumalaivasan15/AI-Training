@@ -11,7 +11,9 @@ only the split is estimated. Completion tokens are generation. Retrieval and too
 themselves run locally (MiniLM embeddings, Chroma, Python) and cost $0 in API fees;
 what they cost is the tokens their results add to every later model call.
 """
+import os
 import sys
+import json
 import math
 import datetime
 
@@ -19,6 +21,7 @@ import llm
 import tracer
 
 STAGES = ("retrieval", "generation", "tools")
+PROBE = os.path.join("runs", "quota_probe.json")
 
 
 def pct(part, whole):
@@ -130,16 +133,25 @@ def tenx():
     capacity_req_min = tpm / (tokens / n)           # requests per minute the TPM limit allows
     calls_10x = 10 * calls
     cost_10x = 10 * cost_day
+    # the tokens-per-day cap is not in the response headers - only in a TPD 429
+    probe = json.load(open(PROBE)) if os.path.exists(PROBE) else {}
+    tpd = probe.get("limit") if probe.get("unit") == "TPD" else None
 
-    line = ("**Rate limit breaks first: at 10x today's rate the app needs %s tokens/min against Groq's %s "
-            "tokens-per-minute cap on %s - %.0fx over - while cost is only $%.2f a day and the %s requests/day "
-            "cap still has room (%s calls).**" % (
-                format(round(demand_10x), ","), format(tpm, ","), llm.MODEL, demand_10x / tpm, cost_10x,
-                format(rpd, ","), format(calls_10x, ",")))
+    line = ("**Rate limit breaks first - the daily token cap: 10x today's traffic needs %s tokens a day against "
+            "Groq's %s tokens-per-day cap on %s (%.1fx over; it breaks at %.1fx today's volume), while cost "
+            "would be only $%.2f a day.**" % (
+                format(10 * tokens, ","), format(tpd, ","), llm.MODEL, 10 * tokens / tpd, tpd / tokens, cost_10x)
+            ) if tpd else (
+            "**Rate limit breaks first: at 10x today's rate the app needs %s tokens/min against Groq's %s "
+            "tokens-per-minute cap on %s - %.0fx over - while cost is only $%.2f a day.**" % (
+                format(round(demand_10x), ","), format(tpm, ","), llm.MODEL, demand_10x / tpm, cost_10x))
     out = ["# tenx.md - what breaks first at 10x", "", line, "",
            "| | today (%s) | at 10x | limit | breaks? |" % day, "|---|---|---|---|---|",
-           "| requests | %d in %.0f min | %d in %.0f min | - | - |" % (n, window_min, 10 * n, window_min),
-           "| tokens per minute | %s | %s | %s TPM | **yes, %.1fx over** |" % (
+           "| requests | %d in %.0f min | %d | - | - |" % (n, window_min, 10 * n)]
+    if tpd:
+        out.append("| tokens per day | %s | %s | %s TPD | **yes, %.1fx over - first, at %.1fx** |" % (
+            format(tokens, ","), format(10 * tokens, ","), format(tpd, ","), 10 * tokens / tpd, tpd / tokens))
+    out += ["| tokens per minute (at today's arrival rate) | %s | %s | %s TPM | yes, %.1fx over - if it arrives as fast as today |" % (
                format(round(demand_1x), ","), format(round(demand_10x), ","), format(tpm, ","), demand_10x / tpm),
            "| model calls per day | %d | %d | %s RPD | no (%.0f%% of cap) |" % (calls, calls_10x, format(rpd, ","), pct(calls_10x, rpd)),
            "| cost per day | $%.4f | $%.4f | - | no |" % (cost_day, cost_10x),
@@ -152,13 +164,28 @@ def tenx():
                nearest_rank(active, 50), nearest_rank(active, 99), nearest_rank(wall, 50), nearest_rank(wall, 99)),
            "At %s tokens per request, the %s TPM cap sustains %.1f requests a minute; 10x today's rate is %.1f a minute." % (
                format(round(tokens / n), ","), format(tpm, ","), capacity_req_min, 10 * n / window_min),
-           "If the same day were spread evenly over an 8-hour shift instead of arriving in %.0f minutes, 10x would be "
-           "%s tokens/min - under the TPM cap - and the first limit hit would be the %s requests/day cap, at %.0fx "
-           "today's volume (%d requests a day at %.2f model calls each); TPM would follow at %.0fx." % (
-               window_min, format(round(10 * tokens / 480), ","), format(rpd, ","), rpd / calls,
-               int(rpd / (calls / n)), calls / n, tpm * 480 / tokens),
-           "Limits are Groq's own response headers (`x-ratelimit-limit-tokens`, `x-ratelimit-limit-requests`) "
-           "recorded in every trace; 429s are classified from the provider's error by `llm.rate_limit_hit`."]
+           ("The daily cap binds however the traffic arrives: spread evenly over an 8-hour shift, 10x would be only "
+            "%s tokens/min (under TPM), but the day's total is the same %s tokens. It was hit for real on %s: %s - "
+            "after the day's traffic plus trap pre-tests and eval-suite runs on the same key; the remaining suite "
+            "cases then waited ~%.0f s each for the budget to refill (`runs/quota_probe.json`). Evals and production "
+            "share one key: tests and suite runs used about %s of those %s tokens, so the cap was reached at only "
+            "~1x production traffic." % (
+                format(round(10 * tokens / 480), ","), format(10 * tokens, ","), probe["ts"][:16],
+                "429 TPD: limit %s, used %s, requested %s" % (format(tpd, ","), format(probe["used"], ","),
+                                                             format(probe["requested"], ",")),
+                probe["retry_after_s"], format(probe["used"] - tokens, ","), format(probe["used"], ","))) if tpd else "",
+           "TPM and RPD come from Groq's own response headers (`x-ratelimit-limit-tokens`, "
+           "`x-ratelimit-limit-requests`) recorded in every trace; the daily token cap is not in the headers and "
+           "appears only in a TPD 429; every 429 is classified by `llm.rate_limit_hit`."]
+    green = os.path.join("runs", "suite_green.jsonl")
+    if tpd and os.path.exists(green):
+        with open(green, encoding="utf-8") as f:
+            logged = [r for r in (json.loads(l) for l in f if l.strip()) if "rate_limited" in r]
+        tpd_hits = sum(1 for r in logged for h in r["rate_limited"] if h["unit"] == "TPD")
+        waited = sum(r["rate_limit_wait_s"] for r in logged)
+        out.insert(-1, "The GREEN suite run that followed met **%d TPD 429s and %.1f hours of waiting** over the %d cases "
+                       "it logged (`runs/suite_green.jsonl`) - 11 eval cases took most of an evening at ~1x." % (
+                           tpd_hits, waited / 3600, len(logged)))
     with open("tenx.md", "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
     print("\n".join(out))

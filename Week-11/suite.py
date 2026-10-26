@@ -71,6 +71,8 @@ async def run(tag):
                **v, "expect_ok": ok_expect, "expect_detail": why,
                "pass": v["verdict"] == "PASS" and v["asserts_ok"] and ok_expect,
                "tokens": rec["tokens"], "cost_usd": rec["cost_usd"], "latency_s": rec["latency_s"],
+               "active_s": rec["active_s"], "rate_limit_wait_s": rec["rate_limit_wait_s"],
+               "rate_limited": rec["rate_limited"],
                "summary": rec["output"], "week6_cases_sha": suite_cases.week6_sha(),
                "ts": datetime.datetime.now().astimezone().isoformat(timespec="seconds")}
         tracer.scrub({"trace_id": case["id"], "input": "", "output": row["summary"]})  # refuse PII in eval output

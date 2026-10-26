@@ -43,7 +43,7 @@ assert CLAIMS_AGENT_V3 != CLAIMS_AGENT_V2
 
 PROMPTS = {"claims-agent-v1": CLAIMS_AGENT_V1, "claims-agent-v2": CLAIMS_AGENT_V2,
            "claims-agent-v3": CLAIMS_AGENT_V3}
-# Production stays on v1 until the v2 canary passes (README: canary and rollback);
+# Production stays on v1 until the v3 canary passes (README: canary and rollback);
 # the suite and the canary select the candidate with PROMPT_VERSION / CANARY_VERSION.
 DEFAULT = "claims-agent-v1"
 
