@@ -1,0 +1,173 @@
+{
+ "seed": 20261026,
+ "items": [
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10026, Marcus Delacroix. Pinhole leak in copper, drywall soaked, unclear how long. What do I need to establish?",
+   "n": 1,
+   "user": "adj-05"
+  },
+  {
+   "source": "week6:C13",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20035. DOL 2024-11-30. Insured's HO-3 covers their own home, HO-0304 ed. 03-24 attached. The loss is at a condo the insured owns in another city and rents out; it stood empty 45 days between tenants and the water was left on when a supply line burst. Excess 1,000.",
+   "n": 2,
+   "user": "adj-04"
+  },
+  {
+   "source": "week6:C08",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20024. DOL 2024-10-12. HO-3 with HO-0509 ed. 06-24. Insured started a bookkeeping business at home in July 2024, grossing about 30,000 so far, and never notified us. Kitchen grease fire on 12 October spread into the home office. Claim includes a business laptop and printer worth 3,200 along with kitchen and household contents. Excess 1,000.",
+   "n": 3,
+   "user": "adj-03"
+  },
+  {
+   "source": "week6:C12",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20034. DOL 2024-09-03. Dec page shows HO-3 with HO-0415 ed. 05-23. Hail dented the metal roof panels on 3 September, no leaks, roof still sheds water. Please confirm our E-22 position. Excess 2,500.",
+   "n": 4,
+   "user": "adj-04"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10052, Sebastian Kowalczyk. Hail hit in June, water started coming in three weeks later. E-21?",
+   "n": 5,
+   "user": "adj-03"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10022, insured Daniel Okoro. Leak ran about three weeks before anyone noticed. Is that E-17 or E-18?",
+   "n": 6,
+   "user": "adj-02"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "Insured has no receipts for the battery replacement. Does that void the claim?",
+   "n": 7,
+   "user": "adj-01"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10092, Ingrid Halvorsen. what do i tell her",
+   "n": 8,
+   "user": "adj-02"
+  },
+  {
+   "source": "week6:C16",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20043. DOL 2024-12-02. HO-3 with HO-0509 ed. 06-24. Insured sells handmade jewellery from home; gross receipts over the last 12 months were 4,200. A customer collecting an order slipped on the icy front step and is claiming for a broken wrist.",
+   "n": 9,
+   "user": "adj-05"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "What is the reserve-setting threshold for claim CLM-2024-88431?",
+   "n": 10,
+   "user": "adj-02"
+  },
+  {
+   "source": "week6:C20",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20053. DOL 2024-06-30. HO-0612 ed. 03-24, Coverage A 350,000. After the fire the contractor recommends rewiring beyond what the code requires while the walls are open. Insured wants it paid.",
+   "n": 11,
+   "user": "adj-05"
+  },
+  {
+   "source": "week6:C21",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20054. DOL 2024-04-11. HO-0612 ed. 03-24. Council will not sign off the rebuild until an asbestos survey and air monitoring are done, quote 3,500. Excess 1,000.",
+   "n": 12,
+   "user": "adj-02"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "Is the 2,500 dollar business property limit extra insurance or part of Coverage C?",
+   "n": 13,
+   "user": "adj-02"
+  },
+  {
+   "source": "week6:C11",
+   "input_type": "file_note",
+   "notes": "CLM-2025-20033. DOL 21 January 2025. HO-3 homeowners, owner occupied, HO-0304 ed. 03-24 attached. During a cold snap the insured kept the thermostat at 50F; a pipe froze and split in the crawlspace and was found the same afternoon. Excess 1,000.",
+   "n": 14,
+   "user": "adj-04"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "Does E-17 mean the same thing under the dwelling fire form as it does under the homeowners form?",
+   "n": 15,
+   "user": "adj-02"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "Is overflow from a sump the same thing as sewer backup under the water damage form?",
+   "n": 16,
+   "user": "adj-01"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10045. Landlord says he shut the water off but did not drain the lines. Does the E-61 exception still apply?",
+   "n": 17,
+   "user": "adj-04"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10071. Fire took half the house and the city now wants the undamaged wall rebuilt to current code. How much extra can we put up?",
+   "n": 18,
+   "user": "adj-04"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "CLM-2024-10027. Insured away for the winter, pipe let go in week two of the trip. Sudden and accidental?",
+   "n": 19,
+   "user": "adj-01"
+  },
+  {
+   "source": "week6:C03",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20013. DOL 2024-04-02. HO-3 with HO-0304 ed. 03-24. Braided supply hose under the kitchen sink split overnight, found at 6am, insured shut off the main straight away. Plumber replaced the hose that morning and the insured put the old hose out with the rubbish before our field visit on 4 April. Excess 500.",
+   "n": 20,
+   "user": "adj-04"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "How much can we pay for work laptops that were taken to a client office and stolen there?",
+   "n": 21,
+   "user": "adj-03"
+  },
+  {
+   "source": "week6:C07",
+   "input_type": "file_note",
+   "notes": "CLM-2025-20023. DOL 14/01/2025. DP-3 rental dwelling, DP-0703 ed. 02-24. Previous tenancy ended 2 December 2024; landlord walked through the property on 5 December but did not write anything down about the plumbing. New tenant moved in 10 December and was in occupation when a supply pipe burst on 14 January. Heating log shows 64F throughout.",
+   "n": 22,
+   "user": "adj-05"
+  },
+  {
+   "source": "week6:C22",
+   "input_type": "file_note",
+   "notes": "CLM-2024-20055. DOL 2024-10-02. HO-0304 ed. 03-24. Leak behind the shower wall ran about 10 days before it was found and mould has spread through the wall cavity. Insured wants mould remediation paid.",
+   "n": 23,
+   "user": "adj-01"
+  },
+  {
+   "source": "week5",
+   "input_type": "desk_question",
+   "notes": "How many days do I have to acknowledge a first notice of loss in this state?",
+   "n": 24,
+   "user": "adj-05"
+  }
+ ]
+}
