@@ -1,0 +1,27 @@
+{
+  "id": "P-trc_a4a9f492d77c",
+  "mode": null,
+  "claim_number": "CLM-2024-20035",
+  "date_of_loss": "2024-11-30",
+  "excess": 1000,
+  "input_type": "file_note",
+  "notes": "CLM-2024-20035. DOL 2024-11-30. Insured's HO-3 covers their own home, HO-0304 ed. 03-24 attached. The loss is at a condo the insured owns in another city and rents out; it stood empty 45 days between tenants and the water was left on when a supply line burst. Excess 1,000.",
+  "expect": {
+    "position_not": [
+      "COVERED",
+      "DENIED"
+    ],
+    "position_in": [
+      "NOT_IN_DOCUMENTS",
+      "UNDETERMINED"
+    ],
+    "must_cite_any": [],
+    "why": "The loss is at a condo the insured owns in another city and rents out - not the residence premises the HO-3 and its HO-0304 endorsement cover - so HO-0304's E-17 exception cannot make it covered, and denying under E-17 applies the wrong form just the same. A tenant-occupied rental needs a dwelling-fire policy, which is not on file (under DP-0703, E-61 would exclude 45 days empty with the water on). Right answer: NOT_IN_DOCUMENTS (or UNDETERMINED) naming the missing rental form. Week 6 labelled this same input (C13) NOT_IN_DOCUMENTS."
+  },
+  "from_trace": "trc_a4a9f492d77c",
+  "trace_ts": "2026-10-26T14:32:45.344+05:30",
+  "trace_prompt_version": "claims-agent-v1",
+  "trace_position": "COVERED",
+  "trace_grounds": "E-17",
+  "how_found": "Not a complaint: found in a sweep of the day's logs - sliced on the output (find.py --position COVERED: 7 of 24 requests), then the Week-6 judge run over those 7; this was the one it failed."
+}

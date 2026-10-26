@@ -1,0 +1,130 @@
+{
+  "trace_id": "trc_a4a9f492d77c",
+  "user": "adj-04",
+  "input_type": "file_note",
+  "prompt_version": "claims-agent-v1",
+  "prompt_sha": "5783e86864c0",
+  "model": "openai/gpt-oss-120b",
+  "input": "CLM-2024-20035. DOL 2024-11-30. Insured's HO-3 covers their own home, HO-0304 ed. 03-24 attached. The loss is at a condo the insured owns in another city and rents out; it stood empty 45 days between tenants and the water was left on when a supply line burst. Excess 1,000.",
+  "ts": "2026-10-26T14:32:45.344+05:30",
+  "output": "CLAIM NUMBER: CLM-2024-20035\nDATE OF LOSS: 2024-11-30\nPOLICY FORMS: HO-0304 ed. 03-24\nLOSS: Water damage from a burst supply line at a rented condo that had been vacant for 45 days.\nCOVERAGE POSITION: COVERED\nGROUNDS: E-17\nEXCESS: 1000\nREASONING: The loss is water damage caused by a burst supply line, which is listed under exclusion E-17 in the HO-0304 endorsement; however, the endorsement specifies that E-17 does NOT apply when the discharge is sudden and accidental, and a burst line meets that definition, so the loss remains covered up to policy limits [HO-0304_03-24#05]. No other exclusions (e.g., vacancy) in the endorsement apply to the facts, therefore coverage is available subject to the $1,000 excess. \nNEXT STEP: Verify the loss amount and issue payment less the $1,000 excess.",
+  "claim_number": "CLM-2024-20035",
+  "position": "COVERED",
+  "grounds": "E-17",
+  "context_ids": [
+    "HO-0304_03-24#05",
+    "HO-0304_03-24#04",
+    "HO-0304_03-24#03",
+    "HO-0304_03-24#00"
+  ],
+  "laps": 2,
+  "tool_calls": 2,
+  "prompt_tokens": 2710,
+  "completion_tokens": 839,
+  "tokens": 3549,
+  "cost_usd": 0.0009099,
+  "latency_s": 4.251,
+  "active_s": 4.251,
+  "rate_limit_wait_s": 0.0,
+  "cost_by_stage": {
+    "retrieval": {
+      "prompt_tokens": 407,
+      "completion_tokens": 0,
+      "cost_usd": 6.105e-05,
+      "latency_ms": 247
+    },
+    "generation": {
+      "prompt_tokens": 2303,
+      "completion_tokens": 839,
+      "cost_usd": 0.00084885,
+      "latency_ms": 2557
+    },
+    "tools": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost_usd": 0.0,
+      "latency_ms": 0
+    }
+  },
+  "setup_ms": 1292,
+  "rate_limits": {
+    "limit-requests": 1000,
+    "remaining-requests": 995,
+    "limit-tokens": 8000,
+    "remaining-tokens": 2661
+  },
+  "rate_limited": [],
+  "stop_reason": null,
+  "error": null,
+  "spans": [
+    {
+      "span": 1,
+      "kind": "setup",
+      "name": "start MCP servers: policy-docs",
+      "start_ms": 0,
+      "latency_ms": 1292,
+      "cost_usd": 0.0
+    },
+    {
+      "span": 2,
+      "kind": "generation",
+      "name": "model call 1",
+      "start_ms": 1292,
+      "latency_ms": 667,
+      "rate_limit_wait_ms": 0,
+      "prompt_tokens": 1105,
+      "completion_tokens": 167,
+      "cost_usd": 0.00026595,
+      "finish_reason": "tool_calls",
+      "estimated_usage": false,
+      "prompt_tokens_by_content": {
+        "instructions": 1105,
+        "history": 0,
+        "retrieval": 0,
+        "tools": 0
+      }
+    },
+    {
+      "span": 3,
+      "kind": "retrieval",
+      "name": "search_policy",
+      "start_ms": 1960,
+      "latency_ms": 247,
+      "args": {
+        "form_numbers": [
+          "HO-0304 ed. 03-24"
+        ],
+        "query": "vacant more than 30 days exclusion"
+      },
+      "cost_usd": 0.0,
+      "error": null,
+      "context_ids": [
+        "HO-0304_03-24#05",
+        "HO-0304_03-24#04",
+        "HO-0304_03-24#03",
+        "HO-0304_03-24#00"
+      ],
+      "result_tokens": 453
+    },
+    {
+      "span": 4,
+      "kind": "generation",
+      "name": "model call 2",
+      "start_ms": 2208,
+      "latency_ms": 1890,
+      "rate_limit_wait_ms": 0,
+      "prompt_tokens": 1605,
+      "completion_tokens": 672,
+      "cost_usd": 0.00064395,
+      "finish_reason": "stop",
+      "estimated_usage": false,
+      "prompt_tokens_by_content": {
+        "instructions": 1123,
+        "history": 75,
+        "retrieval": 407,
+        "tools": 0
+      }
+    }
+  ],
+  "redactions": {}
+}

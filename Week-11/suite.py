@@ -42,6 +42,8 @@ def expect_check(case, summary):
     grounds = HYPHENS.sub("-", f.get("GROUNDS") or "")
     if position in exp.get("position_not", []):
         return False, "position %s, which this case forbids" % position
+    if exp.get("position_in") and position not in exp["position_in"]:
+        return False, "position %s, not one of %s" % (position, exp["position_in"])
     want = exp.get("must_cite_any", [])
     if want and not any(code in grounds for code in want):
         return False, "GROUNDS %r cites none of %s" % (grounds, want)

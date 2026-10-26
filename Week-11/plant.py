@@ -104,7 +104,10 @@ async def main():
     attempts = []
     for attempt in range(1, a.tries + 1):
         print("running the real app on %s (attempt %d/%d) ..." % (trap["id"], attempt, a.tries), flush=True)
-        record = await app.handle(notes, a.user, "file_note", write=False, log=lambda l: None)
+        # plant with the prompt version the logged day actually ran, so the planted
+        # answer is one that day's app gives - not whatever has been fixed since
+        record = await app.handle(notes, a.user, "file_note", version=day_rows[0]["prompt_version"],
+                                  write=False, log=lambda l: None)
         attempts.append(record["position"])
         print("app answered: %s  (grounds: %s)" % (record["position"], record["grounds"]))
         if (record["position"] or "").upper() == "COVERED":
