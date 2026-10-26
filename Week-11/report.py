@@ -30,6 +30,19 @@ def nearest_rank(values, p):
     return v[max(1, math.ceil(p / 100 * len(v))) - 1]
 
 
+def tool_schema_tokens():
+    """Tokens of each tool definition the model is offered on every call - read from
+    the policy-docs server's own tools/list, counted with o200k_base."""
+    import json
+    import asyncio
+    from mcp_host import Host
+
+    async def listed():
+        async with Host("mcp_config.json") as host:
+            return {t["function"]["name"]: tracer._count(json.dumps(t)) for t in host.tools}
+    return asyncio.run(listed())
+
+
 def cost(trace_id):
     rows = tracer.read()
     t = next((r for r in rows if r["trace_id"] == trace_id), None)
@@ -71,6 +84,17 @@ def cost(trace_id):
     for s in STAGES:
         out.append("| %s | $%.6f | %.1f%% |" % (s, avg[s], pct(avg[s], day_total)))
     out.append("| total | $%.6f | 100%% |" % day_total)
+    schema = tool_schema_tokens()
+    calls_day = sum(r["laps"] for r in day)
+    used = sum(1 for r in day for s in r["spans"] if s["kind"] == "tool")
+    out += ["", "**Tool definitions ride inside the generation stage.** Every model call re-sends the tool "
+            "list: %s. That is %d tokens per call, %d per call for `compute_payout` alone - which was called "
+            "**%d times** in the day's %d model calls (the Week 6 summary has no payout field). Its definition "
+            "cost %s input tokens over the day for nothing: the first saving to make, and only visible once "
+            "cost is attributed." % (
+                ", ".join("`%s` %d tokens" % kv for kv in schema.items()), sum(schema.values()),
+                schema.get("compute_payout", 0), used, calls_day,
+                format(schema.get("compute_payout", 0) * calls_day, ","))]
     out += ["", "Retrieval and tools are free to run here (local embeddings, local vector store, Python "
             "arithmetic); their cost is the tokens their results add to every later model call, which "
             "is why they are attributed from the prompt. Split method: o200k_base token counts per "
