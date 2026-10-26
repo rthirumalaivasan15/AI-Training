@@ -92,7 +92,7 @@ async def answer(notes, host, trace, version, log=print):
 async def handle(notes, user, input_type, version=None, write=True, log=print):
     """Run one request end to end and (by default) write its trace. Returns the
     trace record - redacted if it was written."""
-    version = version or prompts.active()
+    version = version or prompts.for_user(user)
     trace = Trace(user, input_type, notes, version, prompts.sha(version))
     started = time.perf_counter()
     async with Host(CONFIG) as host:   # a fresh server per request: no request sees another's evidence

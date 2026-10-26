@@ -31,14 +31,34 @@ _V1_HEAD = "When you are done, reply with the summary and nothing else.\n\n"
 CLAIMS_AGENT_V2 = CLAIMS_AGENT_V1.replace(_V1_HEAD, SCOPE_RULE + _V1_HEAD)
 assert CLAIMS_AGENT_V2 != CLAIMS_AGENT_V1
 
-PROMPTS = {"claims-agent-v1": CLAIMS_AGENT_V1, "claims-agent-v2": CLAIMS_AGENT_V2}
+# v3 = v2 + one sentence. v2 fixed the position on the failing case (NOT_IN_DOCUMENTS,
+# judge PASS) but then wrote EXCESS: NOT STATED although the notes give 1,000 - the
+# scope rule read as "nothing applies, so report nothing". The claim facts are the
+# notes' facts whatever the position. Suite runs: v1 8/11, v2 6/11 (runs/).
+FACTS_RULE = """Whatever the position - including NOT_IN_DOCUMENTS - CLAIM NUMBER, DATE OF LOSS and EXCESS are facts from the notes: report them exactly as the notes give them.
+
+"""
+CLAIMS_AGENT_V3 = CLAIMS_AGENT_V2.replace(_V1_HEAD, FACTS_RULE + _V1_HEAD)
+assert CLAIMS_AGENT_V3 != CLAIMS_AGENT_V2
+
+PROMPTS = {"claims-agent-v1": CLAIMS_AGENT_V1, "claims-agent-v2": CLAIMS_AGENT_V2,
+           "claims-agent-v3": CLAIMS_AGENT_V3}
 # Production stays on v1 until the v2 canary passes (README: canary and rollback);
-# the suite and the canary select v2 with PROMPT_VERSION=claims-agent-v2.
+# the suite and the canary select the candidate with PROMPT_VERSION / CANARY_VERSION.
 DEFAULT = "claims-agent-v1"
 
 
 def active():
     return os.getenv("PROMPT_VERSION", DEFAULT)
+
+
+def for_user(user):
+    """Canary routing: users listed in CANARY_USERS get CANARY_VERSION, everyone else
+    the active version. Rollback is emptying CANARY_USERS - no deploy."""
+    canary = {u.strip() for u in os.getenv("CANARY_USERS", "").split(",") if u.strip()}
+    if user in canary and os.getenv("CANARY_VERSION"):
+        return os.environ["CANARY_VERSION"]
+    return active()
 
 
 def get(version):

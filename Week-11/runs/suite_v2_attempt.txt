@@ -1,0 +1,15 @@
+SUITE V2 ATTEMPT (first fix, not green) - prompt claims-agent-v2 (sha 611e1167c08b) - Week-6 cases sha 400bb0047d97 - 2026-10-26T15:11:01+05:30
+
+  C01                        PARTIAL          E-16, HO-0820 Clause 2   FAIL  judge FAIL
+  C02                        DENIED           E-15                     PASS
+  C05                        DENIED           E-51, HO-0820 Clause 4   PASS
+  C06                        COVERED          HO-0415 Clause 2, HO-041 PASS
+  C09                        COVERED          E-17                     PASS
+  C10                        UNDETERMINED     E-61, E-62               FAIL  judge FAIL
+  C14                        DENIED           E-17                     FAIL  date_of_loss
+  C15                        DENIED           E-31                     PASS
+  C18                        UNDETERMINED     E-17, HO-0304 Clause 2,  PASS
+  C19                        PARTIAL          HO-0509_06-24#02, HO-050 FAIL  grounds_on_denial
+  P-trc_a4a9f492d77c         NOT_IN_DOCUMENTS NONE                     FAIL  excess_numeric
+
+SUITE V2 ATTEMPT: 6/11 pass
