@@ -1,0 +1,15 @@
+SUITE RED - prompt claims-agent-v1 (sha 5783e86864c0) - Week-6 cases sha 400bb0047d97 - 2026-10-26T15:04:53+05:30
+
+  C01                        PARTIAL          E-16, HO-0820 Clause 2   PASS
+  C02                        DENIED           E-15, E-17               FAIL  judge FAIL
+  C05                        DENIED           E-51                     PASS
+  C06                        COVERED          NONE                     PASS
+  C09                        UNDETERMINED     E-17, HO-0304 Clause 4   PASS
+  C10                        NOT_IN_DOCUMENTS NONE                     PASS
+  C14                        DENIED           E-17                     FAIL  date_of_loss
+  C15                        DENIED           E-31                     PASS
+  C18                        UNDETERMINED     E-17, HO-0304 Clause 4   PASS
+  C19                        PARTIAL          HO-0509 Clause 2 (sublim PASS
+  P-trc_a4a9f492d77c         COVERED          E-17                     FAIL  judge FAIL; expect: position COVERED, which this case forbids
+
+SUITE RED: 8/11 pass
