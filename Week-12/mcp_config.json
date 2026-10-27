@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "claims-system": {
+      "command": "python",
+      "args": ["claims_system/server.py"],
+      "env": {"CLAIMS_API_TOKEN": "${CLAIMS_API_TOKEN}"}
+    },
+    "policy-docs": {
+      "command": "python",
+      "args": ["policy_server.py"]
+    }
+  }
+}

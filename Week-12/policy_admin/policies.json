@@ -1,0 +1,651 @@
+{
+ "HP-448120": {
+  "policy_number": "HP-448120",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 350000,
+     "coverage_c_personal_property": 175000
+    }
+   }
+  ]
+ },
+ "HP-448377": {
+  "policy_number": "HP-448377",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 280000,
+     "coverage_c_personal_property": 140000
+    }
+   }
+  ]
+ },
+ "HP-449002": {
+  "policy_number": "HP-449002",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24",
+     "HO-0820 ed. 05-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {
+     "water_backup": 1000
+    },
+    "sub_limits": {
+     "water_backup_per_event": 10000
+    },
+    "limits": {
+     "coverage_a_dwelling": 420000,
+     "coverage_c_personal_property": 210000
+    }
+   }
+  ]
+ },
+ "HP-449215": {
+  "policy_number": "HP-449215",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24",
+     "HO-0820 ed. 05-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {
+     "water_backup": 1000
+    },
+    "sub_limits": {
+     "water_backup_per_event": 10000
+    },
+    "limits": {
+     "coverage_a_dwelling": 310000,
+     "coverage_c_personal_property": 155000
+    }
+   }
+  ]
+ },
+ "HP-450118": {
+  "policy_number": "HP-450118",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24",
+     "HO-0820 ed. 05-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {
+     "water_backup": 1000
+    },
+    "sub_limits": {
+     "water_backup_per_event": 10000
+    },
+    "limits": {
+     "coverage_a_dwelling": 295000,
+     "coverage_c_personal_property": 147500
+    }
+   }
+  ]
+ },
+ "DF-221904": {
+  "policy_number": "DF-221904",
+  "product": "household",
+  "policy_line": "dwelling-fire",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "DP-0703 ed. 02-24"
+    ],
+    "deductible": 1500,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 240000,
+     "coverage_c_personal_property": 120000
+    }
+   }
+  ]
+ },
+ "HP-451330": {
+  "policy_number": "HP-451330",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0415 ed. 01-24"
+    ],
+    "deductible": 2000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 360000,
+     "coverage_c_personal_property": 180000
+    }
+   }
+  ]
+ },
+ "HP-451902": {
+  "policy_number": "HP-451902",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 300000,
+     "coverage_c_personal_property": 150000
+    }
+   }
+  ]
+ },
+ "HP-452611": {
+  "policy_number": "HP-452611",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0509 ed. 06-24"
+    ],
+    "deductible": 500,
+    "form_deductibles": {},
+    "sub_limits": {
+     "business_property_on_premises": 2500,
+     "business_property_away": 500
+    },
+    "limits": {
+     "coverage_a_dwelling": 330000,
+     "coverage_c_personal_property": 165000
+    }
+   }
+  ]
+ },
+ "HP-453047": {
+  "policy_number": "HP-453047",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 310000,
+     "coverage_c_personal_property": 155000
+    }
+   }
+  ]
+ },
+ "HP-460101": {
+  "policy_number": "HP-460101",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 320000,
+     "coverage_c_personal_property": 160000
+    }
+   },
+   {
+    "term_start": "2025-01-01",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 320000,
+     "coverage_c_personal_property": 160000
+    }
+   }
+  ]
+ },
+ "HP-460102": {
+  "policy_number": "HP-460102",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 290000,
+     "coverage_c_personal_property": 145000
+    }
+   },
+   {
+    "term_start": "2025-01-01",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 290000,
+     "coverage_c_personal_property": 145000
+    }
+   }
+  ]
+ },
+ "HP-460103": {
+  "policy_number": "HP-460103",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 300000,
+     "coverage_c_personal_property": 150000
+    }
+   },
+   {
+    "term_start": "2025-01-01",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 300000,
+     "coverage_c_personal_property": 150000
+    }
+   }
+  ]
+ },
+ "HP-460104": {
+  "policy_number": "HP-460104",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 750,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 260000,
+     "coverage_c_personal_property": 130000
+    }
+   },
+   {
+    "term_start": "2025-01-01",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 750,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 260000,
+     "coverage_c_personal_property": 130000
+    }
+   }
+  ]
+ },
+ "HP-460105": {
+  "policy_number": "HP-460105",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 410000,
+     "coverage_c_personal_property": 205000
+    }
+   },
+   {
+    "term_start": "2025-01-01",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 410000,
+     "coverage_c_personal_property": 205000
+    }
+   }
+  ]
+ },
+ "HP-460111": {
+  "policy_number": "HP-460111",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-09-30",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 270000,
+     "coverage_c_personal_property": 135000
+    }
+   }
+  ]
+ },
+ "HP-460112": {
+  "policy_number": "HP-460112",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-11-01",
+    "term_end": "2025-10-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 300000,
+     "coverage_c_personal_property": 150000
+    }
+   }
+  ]
+ },
+ "HP-460113": {
+  "policy_number": "HP-460113",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 285000,
+     "coverage_c_personal_property": 142500
+    }
+   },
+   {
+    "term_start": "2025-01-05",
+    "term_end": "2025-12-31",
+    "forms": [
+     "HO-0304 ed. 01-25"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "storm_ingress_per_storm": 5000
+    },
+    "limits": {
+     "coverage_a_dwelling": 285000,
+     "coverage_c_personal_property": 142500
+    }
+   }
+  ]
+ },
+ "HP-460121": {
+  "policy_number": "HP-460121",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24",
+     "HO-0820 ed. 05-24"
+    ],
+    "deductible": 500,
+    "form_deductibles": {
+     "water_backup": 1000
+    },
+    "sub_limits": {
+     "water_backup_per_event": 10000
+    },
+    "limits": {
+     "coverage_a_dwelling": 380000,
+     "coverage_c_personal_property": 190000
+    }
+   }
+  ]
+ },
+ "HP-460122": {
+  "policy_number": "HP-460122",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0509 ed. 06-24"
+    ],
+    "deductible": 250,
+    "form_deductibles": {},
+    "sub_limits": {
+     "business_property_on_premises": 2500,
+     "business_property_away": 500
+    },
+    "limits": {
+     "coverage_a_dwelling": 280000,
+     "coverage_c_personal_property": 140000
+    }
+   }
+  ]
+ },
+ "HP-460123": {
+  "policy_number": "HP-460123",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0612 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {
+     "ordinance_or_law": 87500
+    },
+    "limits": {
+     "coverage_a_dwelling": 350000,
+     "coverage_c_personal_property": 175000
+    }
+   }
+  ]
+ },
+ "HP-460131": {
+  "policy_number": "HP-460131",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 330000,
+     "coverage_c_personal_property": 165000
+    }
+   }
+  ]
+ },
+ "HP-460132": {
+  "policy_number": "HP-460132",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0415 ed. 05-23"
+    ],
+    "deductible": 2500,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 340000,
+     "coverage_c_personal_property": 170000
+    }
+   }
+  ]
+ },
+ "HP-460133": {
+  "policy_number": "HP-460133",
+  "product": "household",
+  "policy_line": "homeowners",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "HO-0304 ed. 03-24"
+    ],
+    "deductible": 1000,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 300000,
+     "coverage_c_personal_property": 150000
+    }
+   }
+  ]
+ },
+ "DF-460134": {
+  "policy_number": "DF-460134",
+  "product": "household",
+  "policy_line": "dwelling-fire",
+  "terms": [
+   {
+    "term_start": "2024-01-01",
+    "term_end": "2024-12-31",
+    "forms": [
+     "DP-0703 ed. 02-24"
+    ],
+    "deductible": 1500,
+    "form_deductibles": {},
+    "sub_limits": {},
+    "limits": {
+     "coverage_a_dwelling": 230000,
+     "coverage_c_personal_property": 115000
+    }
+   }
+  ]
+ }
+}

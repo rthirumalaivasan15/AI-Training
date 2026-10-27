@@ -1,0 +1,37 @@
+FORM NUMBER: HO-0304
+EDITION: 01-25
+POLICY LINE: homeowners
+EFFECTIVE DATE: 2025-01-01
+TITLE: Water Damage Exclusions Endorsement
+
+THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.
+This endorsement modifies insurance provided under the Homeowners 3 - Special Form. It replaces edition 03-24 for losses occurring on or after the effective date shown above.
+
+CLAUSE 1. DEFINITIONS
+For the purposes of this endorsement:
+(a) "Sudden and accidental" means an abrupt event that is unforeseen, unintended, and occurs over a period of 14 days or fewer from first discharge to discovery.
+(b) "Supply line" means any pipe, hose, or fitting that carries potable water under pressure to a plumbing fixture or appliance within the residence premises.
+(c) "Surface water" means water on the surface of the ground, irrespective of its source, including flood, waves, and overflow of any body of water.
+(d) "Continuous seepage" means discharge or leakage of water that occurs over a period exceeding 14 days, whether or not detectable by the insured.
+(e) "Storm ingress" means surface water entering the dwelling through a door, window, or vent during a storm that produced more than 50 millimetres of rainfall in 24 hours at the nearest official weather station.
+
+CLAUSE 2. SCOPE OF THIS ENDORSEMENT
+This endorsement scopes exclusion codes E-15 through E-18 as applied to Section I - Property Coverages. Where a conflict exists between this endorsement and the base wording HO-3 ed. 10-22, this endorsement controls for losses occurring on or after the effective date shown above.
+
+CLAUSE 3. EXCLUSIONS TABLE
+The following exclusions apply to Section I - Property Coverages:
+
+| Code | Exclusion Description | Applies To | Exception |
+| E-15 | Flood, surface water, waves, tidal water, or overflow of any body of water, whether or not driven by wind | All Section I coverages | Does NOT apply to storm ingress as defined in Clause 1(e), which is covered up to the Storm Ingress Allowance in Clause 5. All other flood and surface water remains excluded. |
+| E-16 | Water which backs up through sewers or drains, or which overflows from a sump | Coverage A and Coverage C | Covered only if endorsement HO-0820 is attached to the policy. |
+| E-17 | Water damage from a burst or ruptured supply line | Coverage A - Dwelling | Does NOT apply where the discharge was sudden and accidental as defined in Clause 1(a); such losses remain covered up to policy limits. |
+| E-18 | Continuous seepage or leakage from plumbing over a period exceeding 14 days | All Section I coverages | None. Losses from continuous seepage are excluded absolutely. |
+
+CLAUSE 4. DUTIES AFTER A WATER LOSS
+The insured must take reasonable steps to stop the discharge, protect the property from further damage, and retain the failed pipe, fitting, or appliance component for inspection. Failure to retain the failed component may void coverage otherwise preserved by the E-17 exception.
+
+CLAUSE 5. STORM INGRESS ALLOWANCE
+The insurer will pay up to 5,000 dollars per storm for direct physical loss caused by storm ingress. This is a sub-limit within Coverage A, not an additional amount of insurance, and the policy deductible applies.
+
+CLAUSE 6. OTHER TERMS
+All other provisions of the policy remain unchanged.
