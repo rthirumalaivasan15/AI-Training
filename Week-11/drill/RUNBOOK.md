@@ -3,6 +3,33 @@
 Two people: a **squadmate** who plants and times, and the **finder** who searches.
 All commands run from `Week-11/` with `.venv\Scripts\python`.
 
+## The short version
+
+Open a terminal and go to the folder first: `cd C:\Projects\AI-Training\Week-11`
+
+**Squadmate (finder looks away):**
+
+```
+.venv\Scripts\python plant.py --trap T13 --user adj-03 --tries 6 --by "Squadmate Name"
+```
+
+Any user `adj-01`..`adj-05` is fine. It may take several tries; wait for **PLANTED**. Then clear
+the screen (`cls`), say *"an adjuster says it told a claimant something was covered when the
+policy excludes it, sometime yesterday"*, and start a stopwatch.
+
+**Finder:**
+
+```
+.venv\Scripts\python sweep.py
+```
+
+It lists every answer that said COVERED and marks with `!!` the ones the judge says are wrong.
+`trc_a4a9f492d77c` is the old one, already fixed. The other `!!` line is the planted one —
+check it with `.venv\Scripts\python find.py --show trc_...` and say "found trc_...".
+The squadmate stops the clock and opens `drill\plant_key.json` to confirm the id.
+
+The full version, with every search option, follows.
+
 The finder must not open `drill/trap_pool.jsonl` or `drill/plant_key.json` before
 the drill is over.
 
