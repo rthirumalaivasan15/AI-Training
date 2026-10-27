@@ -74,7 +74,9 @@ def main():
     t.add_argument("claim_id")
     t.add_argument("--user", default="adj-01")
     sub.add_parser("trace").add_argument("trace_id")
-    sub.add_parser("eval").add_argument("tag", nargs="?", default="run")
+    e = sub.add_parser("eval")
+    e.add_argument("tag", nargs="?", default="run")
+    e.add_argument("--modes", help="comma-separated case modes to run, e.g. version-straddle,wording-not-on-file")
     sub.add_parser("report").add_argument("tag", nargs="?", default="run")
     a = p.parse_args()
 
@@ -88,7 +90,7 @@ def main():
         print(json.dumps(end_to_end(a.trace_id), indent=2, ensure_ascii=False))
     elif a.cmd == "eval":
         import suite
-        asyncio.run(suite.run(a.tag))
+        asyncio.run(suite.run(a.tag, a.modes.split(",") if a.modes else None))
     elif a.cmd == "report":
         import report
         report.main(a.tag)

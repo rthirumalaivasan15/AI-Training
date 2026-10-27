@@ -1,4 +1,7 @@
-"""The Week 6 judge, unchanged, as a function the Week 11 suite calls.
+"""The Week 6 judge - same prompt file (sha-checked), criterion, model and parse - re-run on
+the integrated system's outputs, with the integrated wording library as its reference.
+
+(Week 11 note follows.) The Week 6 judge, unchanged, as a function the Week 11 suite calls.
 
 Same prompt file (../Week-6/judge_v2.txt, refused unless its sha is the one Week 6's
 own v2 run recorded), same criterion, same six endorsements, same model
@@ -17,7 +20,6 @@ import hashlib
 from openai import RateLimitError
 
 import llm
-import assertions
 
 WEEK6 = os.path.join("..", "Week-6")
 PROMPT_FILE = os.path.join(WEEK6, "judge_v2.txt")
@@ -45,7 +47,8 @@ def template():
 
 def endorsements():
     parts = []
-    for path in sorted(glob.glob(os.path.join(WEEK6, "data", "*.txt"))):
+    # Week 12: the integrated library - all seven wordings, both HO-0304 editions
+    for path in sorted(glob.glob(os.path.join("data", "*.txt"))):
         with open(path, encoding="utf-8") as f:
             parts.append(f.read().strip())
     return "\n\n==========\n\n".join(parts)
@@ -77,18 +80,3 @@ def ask(prompt, retries=12):
             print("    rate limited, waiting %.0fs" % wait, flush=True)
             time.sleep(wait)
     raise RuntimeError("judge still rate limited after %d attempts" % retries)
-
-
-def verdict(case, summary):
-    """Judge verdict + the four Week 6 assertions for one case. Week 6 rule."""
-    prompt = render(template(), case, summary or "")
-    reply, tokens = ask(prompt)
-    v, reason = parse(reply)
-    if v is None:                     # Week 6 rule: one retry, then recorded as unparsed
-        reply, more = ask(prompt)
-        tokens += more
-        v, reason = parse(reply)
-    checks = assertions.run(case, summary or "")
-    return {"verdict": v, "reason": reason, "assertions": checks,
-            "asserts_ok": all(c["passed"] for c in checks), "judge_tokens": tokens,
-            "judge_model": JUDGE_MODEL, "prompt_sha": WEEK6_V2_SHA}
