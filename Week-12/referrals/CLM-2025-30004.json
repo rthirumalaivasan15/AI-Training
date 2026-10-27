@@ -1,0 +1,41 @@
+{
+  "referral_id": "REF-777f1074",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_2ab0cc106eb2",
+  "claim_id": "CLM-2025-30004",
+  "policy_number": "HP-460104",
+  "loss_date": "2025-03-14",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0304 ed. 01-25"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_01-25#02",
+      "cites": "Definition of Storm ingress"
+    },
+    {
+      "chunk_id": "HO-0304_01-25#05",
+      "cites": "Exclusion E-15 and exception for storm ingress"
+    },
+    {
+      "chunk_id": "HO-0304_01-25#07",
+      "cites": "Storm Ingress Allowance sub‑limit"
+    }
+  ],
+  "deductible": 750,
+  "sub_limit": 5000,
+  "policy_limit": 260000,
+  "facts": [
+    "Heavy rain of 66 mm in 24 hours on 2025-03-14",
+    "Water entered the basement through the window frame",
+    "Plaster and flooring damaged, estimate $3,900"
+  ],
+  "note": "The loss meets the definition of storm ingress as surface water entering through a window during a storm exceeding 50 mm rainfall in 24 hours [HO-0304_01-25#02]. The flood exclusion does not apply because the endorsement provides an exception for storm ingress, which is payable up to the Storm Ingress Allowance [HO-0304_01-25#05]. The policy sets a Storm Ingress Allowance sub‑limit of $5,000 per storm within Coverage A [HO-0304_01-25#07].",
+  "citation_links": [
+    "[HO-0304 ed. 01-25 - Definition of Storm ingress (in force 2025-01-01 to open), resolved for loss date 2025-03-14](../data/HO-0304_ed_01-25.txt#L10)",
+    "[HO-0304 ed. 01-25 - Exclusion E-15 and exception for storm ingress (in force 2025-01-01 to open), resolved for loss date 2025-03-14](../data/HO-0304_ed_01-25.txt#L24)",
+    "[HO-0304 ed. 01-25 - Storm Ingress Allowance sub‑limit (in force 2025-01-01 to open), resolved for loss date 2025-03-14](../data/HO-0304_ed_01-25.txt#L33)"
+  ]
+}

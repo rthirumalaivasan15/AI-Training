@@ -36,7 +36,7 @@ from search import dense_search
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 POLICIES = os.path.join(HERE, "policy_admin", "policies.json")
-REFERRALS = os.path.join(HERE, "referrals")
+REFERRALS = os.environ.get("REFERRALS_DIR") or os.path.join(HERE, "referrals")   # gates.py points it elsewhere
 SPANS = os.path.join(HERE, "logs", "mcp_policy-docs.jsonl")
 
 with open(POLICIES, encoding="utf-8") as f:
@@ -97,9 +97,7 @@ def coverage_in_force(policy_number: Annotated[str, Field(description="Policy nu
     """Check whether the policy had a term in force on the loss date. IN_FORCE returns that term: its dates, the forms attached with their editions, the policy deductible, any per-form deductibles (which replace the policy deductible for that form's losses), the sub-limits, and the coverage limits. NOT_IN_FORCE returns the terms on record so the gap can be referred. This is the record of what was in force - it does not decide whether the loss is payable."""
     started = time.perf_counter()
     p = _policy(policy_number)
-    day = _date(loss_date)
-    term = next((t for t in p["terms"] if _date(t["term_start"], "term_start") <= day
-                 <= _date(t["term_end"], "term_end")), None)
+    term = _term(p, _date(loss_date))
     if term is None:
         out = {"status": "NOT_IN_FORCE", "policy_number": policy_number, "loss_date": loss_date,
                "terms_on_record": [{"term_start": t["term_start"], "term_end": t["term_end"]} for t in p["terms"]]}
@@ -109,6 +107,11 @@ def coverage_in_force(policy_number: Annotated[str, Field(description="Policy nu
     _span(ctx, "coverage_in_force", started, {"policy_number": policy_number, "loss_date": loss_date},
           {"status": out["status"]})
     return out
+
+
+def _term(p, day):
+    return next((t for t in p["terms"] if _date(t["term_start"], "term_start") <= day
+                 <= _date(t["term_end"], "term_end")), None)
 
 
 def _form(raw):
@@ -213,6 +216,19 @@ def refer_to_adjuster(
     unknown = [c["chunk_id"] for c in payload["citations"] if c["chunk_id"] not in _chunks]
     if unknown:
         raise ToolError("unknown chunk ids %s: cite chunk ids exactly as search_policy returned them." % unknown)
+    # the edition gate: a bare form number in search_policy resolves to the edition in force on the
+    # loss date, which need not be the edition this policy carried (CLM-2024-30032: ed. 05-23 on the
+    # policy, ed. 01-24 cited). So every citation is checked here against the policy's own term.
+    term = _term(_policy(policy_number), _date(loss_date))
+    if term is not None:
+        held = {tuple(f.split(" ed. ")) for f in term["forms"]}
+        wrong = [c["chunk_id"] for c in payload["citations"]
+                 if (_chunks[c["chunk_id"]]["form_number"], _chunks[c["chunk_id"]]["edition"]) not in held]
+        if wrong:
+            raise ToolError("%s: not an edition this policy carried on %s - the term in force holds %s. Cite only "
+                            "those editions. If one of them is not in the wording library, refer with assessment "
+                            "WORDING_NOT_ON_FILE and cite nothing from another edition in its place." % (
+                                ", ".join(sorted(set(wrong))), loss_date, ", ".join(term["forms"])))
     # the PII line: names, addresses and injuries never leave this server or reach disk
     tokens = set()
     for s in facts + [note]:

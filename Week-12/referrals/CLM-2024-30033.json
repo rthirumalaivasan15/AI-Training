@@ -1,0 +1,23 @@
+{
+  "referral_id": "REF-c0eb51a5",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_c10683925475",
+  "claim_id": "CLM-2024-30033",
+  "policy_number": "HP-460133",
+  "loss_date": "2024-02-10",
+  "in_force": "IN_FORCE",
+  "assessment": "WORDING_NOT_ON_FILE",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 150000,
+  "facts": [
+    "Dishwasher supply hose split on 2024-02-10; water shut off within two hours.",
+    "Estimated loss amount $6,400."
+  ],
+  "note": "The policy carries HO-0304 ed. 03-24, but the library does not contain the wording for this form on the loss date, preventing analysis of applicable exclusions or limits. [HO-0304 ed. 03-24]",
+  "citation_links": []
+}

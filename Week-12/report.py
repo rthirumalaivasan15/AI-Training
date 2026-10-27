@@ -1,6 +1,6 @@
 """Reports from the eval runs and their traces - no model calls.
 
-    python app.py report after            # eval_report.md, trajectory.md, cost_10x.md
+    python app.py report after            # eval_report.md, taxonomy.md, trajectory.md, cost_10x.md
     python app.py report after before     # ... plus the before -> after comparison
 
 eval_report.md   pass rate overall and per case mode with n, every assertion's failures,
@@ -23,6 +23,9 @@ import suite
 
 HAIL_WEEK = 18_000
 NORMAL_MONTH = 1_800
+# seam 11: refer_to_adjuster checks every citation against the policy term from here on. A case whose
+# trace started earlier ran without that gate (the servers start fresh per request).
+GATE_SINCE = "2026-10-27T18:19:44+05:30"
 
 
 def load(tag):
@@ -107,6 +110,12 @@ def eval_report(tag, before=None):
     bad_ed, _ = wrong_edition(rows)
     agree = sum((r["judge"] or "NONE") == r["reference_label"] for r in rows if r["judge"])
     judged = sum(1 for r in rows if r["judge"])
+    total = len(cases)
+    gated = [r for r in rows if tr[r["trace_id"]]["ts"] >= GATE_SINCE]
+    out += ["**Cases run: %d of %d%s.** %d ran before the edition gate in `refer_to_adjuster` (seam 11, %s), "
+            "%d after it." % (n, total, "" if n == total else " - the run is still going; this report is rebuilt "
+                              "from whatever has finished", n - len(gated), GATE_SINCE[:16].replace("T", " "),
+                              len(gated)), ""]
     out += ["**Pass rate: %d/%d (%.0f%%).** Wrong-endorsement-version citation rate: **%d/%d (%.0f%%)**. "
             "Judge agreement with the reference decisions: **%d/%d = %.0f%%**." % (
                 passed, n, pct(passed, n), len(bad_ed), n, pct(len(bad_ed), n), agree, judged, pct(agree, judged)), ""]
@@ -157,8 +166,7 @@ def eval_report(tag, before=None):
             "- **Payable amounts**: the system never computes a payout, so no case checks one.",
             "- **Adversarial input**: no prompt injection in the notes is tested.",
             "- **Human labels**: judge agreement is against reference decisions, not a person grading these outputs."]
-    path = "eval_report.md" if not before else "eval_report.md"
-    with open(path, "w", encoding="utf-8") as f:
+    with open("eval_report.md", "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
     print("\n".join(out[:8]))
     return rows
@@ -259,7 +267,75 @@ def cost_report(tag):
     print(out[-9])
 
 
+# --- taxonomy ------------------------------------------------------------------------
+def _failed(row, name):
+    return not next(c for c in row["checks"] if c["name"] == name)["passed"]
+
+
+# (name, severity, where it comes from, test on one eval row + its case)
+MODES = [
+    ("A second edition crowds the one in force out of the top 4, so wording that is on file is reported as "
+     "WORDING_NOT_ON_FILE", "High - the adjuster is told there is no wording and the exclusion is never put to them",
+     "**NEW - created by integration**: no form had two editions until the 2025 HO-0304 joined the library",
+     lambda r, c: r["assessment"] == "WORDING_NOT_ON_FILE" and "WORDING_NOT_ON_FILE" not in c["assessment_in"]),
+    ("Cites an edition the policy did not carry on the loss date", "Critical - the brief's live wound: a loss "
+     "assessed against wording that was not its contract", "Week 5 mode 3 (answers from whichever endorsement came "
+     "back), now across editions", lambda r, c: _failed(r, "edition")),
+    ("The judge applies a newer edition to an older loss and fails a correct referral", "Medium - no claim is "
+     "harmed, but the eval reports a correct system as broken", "**NEW - created by integration**: the Week 6 judge "
+     "reads the whole library, which held one edition per form until now",
+     lambda r, c: r["judge"] == "FAIL" and r["reference_label"] == "PASS"),
+    ("The judge passes a referral the reference decision fails", "High - a wrong referral reaches the report as a "
+     "pass", "Week 11 (the judge passed the planted wrong answer)",
+     lambda r, c: r["judge"] == "PASS" and r["reference_label"] == "FAIL"),
+    ("Misreads the notes: wrong assessment with the right wording", "High - the wrong exclusion question is put to "
+     "the adjuster", "Week 5 modes 2 and 4",
+     lambda r, c: _failed(r, "assessment") and r["assessment"] != "WORDING_NOT_ON_FILE" and not _failed(r, "edition")),
+    ("Deductible, sub-limit and policy limit confused", "High - the number juniors mix up weekly, now in a referral",
+     "Week 7", lambda r, c: _failed(r, "numbers")),
+    ("Ends without a valid referral, or never checks in-force against the loss date", "Critical - nothing reaches "
+     "the adjuster, or the term is assumed", "Week 7 / Week 9 agent stops",
+     lambda r, c: _failed(r, "referred") or _failed(r, "in_force_checked") or _failed(r, "loss_date")),
+]
+
+
+def taxonomy_report(tag, before=None):
+    cases = {c["id"]: c for c in suite.load_cases()}
+    runs = [(before, load(before))] if before else []
+    runs.append((tag, load(tag)))
+    head = " | ".join("`%s` n=%d" % (t, len(rs)) for t, rs in runs)
+    out = ["# taxonomy.md - the Week 5 taxonomy re-scored on the integrated system", "",
+           "Built by `python app.py report %s%s` from the eval rows and their traces; a case can sit in more than one "
+           "mode. Frequency is the share of the run's cases. Rebuilt whenever the run grows." % (
+               tag, " " + before if before else ""), "",
+           "| # | mode | origin | severity | %s | example trace |" % head,
+           "|---|---|---|---|%s---|" % ("---|" * len(runs))]
+    for i, (name, sev, origin, test) in enumerate(MODES, 1):
+        cells, example = [], None
+        for t, rs in runs:
+            hit = [r for r in rs if test(r, cases[r["id"]])]
+            cells.append("%d (%.0f%%)" % (len(hit), pct(len(hit), len(rs))))
+            example = example if example and not hit else (hit[0]["trace_id"] if hit else example)
+        out.append("| %d | %s | %s | %s | %s | %s |" % (i, name, origin, sev, " | ".join(cells),
+                                                      "`%s`" % example if example else "not seen"))
+    clean = [r for r in runs[-1][1] if not any(test(r, cases[r["id"]]) for _, _, _, test in MODES)]
+    out += ["", "Clean in `%s`: %d of %d. Never seen in any run: the word \"covered\" in a referral - "
+            "`refer_to_adjuster` refuses it in code, and `gates.py` replays that refusal." % (
+                tag, len(clean), len(runs[-1][1])), "",
+            "## Traces read by hand", "",
+            "- `trc_c66b247d566d` (CLM-2024-30001, after): assertions all pass; the judge cited the 2025 Storm Ingress "
+            "Allowance against an August 2024 loss. Mode 3 - seam 10.",
+            "- `trc_d41d68b1a7ad` (CLM-2024-30032, after): `search_policy` was called with the bare form `HO-0415`, the "
+            "seam-1 fix resolved it to ed. 01-24 (in force on the date) though the policy carries ed. 05-23. Mode 2 - "
+            "seam 11, gate added to `refer_to_adjuster`.",
+            "- The two `before` storm losses (CLM-2024-30001/30002): retrieval returned three 2025 chunks out of four, "
+            "the 2024 E-15 row never reached the model, and it referred as WORDING_NOT_ON_FILE. Mode 1 - seam 1."]
+    with open("taxonomy.md", "w", encoding="utf-8") as f:
+        f.write("\n".join(out) + "\n")
+
+
 def main(tag, before=None):
     eval_report(tag, before)
+    taxonomy_report(tag, before)
     trajectory_report(tag)
     cost_report(tag)

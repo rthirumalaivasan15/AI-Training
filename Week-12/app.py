@@ -3,7 +3,7 @@
     python app.py triage CLM-2024-30001      one claim end to end: FNOL in -> referral out
     python app.py trace trc_0123abcd4567     one request across every hop: host spans + MCP server spans
     python app.py eval [tag]                 the eval suite against the integrated system (runs/eval_<tag>.*)
-    python app.py report [tag]               eval report, trajectory eval, cost and the 10x plan, from the runs
+    python app.py report [tag] [before]      eval report, trajectory eval, cost and the 10x plan, from the runs
 
 Integrated: RAG (Weeks 3-4: dense retrieval over clause-level chunks), the hand-built
 agent loop (Week 7) with its tools discovered over MCP (Week 9) from two servers -
@@ -77,7 +77,9 @@ def main():
     e = sub.add_parser("eval")
     e.add_argument("tag", nargs="?", default="run")
     e.add_argument("--modes", help="comma-separated case modes to run, e.g. version-straddle,wording-not-on-file")
-    sub.add_parser("report").add_argument("tag", nargs="?", default="run")
+    r = sub.add_parser("report")
+    r.add_argument("tag", nargs="?", default="run")
+    r.add_argument("before", nargs="?", help="a run to compare against on the cases both hold, e.g. before")
     a = p.parse_args()
 
     if a.cmd == "triage":
@@ -93,7 +95,7 @@ def main():
         asyncio.run(suite.run(a.tag, a.modes.split(",") if a.modes else None))
     elif a.cmd == "report":
         import report
-        report.main(a.tag)
+        report.main(a.tag, a.before)
 
 
 if __name__ == "__main__":

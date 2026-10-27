@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-b9eebf47",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_c66b247d566d",
+  "claim_id": "CLM-2024-30001",
+  "policy_number": "HP-460101",
+  "loss_date": "2024-08-11",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "E-15 exclusion – flood, surface water, waves, tidal water, or overflow of any body of water"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#02",
+      "cites": "Definition of \"Surface water\""
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 320000,
+  "facts": [
+    "Water pooled on the patio and ran in under the patio door into the family room after a thunderstorm on 11 August 2024.",
+    "Rainfall recorded 62 mm in 24 hours.",
+    "Carpets and skirting boards soaked; estimated loss $4,800."
+  ],
+  "note": "The loss involves surface water entering the residence, which matches the definition of \"Surface water\" (HO-0304_03-24#02) and triggers the E-15 exclusion for flood and surface water (HO-0304_03-24#05). [HO-0304_03-24#02] [HO-0304_03-24#05]",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - E-15 exclusion – flood, surface water, waves, tidal water, or overflow of any body of water (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-08-11](../data/HO-0304_ed_03-24.txt#L23)",
+    "[HO-0304 ed. 03-24 - Definition of \"Surface water\" (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-08-11](../data/HO-0304_ed_03-24.txt#L10)"
+  ]
+}

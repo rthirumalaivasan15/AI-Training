@@ -1,0 +1,40 @@
+{
+  "referral_id": "REF-0befd09b",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_41db93dfc3e6",
+  "claim_id": "CLM-2025-30005",
+  "policy_number": "HP-460105",
+  "loss_date": "2025-02-10",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "HO-0304 ed. 01-25"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_01-25#02",
+      "cites": "Definition of \"Surface water\" and \"Storm ingress\""
+    },
+    {
+      "chunk_id": "HO-0304_01-25#05",
+      "cites": "Exclusion E-15 – Flood, surface water excluded except storm ingress"
+    },
+    {
+      "chunk_id": "HO-0304_01-25#07",
+      "cites": "Storm Ingress Allowance sub-limit $5,000"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 410000,
+  "facts": [
+    "After snowmelt the river burst its banks; 40 cm of river water across the ground floor.",
+    "No rainfall event recorded locally."
+  ],
+  "note": "The loss involves river flood water entering the ground floor, which is classified as \"surface water\" under the endorsement (see HO-0304_01-25#02). Exclusion E-15 expressly excludes flood and surface water losses, except for storm ingress defined as water entering during a storm with >50 mm rainfall (HO-0304_01-25#02). No storm rainfall occurred, so the exclusion applies (HO-0304_01-25#05). The Storm Ingress Allowance sub‑limit does not apply (HO-0304_01-25#07).",
+  "citation_links": [
+    "[HO-0304 ed. 01-25 - Definition of \"Surface water\" and \"Storm ingress\" (in force 2025-01-01 to open), resolved for loss date 2025-02-10](../data/HO-0304_ed_01-25.txt#L10)",
+    "[HO-0304 ed. 01-25 - Exclusion E-15 – Flood, surface water excluded except storm ingress (in force 2025-01-01 to open), resolved for loss date 2025-02-10](../data/HO-0304_ed_01-25.txt#L24)",
+    "[HO-0304 ed. 01-25 - Storm Ingress Allowance sub-limit $5,000 (in force 2025-01-01 to open), resolved for loss date 2025-02-10](../data/HO-0304_ed_01-25.txt#L33)"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "referral_id": "REF-46dc9da8",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_a074d9ccf827",
+  "claim_id": "CLM-2025-30003",
+  "policy_number": "HP-460103",
+  "loss_date": "2025-01-01",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0304 ed. 01-25"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_01-25#07",
+      "cites": "Storm Ingress Allowance sub-limit"
+    },
+    {
+      "chunk_id": "HO-0304_01-25#02",
+      "cites": "Definition of Storm Ingress"
+    },
+    {
+      "chunk_id": "HO-0304_01-25#05",
+      "cites": "Exclusion E-15 and exception for storm ingress"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": 5000,
+  "policy_limit": 300000,
+  "facts": [
+    "Water entered the kitchen through the back door during a storm on 2025-01-01.",
+    "The storm produced 58 mm of rain in 24 hours, exceeding the 50 mm threshold.",
+    "Kitchen units and flooring were damaged, with an estimated loss of $7,900."
+  ],
+  "note": "The loss is a storm ingress event as defined in Clause 1(e) (HO-0304_01-25#02). Clause 5 provides a $5,000 per‑storm allowance for such loss, which is a sub‑limit within Coverage A (HO-0304_01-25#07). Exclusion E‑15 excludes flood and surface water generally, but expressly makes an exception for storm ingress (HO-0304_01-25#05).",
+  "citation_links": [
+    "[HO-0304 ed. 01-25 - Storm Ingress Allowance sub-limit (in force 2025-01-01 to open), resolved for loss date 2025-01-01](../data/HO-0304_ed_01-25.txt#L33)",
+    "[HO-0304 ed. 01-25 - Definition of Storm Ingress (in force 2025-01-01 to open), resolved for loss date 2025-01-01](../data/HO-0304_ed_01-25.txt#L10)",
+    "[HO-0304 ed. 01-25 - Exclusion E-15 and exception for storm ingress (in force 2025-01-01 to open), resolved for loss date 2025-01-01](../data/HO-0304_ed_01-25.txt#L24)"
+  ]
+}
