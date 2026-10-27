@@ -16,7 +16,7 @@ over), already hit for real today; cost at 10x would be $0.27 a day.
 
 | deliverable | file |
 |---|---|
-| time-to-find + slice | [drill.md](drill.md) — **the timed squadmate drill has not been run**; how the real bad answer was found is documented |
+| time-to-find + slice | [drill.md](drill.md) — **not measured**: one plant was made but planted and searched by the same person, no squadmate or stopwatch. It showed the judge sweep **misses** the planted answer, and names the log field that finds both bad answers exactly: E-17 cited without the definitions chunk `#02` in the context ids |
 | the found trace: per-span latency, tokens, cost, prompt version, context ids | [trace.json](trace.json) |
 | the eval case | [evals/P-trc_a4a9f492d77c.json](evals/P-trc_a4a9f492d77c.json) |
 | suite output RED, then GREEN, with pass counts | below, and `runs/suite_red.txt`, `runs/suite_v2_attempt.txt`, `runs/suite_green.txt` |

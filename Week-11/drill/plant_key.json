@@ -1,0 +1,21 @@
+{
+  "trace_id": "trc_0d52f79cca97",
+  "stamped_ts": "2026-10-26T14:34:49.707+05:30",
+  "actually_ran_at": "2026-10-27T14:53:28.422+05:30",
+  "user": "adj-03",
+  "trap": "T13",
+  "expected": {
+    "position_not": [
+      "COVERED"
+    ],
+    "must_cite_any": [],
+    "why": "The loss is at a rental townhouse in another town, not the residence premises the HO-3 and HO-0304 cover, so HO-0304's E-17 exception does not reach it; the rental needs a dwelling-fire policy, which is not on file - and under DP-0703, E-61 would exclude it anyway (empty 52 days, water left on). Right answer: NOT_IN_DOCUMENTS naming the missing rental form."
+  },
+  "app_position": "COVERED",
+  "app_grounds": "E-17",
+  "planted_by": "Real Name Here",
+  "runs_until_covered": [
+    "COVERED"
+  ],
+  "note": "planted for the Week 11 drill: a real app run, re-stamped into the traffic window"
+}
