@@ -45,17 +45,30 @@ def template():
     return text
 
 
-def endorsements():
+def endorsements(as_of=None):
+    """The wording library the judge reads. Week 6 always had one edition per form, so the judge
+    saw the wording in force. With two HO-0304 editions, `as_of` (YYYY-MM-DD, the loss date) keeps
+    that meaning: only the editions in force on that date. Without it, every edition - and the
+    judge was seen applying the 2025 Storm Ingress Allowance to a 2024 loss."""
+    ranges = {}
+    if as_of:
+        day = int(as_of.replace("-", ""))
+        with open("chunks.jsonl", encoding="utf-8") as f:
+            for c in (json.loads(l) for l in f if l.strip()):
+                ranges[c["source_file"]] = (c["in_force_from"], c["in_force_to"])
     parts = []
-    # Week 12: the integrated library - all seven wordings, both HO-0304 editions
     for path in sorted(glob.glob(os.path.join("data", "*.txt"))):
+        if as_of:
+            lo, hi = ranges[os.path.basename(path)]
+            if not lo <= day <= hi:
+                continue
         with open(path, encoding="utf-8") as f:
             parts.append(f.read().strip())
     return "\n\n==========\n\n".join(parts)
 
 
 def render(tmpl, case, summary):
-    return (tmpl.replace("{{ENDORSEMENTS}}", endorsements())
+    return (tmpl.replace("{{ENDORSEMENTS}}", endorsements(case.get("as_of")))
                 .replace("{{NOTES}}", case["notes"])
                 .replace("{{SUMMARY}}", summary))
 

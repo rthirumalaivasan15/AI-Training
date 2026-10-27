@@ -105,7 +105,7 @@ def checks(case, rec):
     return out
 
 
-def judge_case(claim, r):
+def judge_case(claim, r, as_of=None):
     term = term_for(claim)
     record = ("Policy %s (%s); term in force on the loss date: %s." % (
         claim["policy_number"], POLICIES[claim["policy_number"]]["policy_line"],
@@ -122,10 +122,11 @@ def judge_case(claim, r):
         "DEDUCTIBLE / SUB-LIMIT / POLICY LIMIT: %s / %s / %s" % ((r or {}).get("deductible"), (r or {}).get("sub_limit"),
                                                                 (r or {}).get("policy_limit")),
         "REASONING: %s" % (r or {}).get("note"), "NEXT STEP: referred to a claims adjuster for the decision."])
-    reply, tokens = judge.ask(judge.render(judge.template(), {"notes": notes}, summary))
+    case = {"notes": notes, "as_of": as_of}
+    reply, tokens = judge.ask(judge.render(judge.template(), case, summary))
     v, reason = judge.parse(reply)
     if v is None:                      # Week 6 rule: one retry, then recorded as unparsed
-        reply, more = judge.ask(judge.render(judge.template(), {"notes": notes}, summary))
+        reply, more = judge.ask(judge.render(judge.template(), case, summary))
         tokens += more
         v, reason = judge.parse(reply)
     return v, reason, tokens
