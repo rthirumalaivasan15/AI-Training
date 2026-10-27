@@ -7,7 +7,8 @@ Tools:
   policy_lookup(policy_number)                  the policy's terms, forms with editions
   coverage_in_force(policy_number, loss_date)   is there a term covering the loss date; its
                                                 forms, deductibles, sub-limits and limits
-  search_policy(query, form_numbers, product)   endorsement wording passages with chunk ids
+  search_policy(query, loss_date, form_numbers, product)
+                                                wording IN FORCE ON THE LOSS DATE, edition resolved in code
   refer_to_adjuster(...)                        the ONLY way out: queues the claim for an
                                                 adjuster with the wording and facts; refuses
                                                 any payload that states a coverage decision
@@ -121,29 +122,55 @@ def _form(raw):
                                                     ", ".join(FORMS)))
 
 
+def _resolve(raw, day):
+    """'HO-0304 ed. 03-24' -> 'HO-0304', after checking the edition in code: it must be in the
+    library and in force on the loss date. 'HO-0304' alone resolves to whichever edition is in
+    force on the loss date. Either way the date filter below returns only that edition."""
+    head = re.sub(r"\s+ed\.?\s*[\d-]+$", "", raw.strip())
+    form = _form(head)
+    found = re.search(r"ed\.?\s*([\d-]+)$", raw.strip())
+    if not found:
+        return form
+    edition = found.group(1)
+    eds = {(c["edition"], c["in_force_from"], c["in_force_to"]) for c in _chunks.values() if c["form_number"] == form}
+    match = next((e for e in eds if e[0] == edition), None)
+    if match is None:
+        raise ToolError("%s ed. %s is not in the wording library (it holds %s). No other edition of %s may be used "
+                        "in its place: refer with assessment WORDING_NOT_ON_FILE." % (
+                            form, edition, ", ".join("ed. %s" % e[0] for e in sorted(eds)), form))
+    if not match[1] <= day <= match[2]:
+        raise ToolError("%s ed. %s is in force %s to %s, not on the loss date %s: the wording in force on that date "
+                        "is not in the library. Refer with assessment WORDING_NOT_ON_FILE." % (
+                            form, edition, _iso(match[1]), _iso(match[2]), _iso(day)))
+    return form
+
+
 @mcp.tool()
 def search_policy(
     query: Annotated[str, Field(description="Plain words for the one fact you need, e.g. 'surface water through a door'.")],
+    loss_date: Annotated[str, Field(description="The claim's date of loss, YYYY-MM-DD. Only wording in force on this date is searched.")],
     ctx: Context,
     form_numbers: Annotated[Optional[list[str]], Field(
         description="The forms on the policy term, as coverage_in_force lists them, e.g. ['HO-0304 ed. 03-24']. Omit to search every form.")] = None,
     product: Annotated[Optional[Literal["homeowners", "dwelling-fire"]], Field(
         description="Restrict to one policy line.")] = None,
 ) -> dict:
-    """Search the endorsement wording and return up to 4 passages, best match first, each with its chunk id, form, edition and the dates that edition is in force. Cite the chunk id of every passage you rely on. Never returns claim facts or policy records."""
+    """Search the endorsement wording in force on the loss date and return up to 4 passages, best match first, each with its chunk id, form, edition and in-force dates. The edition is resolved against the loss date in code: an edition that is not in force on that date, or not in the library, is never returned - the call says so instead. Cite the chunk id of every passage you rely on. Never returns claim facts or policy records."""
     started = time.perf_counter()
-    where = []
+    day = int(_date(loss_date).strftime("%Y%m%d"))
+    where = [{"in_force_from": {"$lte": day}}, {"in_force_to": {"$gte": day}}]
     if form_numbers:
-        forms = [_form(f) for f in form_numbers]
+        forms = [_resolve(f, day) for f in form_numbers]
         where.append({"form_number": forms[0]} if len(forms) == 1 else {"form_number": {"$in": forms}})
     if product:
         where.append({"policy_line": product})
-    clause = None if not where else (where[0] if len(where) == 1 else {"$and": where})
-    hits = dense_search(query, k=4, where=clause)
-    out = {"passages": [{"chunk_id": h["chunk_id"], "form": h["meta"]["form_number"], "edition": h["meta"]["edition"],
+    hits = dense_search(query, k=4, where={"$and": where})
+    out = {"loss_date": loss_date,
+           "passages": [{"chunk_id": h["chunk_id"], "form": h["meta"]["form_number"], "edition": h["meta"]["edition"],
                          "in_force": "%s to %s" % (_iso(h["meta"]["in_force_from"]), _iso(h["meta"]["in_force_to"])),
                          "text": h["text"]} for h in hits]}
-    _span(ctx, "search_policy", started, {"query": query, "form_numbers": form_numbers, "product": product},
+    _span(ctx, "search_policy", started, {"query": query, "loss_date": loss_date, "form_numbers": form_numbers,
+                                          "product": product},
           {"context_ids": [p["chunk_id"] for p in out["passages"]]})
     return out
 
