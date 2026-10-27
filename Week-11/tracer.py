@@ -34,6 +34,7 @@ LOG_DIR = "logs"
 TEXT_FIELDS = ("input", "output")
 CLAIM = re.compile(r"\bCLM-\d{4}-\d{5}\b")
 CODE = re.compile(r"\bE-\d{2}\b")
+DAY_FILE = re.compile(r"\d{4}-\d{2}-\d{2}\.jsonl")
 _enc = tiktoken.get_encoding("o200k_base")   # gpt-oss's tokenizer family; used only to split a known total
 
 
@@ -202,7 +203,8 @@ def read(day=None, log_dir=LOG_DIR):
     if not os.path.isdir(log_dir):
         return rows
     for name in sorted(os.listdir(log_dir)):
-        if name.endswith(".jsonl") and (day is None or name.startswith(day)):
+        # only the day files (YYYY-MM-DD.jsonl) - logs/ also holds verdicts.jsonl from sweep.py
+        if DAY_FILE.fullmatch(name) and (day is None or name.startswith(day)):
             with open(os.path.join(log_dir, name), encoding="utf-8") as f:
                 rows += [json.loads(l) for l in f if l.strip()]
     return sorted(rows, key=lambda r: r["ts"])
