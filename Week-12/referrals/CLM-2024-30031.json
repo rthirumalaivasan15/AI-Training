@@ -1,0 +1,35 @@
+{
+  "referral_id": "REF-e938a496",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_922508fec297",
+  "claim_id": "CLM-2024-30031",
+  "policy_number": "HP-460131",
+  "loss_date": "2024-11-30",
+  "in_force": "IN_FORCE",
+  "assessment": "FACTS_NEEDED",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "Exclusion E-17 Water damage from a burst or ruptured supply line"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#02",
+      "cites": "Definition of \"Sudden and accidental\""
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 330000,
+  "facts": [
+    "Loss occurred at a condo owned by the insured, rented out, vacant for 45 days between tenants.",
+    "Water was left on when a supply line burst, causing water damage."
+  ],
+  "note": "The loss involves a burst supply line, which triggers exclusion E-17 unless the discharge is \"sudden and accidental\" as defined. The adjuster must determine whether the discharge was discovered within 14 days and meets the definition of sudden and accidental. [HO-0304_03-24#05] [HO-0304_03-24#02]",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - Exclusion E-17 Water damage from a burst or ruptured supply line (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-30](../data/HO-0304_ed_03-24.txt#L23)",
+    "[HO-0304 ed. 03-24 - Definition of \"Sudden and accidental\" (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-30](../data/HO-0304_ed_03-24.txt#L10)"
+  ]
+}

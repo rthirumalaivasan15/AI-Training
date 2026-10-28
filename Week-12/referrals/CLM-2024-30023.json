@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-1a02696a",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_7f2a4b068dd3",
+  "claim_id": "CLM-2024-30023",
+  "policy_number": "HP-460123",
+  "loss_date": "2024-06-30",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0612 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0612_03-24#02",
+      "cites": "Definition of Ordinance or Law and Undamaged Portion"
+    },
+    {
+      "chunk_id": "HO-0612_03-24#03",
+      "cites": "Increased limit to 25% of Coverage A"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": 87500,
+  "policy_limit": 350000,
+  "facts": [
+    "Kitchen fire on 2024-06-30 caused damage requiring rebuild.",
+    "City requires the rebuild, including undamaged rooms, to meet current building code, increasing construction cost to $40,000.",
+    "[HEALTH]"
+  ],
+  "note": "The loss triggers the Ordinance or Law endorsement because the rebuild must comply with current code, covering costs for undamaged portions (HO-0612_03-24#02). The endorsement provides an increased limit of 25% of Coverage A, which is $87,500, exceeding the quoted $40,000 cost (HO-0612_03-24#03). No exclusion language applies to this situation. [HO-0612_03-24#02] [HO-0612_03-24#03]",
+  "citation_links": [
+    "[HO-0612 ed. 03-24 - Definition of Ordinance or Law and Undamaged Portion (in force 2024-03-01 to open), resolved for loss date 2024-06-30](../data/HO-0612_ed_03-24.txt#L10)",
+    "[HO-0612 ed. 03-24 - Increased limit to 25% of Coverage A (in force 2024-03-01 to open), resolved for loss date 2024-06-30](../data/HO-0612_ed_03-24.txt#L15)"
+  ]
+}

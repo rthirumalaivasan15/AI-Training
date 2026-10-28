@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-075b41a8",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_d671e028cea0",
+  "claim_id": "CLM-2024-10007",
+  "policy_number": "HP-451330",
+  "loss_date": "2024-05-03",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "HO-0415 ed. 01-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0415_01-24#05",
+      "cites": "E-22 - Damage to metal roof surfacing consisting solely of denting, without loss of water-shedding function"
+    },
+    {
+      "chunk_id": "HO-0415_01-24#03",
+      "cites": "Scope of endorsement covering exclusions E-21 and E-22 for hail loss"
+    }
+  ],
+  "deductible": 2000,
+  "sub_limit": null,
+  "policy_limit": 360000,
+  "facts": [
+    "Roof is standing-seam metal with numerous hail dents across the south and west panels.",
+    "Inspection found no punctures, no leaks in the attic, and panels continue to shed water normally.",
+    "Roofer quote to replace the panels is $19,800."
+  ],
+  "note": "The loss involves denting of a metal roof surfacing caused by hail, with no loss of water‑shedding function, which triggers exclusion E‑22 that expressly excludes such denting damage. The endorsement scope (E‑21 and E‑22) applies to hail losses on the loss date. [HO-0415_01-24#05] [HO-0415_01-24#03]",
+  "citation_links": [
+    "[HO-0415 ed. 01-24 - E-22 - Damage to metal roof surfacing consisting solely of denting, without loss of water-shedding function (in force 2024-01-15 to open), resolved for loss date 2024-05-03](../data/HO-0415_ed_01-24.txt#L21)",
+    "[HO-0415 ed. 01-24 - Scope of endorsement covering exclusions E-21 and E-22 for hail loss (in force 2024-01-15 to open), resolved for loss date 2024-05-03](../data/HO-0415_ed_01-24.txt#L15)"
+  ]
+}

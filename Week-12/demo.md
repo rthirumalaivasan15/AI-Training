@@ -53,12 +53,17 @@ Say: *"A storm on 14 March 2025, 66 mm of rain, water through a basement window.
 From `eval_report.md`, on the same 7 version-boundary cases, before → after:
 
 - **The two 2024 storm losses:** referred "wording not on file" **2/2 → E-15 ed. 03-24 cited, 2/2**.
-- **Pass:** 3/7 → 4/7 on the first after run. **Wrong-endorsement-version citations: 1/7 → 1/7, then
-  → *[the rerun of CLM-2024-30032 with the edition check, filled in when it runs]*.** Say plainly that the
-  first fix did not move this number. The second one is what moves it.
-- **n and the judge:** the full suite is 25 cases. Judge agreement with the reference decisions is
-  *[from `eval_report.md` and `runs/rejudge_after.jsonl` when the run finishes]*. Say the number with and
-  without the loss-date-resolved library.
+- **Wrong-endorsement-version citations: 1/7 → 1/7 → 0/7. Pass: 3/7 → 4/7 → 5/7.** Say plainly that the
+  date fix alone did not move the wrong-edition number. The edition gate (seam 11) did. In the re-run
+  (trace `trc_40d52edd723e`) the model **made the same mistake again**: it cited HO-0415 ed. 01-24. The server
+  refused it, and the model referred as WORDING_NOT_ON_FILE. That is the gate working live, not the model
+  getting lucky.
+- **n and the judge:** the full suite is **25 cases: 19/25 pass (76%), 20/25 (80%) with the gate re-run, and 0/25
+  wrong-edition citations.** Judge agreement with the reference decisions is **21/25 = 84%: below the 85%
+  target. Say so.** It is also 84% when the judge reads only the wording in force on each loss date. The misses
+  are mode 3: the Week 6 judge was validated on COVERED / DENIED summaries and fails correct "policy not in force"
+  and "wording not on file" referrals. The fix is to re-validate the judge prompt on referrals, which we ran
+  out of time for.
 - **Bonus:** hit-rate@3 on the Week 4 golden set: 9/12 in Week 4 → **8/12** when the 2025 edition joined →
   **9/12** with the date filter (`runs/hitrate.md`).
 - **One sentence on what the suite does not measure:** *"Nothing here is a motor claim, a real claim file
@@ -69,7 +74,7 @@ From `eval_report.md`, on the same 7 version-boundary cases, before → after:
 1. **The case that now guards the failure:** `evals/cases.jsonl` holds the 5 straddle cases (including
    CLM-2024-30002, dated **31 Dec 2024, the day before the 2025 edition**) and CLM-2024-30032. `gates.py`
    replays the exact wrong-edition referral from trace `trc_d41d68b1a7ad` and expects a refusal. It runs in
-   seconds with no model call.
+   seconds with no model call. **Run it live: `python gates.py` → "GATES 9/9 hold".**
 2. **Cost per claim triaged** (`cost_10x.md`): about **$0.002**. 92% of it is generation; retrieval and
    tools cost only the tokens they add.
 3. **What breaks first in a hailstorm week (18,000 FNOLs):** **the daily token cap.** It needs 28.4 million
@@ -81,8 +86,11 @@ From `eval_report.md`, on the same 7 version-boundary cases, before → after:
 
 ## Hostile questions — the short answers
 
-- **"How many cases straddle a version boundary, and what do they score?"** 5 straddle cases plus 2
-  wording-edition cases. Give their score from the before → after table, not the average.
+- **"How many cases straddle a version boundary, and what do they score?"** 5 straddle cases: **3/5 before →
+  4/5 after.** All 5 pass every assertion after. The fifth (CLM-2024-30001) fails only because the judge
+  applied the 2025 wording, and it passes when the judge reads only the wording in force on the loss date.
+  Be honest that 3 of the 5 were already green before: they are 2025 losses, and the 2025 wording was
+  already winning the search. Only the two 2024 losses were red.
 - **"Does it ever say covered?"** No. Show the assertion `no_covered` in `suite.py`, and the refusal in
   `policy_server.py` (`refer_to_adjuster`). That is the code that enforces it, not a prompt asking for it.
 - **"Show the trace where it got the sub-limit right."** `trc_2ab0cc106eb2`: sub-limit 5,000 is a separate

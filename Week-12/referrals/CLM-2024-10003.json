@@ -1,0 +1,41 @@
+{
+  "referral_id": "REF-495feb7c",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_3711a9d94330",
+  "claim_id": "CLM-2024-10003",
+  "policy_number": "HP-449002",
+  "loss_date": "2024-09-19",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "HO-0304 ed. 03-24",
+    "HO-0820 ed. 05-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#02",
+      "cites": "Definition of surface water"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "Exclusion E-15 (Flood, surface water, etc.)"
+    },
+    {
+      "chunk_id": "HO-0820_05-24#03",
+      "cites": "Water-backup coverage grant and deductible/sub-limit"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": 10000,
+  "policy_limit": 420000,
+  "facts": [
+    "Insured reports two feet of water in the finished basement after a storm.",
+    "Site visit notes floor drain and sump are working; water entered through basement window wells after a creek overtopped its banks."
+  ],
+  "note": "The insured reports two feet of water in the finished basement after a creek overtopped its banks, with water entering through the basement window wells. [HO-0304_03-24#02] The policy defines “surface water” as water on the ground surface, including flood and overflow of any body of water, which matches the described loss. [HO-0304_03-24#02] Clause 5 of HO‑0304 lists exclusion E‑15 for flood, surface water, waves, tidal water, or overflow of any body of water, applying to all Section I coverages with no exception. [HO-0304_03-24#05] Although HO‑0820 provides water‑backup coverage with a $1,000 per‑form deductible and a $10,000 per‑event sub‑limit, it only overrides exclusion E‑16 and does not affect exclusion E‑15. [HO-0820_05-24#03]",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - Definition of surface water (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-09-19](../data/HO-0304_ed_03-24.txt#L10)",
+    "[HO-0304 ed. 03-24 - Exclusion E-15 (Flood, surface water, etc.) (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-09-19](../data/HO-0304_ed_03-24.txt#L23)",
+    "[HO-0820 ed. 05-24 - Water-backup coverage grant and deductible/sub-limit (in force 2024-05-01 to open), resolved for loss date 2024-09-19](../data/HO-0820_ed_05-24.txt#L15)"
+  ]
+}

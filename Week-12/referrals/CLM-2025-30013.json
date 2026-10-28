@@ -1,0 +1,21 @@
+{
+  "referral_id": "REF-09970f32",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_a667053ec178",
+  "claim_id": "CLM-2025-30013",
+  "policy_number": "HP-460113",
+  "loss_date": "2025-01-03",
+  "in_force": "NOT_IN_FORCE",
+  "assessment": "POLICY_NOT_IN_FORCE",
+  "wording": [],
+  "citations": [],
+  "deductible": null,
+  "sub_limit": null,
+  "policy_limit": null,
+  "facts": [
+    "Pipe in the loft froze and split; found the same morning.",
+    "Renewal was paid on 5 January."
+  ],
+  "note": "The policy was not in force on the loss date; the prior term ended 2024-12-31 and the next term began 2025-01-05. [no citation]",
+  "citation_links": []
+}

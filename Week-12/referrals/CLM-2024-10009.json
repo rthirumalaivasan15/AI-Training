@@ -1,0 +1,37 @@
+{
+  "referral_id": "REF-117aed9a",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_d1a6eec29370",
+  "claim_id": "CLM-2024-10009",
+  "policy_number": "HP-452611",
+  "loss_date": "2024-08-27",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0509 ed. 06-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0509_06-24#02",
+      "cites": "definition of \"business property\" and \"home business\""
+    },
+    {
+      "chunk_id": "HO-0509_06-24#03",
+      "cites": "sub‑limit of $2,500 for business property on the residence premises"
+    }
+  ],
+  "deductible": 500,
+  "sub_limit": 2500,
+  "policy_limit": 165000,
+  "facts": [
+    "Burglary resulted in theft of two laptops and a camera kit from the home office.",
+    "Insured operates a wedding photography business from the house, with gross receipts of $38,000 in the prior 12 months.",
+    "All stolen items were used for the photography business and were located at the residence at the time of loss.",
+    "Replacement cost of the stolen items is $6,000, with receipts provided."
+  ],
+  "note": "The loss involves theft of business property located on the residence premises; the policy provides a $2,500 sub‑limit for such property, and no exclusion in the endorsement applies to personal property coverage for this type of loss. [HO-0509_06-24#02] [HO-0509_06-24#03]",
+  "citation_links": [
+    "[HO-0509 ed. 06-24 - definition of \"business property\" and \"home business\" (in force 2024-06-01 to open), resolved for loss date 2024-08-27](../data/HO-0509_ed_06-24.txt#L10)",
+    "[HO-0509 ed. 06-24 - sub‑limit of $2,500 for business property on the residence premises (in force 2024-06-01 to open), resolved for loss date 2024-08-27](../data/HO-0509_ed_06-24.txt#L15)"
+  ]
+}

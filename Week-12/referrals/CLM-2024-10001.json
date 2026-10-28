@@ -1,0 +1,35 @@
+{
+  "referral_id": "REF-2d24346e",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_02ab5be2a6d5",
+  "claim_id": "CLM-2024-10001",
+  "policy_number": "HP-448120",
+  "loss_date": "2024-07-14",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#02",
+      "cites": "Definition of \"Sudden and accidental\" (Clause 1(a))"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "Exclusion E-17 and its exception for sudden and accidental discharge"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 350000,
+  "facts": [
+    "Braided supply hose to the dishwasher split while the insured was at dinner, causing water to run for about two hours before discovery.",
+    "Insured shut off the valve under the sink upon discovery and retained the failed hose for inspection."
+  ],
+  "note": "The hose rupture is a supply line failure that discharged water for approximately two hours, which falls within the 14‑day period defining a \"sudden and accidental\" event, thus the E‑17 exclusion does not apply and the loss is not excluded. HO-0304_03-24#02 HO-0304_03-24#05",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - Definition of \"Sudden and accidental\" (Clause 1(a)) (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-07-14](../data/HO-0304_ed_03-24.txt#L10)",
+    "[HO-0304 ed. 03-24 - Exclusion E-17 and its exception for sudden and accidental discharge (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-07-14](../data/HO-0304_ed_03-24.txt#L23)"
+  ]
+}

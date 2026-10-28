@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-914154d5",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_139c643780cd",
+  "claim_id": "CLM-2024-10004",
+  "policy_number": "HP-449215",
+  "loss_date": "2024-06-11",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0820 ed. 05-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0820_05-24#02",
+      "cites": "Definition of Water Backup"
+    },
+    {
+      "chunk_id": "HO-0820_05-24#03",
+      "cites": "Coverage Grant and Deductible"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": 10000,
+  "policy_limit": 310000,
+  "facts": [
+    "Heavy rain overnight caused municipal sewer main surcharge.",
+    "Water entered basement through floor drain, not through windows or surface entry.",
+    "City confirmed sewer main surcharge; no failure of insured's sump pump."
+  ],
+  "note": "The endorsement HO-0820 defines \"Water backup\" as water that backs up through sewers or drains, which matches the basement flood from the municipal sewer surcharge [HO-0820_05-24#02]. The coverage grant provides up to $10,000 per loss event with a $1,000 deductible, overriding any exclusion in HO-0304, and no listed exclusions (e.g., equipment failure or vacancy) apply to this situation [HO-0820_05-24#03].",
+  "citation_links": [
+    "[HO-0820 ed. 05-24 - Definition of Water Backup (in force 2024-05-01 to open), resolved for loss date 2024-06-11](../data/HO-0820_ed_05-24.txt#L10)",
+    "[HO-0820 ed. 05-24 - Coverage Grant and Deductible (in force 2024-05-01 to open), resolved for loss date 2024-06-11](../data/HO-0820_ed_05-24.txt#L15)"
+  ]
+}

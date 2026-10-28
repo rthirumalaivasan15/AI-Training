@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-221d33a6",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_9b996fadb204",
+  "claim_id": "CLM-2024-30034",
+  "policy_number": "DF-460134",
+  "loss_date": "2024-10-20",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "DP-0703 ed. 02-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "DP-0703_02-24#05",
+      "cites": "Exclusion E-61 – water damage from burst supply line while unoccupied >30 days, exception if water shut off and drained"
+    },
+    {
+      "chunk_id": "DP-0703_02-24#06",
+      "cites": "Clause 4 – landlord must inspect within 7 days; failure voids exception in E-61"
+    }
+  ],
+  "deductible": 1500,
+  "sub_limit": null,
+  "policy_limit": 230000,
+  "facts": [
+    "Tenant left on 1 September; landlord had plumber shut off water at the main and drain the system on 3 September.",
+    "No inspection of the unit was done after the tenant left.",
+    "On 20 October, water was reported under the door due to a burst supply line fitting; estimate $11,200."
+  ],
+  "note": "Exclusion E-61 excludes water damage from a burst supply line when the dwelling is unoccupied between tenancies for more than 30 days, but its exception is voided because the landlord failed to inspect within 7 days as required by Clause 4. The adjuster should consider this exclusion. [DP-0703_02-24#05] [DP-0703_02-24#06]",
+  "citation_links": [
+    "[DP-0703 ed. 02-24 - Exclusion E-61 – water damage from burst supply line while unoccupied >30 days, exception if water shut off and drained (in force 2024-02-01 to open), resolved for loss date 2024-10-20](../data/DP-0703_ed_02-24.txt#L21)",
+    "[DP-0703 ed. 02-24 - Clause 4 – landlord must inspect within 7 days; failure voids exception in E-61 (in force 2024-02-01 to open), resolved for loss date 2024-10-20](../data/DP-0703_ed_02-24.txt#L25)"
+  ]
+}

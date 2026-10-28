@@ -1,0 +1,42 @@
+{
+  "referral_id": "REF-3e56cd1f",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_8fb78354312a",
+  "claim_id": "CLM-2024-10006",
+  "policy_number": "DF-221904",
+  "loss_date": "2024-10-08",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "DP-0703 ed. 02-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "DP-0703_02-24#05",
+      "cites": "Exclusion E-61 Water damage from a burst supply line occurring while the dwelling is unoccupied between tenancies for more than 30 consecutive days"
+    },
+    {
+      "chunk_id": "DP-0703_02-24#06",
+      "cites": "Clause 4 Landlord duties – inspection within 7 days of tenancy ending"
+    },
+    {
+      "chunk_id": "DP-0703_02-24#02",
+      "cites": "Definition of \"Burst supply line\""
+    }
+  ],
+  "deductible": 1500,
+  "sub_limit": null,
+  "policy_limit": 240000,
+  "facts": [
+    "Burst supply line under kitchen sink at rental property on 2024-10-08.",
+    "Unit was empty for 45 days after tenant moved out on 2024-08-24.",
+    "Landlord shut off water at the main and drained the lines the week the tenant left.",
+    "Landlord inspected the unit on 2024-09-13, more than 7 days after tenancy ended."
+  ],
+  "note": "The loss is a burst supply line occurring while the dwelling was unoccupied for 45 days, matching exclusion E-61. [DP-0703_02-24#05] Although the landlord shut off the water and drained the system, the required inspection within 7 days after tenancy ended was not performed, voiding the exception. [DP-0703_02-24#06] Accordingly, the exclusion appears to apply. [DP-0703_02-24#05]",
+  "citation_links": [
+    "[DP-0703 ed. 02-24 - Exclusion E-61 Water damage from a burst supply line occurring while the dwelling is unoccupied between tenancies for more than 30 consecutive days (in force 2024-02-01 to open), resolved for loss date 2024-10-08](../data/DP-0703_ed_02-24.txt#L21)",
+    "[DP-0703 ed. 02-24 - Clause 4 Landlord duties – inspection within 7 days of tenancy ending (in force 2024-02-01 to open), resolved for loss date 2024-10-08](../data/DP-0703_ed_02-24.txt#L25)",
+    "[DP-0703 ed. 02-24 - Definition of \"Burst supply line\" (in force 2024-02-01 to open), resolved for loss date 2024-10-08](../data/DP-0703_ed_02-24.txt#L10)"
+  ]
+}

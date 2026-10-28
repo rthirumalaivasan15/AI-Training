@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-ea36f060",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_a0fb19a5ac92",
+  "claim_id": "CLM-2024-30022",
+  "policy_number": "HP-460122",
+  "loss_date": "2024-09-05",
+  "in_force": "IN_FORCE",
+  "assessment": "NO_EXCLUSION_TRIGGERED",
+  "wording": [
+    "HO-0509 ed. 06-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0509_06-24#02",
+      "cites": "Definition of Home Business and Business Property"
+    },
+    {
+      "chunk_id": "HO-0509_06-24#03",
+      "cites": "Sub‑limit for Business Property Away from Residence"
+    }
+  ],
+  "deductible": 250,
+  "sub_limit": 500,
+  "policy_limit": 140000,
+  "facts": [
+    "Insured runs a graphic design business from home with gross receipts of $41,000 in the last 12 months.",
+    "Laptop and camera used for the business were stolen from the insured's car outside a client's office.",
+    "Police report filed on 2024-09-06, valuing the loss at $3,600."
+  ],
+  "note": "The endorsement defines a home business as one with gross receipts over $5,000, which the insured meets, establishing that the laptop and camera are business property (HO-0509_06-24#02). The endorsement sets a $500 sub‑limit for business property away from the residence, which applies to this theft (HO-0509_06-24#03). No exclusion language directly applies to this loss, so no exclusion is triggered. The policy deductible of $250 applies (no per‑form deductible).",
+  "citation_links": [
+    "[HO-0509 ed. 06-24 - Definition of Home Business and Business Property (in force 2024-06-01 to open), resolved for loss date 2024-09-05](../data/HO-0509_ed_06-24.txt#L10)",
+    "[HO-0509 ed. 06-24 - Sub‑limit for Business Property Away from Residence (in force 2024-06-01 to open), resolved for loss date 2024-09-05](../data/HO-0509_ed_06-24.txt#L15)"
+  ]
+}

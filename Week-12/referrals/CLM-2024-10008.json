@@ -1,0 +1,22 @@
+{
+  "referral_id": "REF-1a0fc649",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_351855794fb0",
+  "claim_id": "CLM-2024-10008",
+  "policy_number": "HP-451902",
+  "loss_date": "2024-09-30",
+  "in_force": "IN_FORCE",
+  "assessment": "FACTS_NEEDED",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": null,
+  "facts": [
+    "Water damage in the kitchen."
+  ],
+  "note": "The adjuster must obtain additional details about the cause and extent of the water damage to determine whether any exclusion or limitation applies. No exclusion can be identified from the current notes. [no_citation]",
+  "citation_links": []
+}

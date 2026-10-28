@@ -1,0 +1,21 @@
+{
+  "referral_id": "REF-a7e72ed8",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_0d803e0b4b6c",
+  "claim_id": "CLM-2024-30012",
+  "policy_number": "HP-460112",
+  "loss_date": "2024-10-28",
+  "in_force": "NOT_IN_FORCE",
+  "assessment": "POLICY_NOT_IN_FORCE",
+  "wording": [],
+  "citations": [],
+  "deductible": null,
+  "sub_limit": null,
+  "policy_limit": null,
+  "facts": [
+    "Toilet supply hose burst in the upstairs bathroom; the ceiling below collapsed.",
+    "Insured bought the policy last week."
+  ],
+  "note": "The policy term began on 2024-11-01, which is after the loss date of 2024-10-28, so the policy was not in force at the time of loss. [no citation]",
+  "citation_links": []
+}

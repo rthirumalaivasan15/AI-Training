@@ -119,21 +119,58 @@ def eval_report(tag, before=None):
     out += ["**Pass rate: %d/%d (%.0f%%).** Wrong-endorsement-version citation rate: **%d/%d (%.0f%%)**. "
             "Judge agreement with the reference decisions: **%d/%d = %.0f%%**." % (
                 passed, n, pct(passed, n), len(bad_ed), n, pct(len(bad_ed), n), agree, judged, pct(agree, judged)), ""]
+    if os.path.exists(os.path.join("runs", "eval_gate.jsonl")):
+        g = {r["id"]: r for r in load("gate")}
+        fin = [g.get(r["id"], r) for r in rows]
+        out += ["With the cases that ran before the edition gate re-run (`gate`): **pass %d/%d (%.0f%%), wrong-endorsement-"
+                "version citation rate %d/%d (%.0f%%).**" % (
+                    sum(r["pass"] for r in fin), n, pct(sum(r["pass"] for r in fin), n), len(wrong_edition(fin)[0]), n,
+                    pct(len(wrong_edition(fin)[0]), n)), ""]
     if before:
         b = {r["id"]: r for r in load(before)}
+        g = {r["id"]: r for r in load("gate")} if os.path.exists(os.path.join("runs", "eval_gate.jsonl")) else {}
         common = [r for r in rows if r["id"] in b]
-        b_bad = sum(not next(c for c in b[r["id"]]["checks"] if c["name"] == "edition")["passed"] for r in common)
-        a_bad = sum(not next(c for c in r["checks"] if c["name"] == "edition")["passed"] for r in common)
-        out += ["## Before -> after on the same %d cases (`%s` -> `%s`)" % (len(common), before, tag), "",
-                "| case | mode | before | after |", "|---|---|---|---|"]
+        # the final state of each case: its `gate` re-run if it has one, else its `after` row
+        final = {r["id"]: g.get(r["id"], r) for r in common}
+
+        def bad(row):
+            return not next(c for c in row["checks"] if c["name"] == "edition")["passed"]
+
+        def cell(row):
+            f = [c["name"] for c in row["checks"] if not c["passed"]] + ([] if row["judge"] == "PASS" else ["judge"])
+            return "PASS" if row["pass"] else "FAIL: " + ", ".join(f)
+
+        out += ["## Before -> after on the same %d cases (`%s` -> `%s`%s)" % (
+                    len(common), before, tag, " -> `gate`" if g else ""), "",
+                "`gate` re-runs a case that ran before the seam-11 edition check in `refer_to_adjuster` existed; "
+                "every other case in `%s` already ran with it." % tag if g else "", "",
+                "| case | mode | before | after | after, with the edition gate |", "|---|---|---|---|---|"]
         for r in common:
-            fb = [c["name"] for c in b[r["id"]]["checks"] if not c["passed"]] + ([] if b[r["id"]]["judge"] == "PASS" else ["judge"])
-            fa = [c["name"] for c in r["checks"] if not c["passed"]] + ([] if r["judge"] == "PASS" else ["judge"])
-            out.append("| %s | %s | %s | %s |" % (r["id"], r["mode"], "PASS" if b[r["id"]]["pass"] else "FAIL: " + ", ".join(fb),
-                                                "PASS" if r["pass"] else "FAIL: " + ", ".join(fa)))
-        out += ["", "**Wrong-endorsement-version citation rate: %d/%d -> %d/%d. Pass: %d/%d -> %d/%d.**" % (
-            b_bad, len(common), a_bad, len(common), sum(b[r["id"]]["pass"] for r in common), len(common),
-            sum(r["pass"] for r in common), len(common)), ""]
+            out.append("| %s | %s | %s | %s | %s |" % (r["id"], r["mode"], cell(b[r["id"]]), cell(r),
+                                                     cell(g[r["id"]]) if r["id"] in g else
+                                                     "not re-run yet" if bad(r) else
+                                                     "not re-run: no wrong edition cited, nothing for the gate to refuse"))
+        out += ["", "**Wrong-endorsement-version citation rate: %d/%d -> %d/%d -> %d/%d. Pass: %d/%d -> %d/%d -> "
+                "%d/%d.**" % (sum(bad(b[r["id"]]) for r in common), len(common), sum(bad(r) for r in common),
+                              len(common), sum(bad(final[r["id"]]) for r in common), len(common),
+                              sum(b[r["id"]]["pass"] for r in common), len(common), sum(r["pass"] for r in common),
+                              len(common), sum(final[r["id"]]["pass"] for r in common), len(common)), ""]
+    rj = os.path.join("runs", "rejudge_%s.jsonl" % tag)
+    if os.path.exists(rj):
+        with open(rj, encoding="utf-8") as f:
+            rr = [json.loads(l) for l in f if l.strip()]
+        rr = [x for x in rr if x["judge_as_of_loss_date"]]
+        a_all = sum(x["judge_all_editions"] == x["reference_label"] for x in rr)
+        a_dol = sum(x["judge_as_of_loss_date"] == x["reference_label"] for x in rr)
+        out += ["## Judge agreement, re-measured on the integrated outputs (`rejudge.py %s`)" % tag, "",
+                "The same Week 6 judge on the same stored referrals, two ways. **Reading every edition in the library: "
+                "%d/%d = %.0f%%. Reading only the wording in force on each loss date: %d/%d = %.0f%%.** Target 85%%." % (
+                    a_all, len(rr), pct(a_all, len(rr)), a_dol, len(rr), pct(a_dol, len(rr))), "",
+                "| case | reference | judge, every edition | judge, wording in force on the loss date |",
+                "|---|---|---|---|"]
+        out += ["| %s | %s | %s | %s |" % (x["id"], x["reference_label"], x["judge_all_editions"],
+                                          x["judge_as_of_loss_date"]) for x in rr]
+        out.append("")
     out += ["## Pass rate per case mode", "", "| mode | n | pass | rate |", "|---|---|---|---|"]
     by = defaultdict(list)
     for r in rows:
@@ -281,9 +318,10 @@ MODES = [
     ("Cites an edition the policy did not carry on the loss date", "Critical - the brief's live wound: a loss "
      "assessed against wording that was not its contract", "Week 5 mode 3 (answers from whichever endorsement came "
      "back), now across editions", lambda r, c: _failed(r, "edition")),
-    ("The judge applies a newer edition to an older loss and fails a correct referral", "Medium - no claim is "
-     "harmed, but the eval reports a correct system as broken", "**NEW - created by integration**: the Week 6 judge "
-     "reads the whole library, which held one edition per form until now",
+    ("The judge fails a correct referral: it applies a newer edition to an older loss, or does not accept an "
+     "assessment that is not a coverage position", "Medium - no claim is harmed, but the eval reports a correct "
+     "system as broken", "**NEW - created by integration**: the Week 6 judge reads the whole library (one edition per "
+     "form until now) and was validated on COVERED / DENIED summaries, not referrals (seams 6, 10)",
      lambda r, c: r["judge"] == "FAIL" and r["reference_label"] == "PASS"),
     ("The judge passes a referral the reference decision fails", "High - a wrong referral reaches the report as a "
      "pass", "Week 11 (the judge passed the planted wrong answer)",
@@ -329,7 +367,13 @@ def taxonomy_report(tag, before=None):
             "seam-1 fix resolved it to ed. 01-24 (in force on the date) though the policy carries ed. 05-23. Mode 2 - "
             "seam 11, gate added to `refer_to_adjuster`.",
             "- The two `before` storm losses (CLM-2024-30001/30002): retrieval returned three 2025 chunks out of four, "
-            "the 2024 E-15 row never reached the model, and it referred as WORDING_NOT_ON_FILE. Mode 1 - seam 1."]
+            "the 2024 E-15 row never reached the model, and it referred as WORDING_NOT_ON_FILE. Mode 1 - seam 1.",
+            "- `trc_25e1c00926de` (CLM-2024-30011, after): a correct POLICY_NOT_IN_FORCE referral (term ended "
+            "2024-09-30, loss 2024-10-12); the judge failed it because the policy number is not in the endorsement "
+            "wording. Mode 3 - the judge has no idea what a referral without a coverage position is (seam 6).",
+            "- `trc_351855794fb0` (CLM-2024-10008, after): FACTS_NEEDED, right assessment, but `policy_limit` left "
+            "null where the record holds 300,000; the judge passed it, the `numbers` assertion did not. Mode 6 - the "
+            "assertion caught what the judge missed."]
     with open("taxonomy.md", "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
 

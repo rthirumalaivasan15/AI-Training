@@ -1,0 +1,21 @@
+{
+  "referral_id": "REF-b3aac4ca",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_25e1c00926de",
+  "claim_id": "CLM-2024-30011",
+  "policy_number": "HP-460111",
+  "loss_date": "2024-10-12",
+  "in_force": "NOT_IN_FORCE",
+  "assessment": "POLICY_NOT_IN_FORCE",
+  "wording": [],
+  "citations": [],
+  "deductible": null,
+  "sub_limit": null,
+  "policy_limit": null,
+  "facts": [
+    "Supply line to the washing machine split; found within the hour and shut off.",
+    "Insured says the policy is active. Estimate 5,100."
+  ],
+  "note": "The policy HP-460111 had a term ending 2024-09-30, which does not cover the loss date of 2024-10-12. No coverage in force on loss date. [no citation]",
+  "citation_links": []
+}

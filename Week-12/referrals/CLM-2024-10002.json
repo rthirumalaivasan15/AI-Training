@@ -1,0 +1,36 @@
+{
+  "referral_id": "REF-863e4ed6",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_d63ad4143756",
+  "claim_id": "CLM-2024-10002",
+  "policy_number": "HP-448377",
+  "loss_date": "2024-08-02",
+  "in_force": "IN_FORCE",
+  "assessment": "EXCLUSION_APPEARS_TO_APPLY",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "E-18 exclusion for continuous seepage"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#02",
+      "cites": "definition of \"continuous seepage\" exceeding 14 days"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 280000,
+  "facts": [
+    "Leak on copper supply line to the toilet discovered in the upstairs bathroom.",
+    "Subfloor rotted and mold growth on joists due to water exposure.",
+    "Plumber's opinion that the leak had been ongoing for roughly six to eight weeks before discovery."
+  ],
+  "note": "The loss resulted from water that seeped continuously for more than 14 days, which matches the definition of \"continuous seepage\" in Clause 1(d) and triggers the E-18 exclusion for all Section I coverages. The exclusion applies regardless of any other provisions. [HO-0304_03-24#02] [HO-0304_03-24#05]",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - E-18 exclusion for continuous seepage (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-08-02](../data/HO-0304_ed_03-24.txt#L23)",
+    "[HO-0304 ed. 03-24 - definition of \"continuous seepage\" exceeding 14 days (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-08-02](../data/HO-0304_ed_03-24.txt#L10)"
+  ]
+}

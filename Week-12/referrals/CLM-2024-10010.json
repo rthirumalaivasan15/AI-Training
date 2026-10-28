@@ -1,0 +1,45 @@
+{
+  "referral_id": "REF-1f782484",
+  "queued_for": "claims adjuster",
+  "trace_id": "trc_b420a997fe00",
+  "claim_id": "CLM-2024-10010",
+  "policy_number": "HP-453047",
+  "loss_date": "2024-11-05",
+  "in_force": "IN_FORCE",
+  "assessment": "FACTS_NEEDED",
+  "wording": [
+    "HO-0304 ed. 03-24"
+  ],
+  "citations": [
+    {
+      "chunk_id": "HO-0304_03-24#01",
+      "cites": "Definition of \"Sudden and accidental\" (Clause 1(a))"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "Exclusion E-17 (burst or ruptured supply line) and its exception"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#06",
+      "cites": "Duty to retain failed component (Clause 4)"
+    },
+    {
+      "chunk_id": "HO-0304_03-24#05",
+      "cites": "Exclusion E-18 (continuous seepage)"
+    }
+  ],
+  "deductible": 1000,
+  "sub_limit": null,
+  "policy_limit": 310000,
+  "facts": [
+    "Insured found water under the vanity and a warped cabinet base. Not sure when the leak started, they rarely use that bathroom.",
+    "Plumber replaced a failed compression fitting on the supply line. The old fitting was thrown away by the plumber."
+  ],
+  "note": "The notes do not establish whether the water discharge was \"sudden and accidental\" within 14 days, nor whether the leak persisted longer than 14 days (continuous seepage) [HO-0304_03-24#01]. The plumber discarded the failed fitting, which may void the exception to Exclusion E-17 that would otherwise preserve coverage, but the timing fact remains missing [HO-0304_03-24#06][HO-0304_03-24#05]. Additional information on the duration of the leak and retention of the failed component is required [HO-0304_03-24#05].",
+  "citation_links": [
+    "[HO-0304 ed. 03-24 - Definition of \"Sudden and accidental\" (Clause 1(a)) (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-05](../data/HO-0304_ed_03-24.txt#L7)",
+    "[HO-0304 ed. 03-24 - Exclusion E-17 (burst or ruptured supply line) and its exception (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-05](../data/HO-0304_ed_03-24.txt#L23)",
+    "[HO-0304 ed. 03-24 - Duty to retain failed component (Clause 4) (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-05](../data/HO-0304_ed_03-24.txt#L29)",
+    "[HO-0304 ed. 03-24 - Exclusion E-18 (continuous seepage) (in force 2024-03-01 to 2024-12-31), resolved for loss date 2024-11-05](../data/HO-0304_ed_03-24.txt#L23)"
+  ]
+}
